@@ -12,6 +12,20 @@
     "logo": "logos/redstone.png"
   },
   {
+    "kind": "perspectives",
+    "slug": "axil-prime-credit-3m",
+    "title": "Axil Prime Credit 3M",
+    "subtitle": "Tokenized consumer credit: structure, protections, and risks",
+    "published": "August 6, 2026",
+    "source": "https://alearesearch.io/reports/perspectives/axil-prime-credit-3m",
+    "pdf": "pdfs/axil-prime-credit-3m.pdf",
+    "pages": 8,
+    "figures": 3,
+    "bytes": 1691572,
+    "summary": "A public perspective on a three-month tokenized consumer-credit vault: how it works, its safeguards, and its risks.",
+    "logo": "logos/axil.ico"
+  },
+  {
     "kind": "theses",
     "slug": "hyperliquid-2",
     "title": "Hyperliquid",

@@ -29,6 +29,7 @@ CHROME = os.environ.get("PORTFOLIO_CHROME") or (str(DEFAULT_CHROME) if DEFAULT_C
 AS_OF = "8 October 2026"
 
 ARTICLES = [
+    ("perspectives", "axil-prime-credit-3m", "axil-prime-credit-3m"),
     ("theses", "hyperliquid", "hyperliquid-2025"),
     ("theses", "ethena", "ethena"),
     ("theses", "derive", "derive"),
@@ -44,6 +45,7 @@ ARTICLES = [
 ]
 
 SUBTITLES = {
+    "axil-prime-credit-3m": "Tokenized consumer credit: structure, protections, and risks",
     "derive": "Onchain options investment thesis",
     "ether-fi": "The full-stack neobank thesis",
     "hyperliquid-2": "HIP-4: Outcome Markets",
@@ -178,7 +180,7 @@ def build_one(browser, kind: str, slug: str, filename: str) -> dict:
     figure_count = len(article.select("figure"))
     clean = clean_article(article, source)
     doc = f"""<!doctype html><html><head><meta charset="utf-8"><title>{html.escape(title)}</title><style>{CSS}</style></head><body>
-      {cover_html(title, subtitle, "Thesis" if kind == "theses" else "Memo", published, source)}
+      {cover_html(title, subtitle, {"theses": "Thesis", "memos": "Memo", "perspectives": "Perspective"}[kind], published, source)}
       <div class="article-kicker">ALEA RESEARCH / {kind.upper()} / {html.escape(published)}</div>
       {clean}
       </body></html>"""

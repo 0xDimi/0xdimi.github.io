@@ -16,8 +16,11 @@ SITE = ROOT / "docs"
 
 def main() -> None:
     manifest = json.loads((SITE / "manifest.json").read_text())
-    if len(manifest) != 17:
-        raise RuntimeError(f"Expected 17 publications, found {len(manifest)}")
+    if len(manifest) != 18:
+        raise RuntimeError(f"Expected 18 publications, found {len(manifest)}")
+    axil = next((item for item in manifest if item["slug"] == "axil-prime-credit-3m"), None)
+    if not axil or axil["kind"] != "perspectives" or axil["source"] != "https://alearesearch.io/reports/perspectives/axil-prime-credit-3m":
+        raise RuntimeError("Axil public perspective is missing or misclassified")
     soup = BeautifulSoup((SITE / "index.html").read_text(), "html.parser")
     cards = soup.select("#work-grid article.work-card")
     if len(cards) != len(manifest):
