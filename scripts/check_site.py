@@ -16,8 +16,17 @@ SITE = ROOT / "docs"
 
 def main() -> None:
     manifest = json.loads((SITE / "manifest.json").read_text())
-    if len(manifest) != 21:
-        raise RuntimeError(f"Expected 21 publications, found {len(manifest)}")
+    if len(manifest) != 23:
+        raise RuntimeError(f"Expected 23 publications, found {len(manifest)}")
+    quarterly_sources = {
+        "etherfi-q1-2026": "https://alearesearch.io/reports/benchmark/etherfi-q1-2026",
+        "threshold-q1-26": "https://alearesearch.io/reports/benchmark/threshold-q1-26",
+    }
+    quarterly_items = {item["slug"]: item for item in manifest if item["kind"] == "quarterly_reports"}
+    if set(quarterly_items) != set(quarterly_sources):
+        raise RuntimeError("Quarterly Reports category is incomplete")
+    if any(quarterly_items[slug]["source"] != source for slug, source in quarterly_sources.items()):
+        raise RuntimeError("Quarterly report source URL mismatch")
     sector_sources = {
         "rwa-perpetuals": "https://alearesearch.io/reports/perspectives/rwa-perpetuals",
         "when-agents-pay": "https://alearesearch.io/reports/perspectives/when-agents-pay",
@@ -29,12 +38,14 @@ def main() -> None:
     if any(sector_items[slug]["source"] != source for slug, source in sector_sources.items()):
         raise RuntimeError("Sector report source URL mismatch")
     axil = next((item for item in manifest if item["slug"] == "axil-prime-credit-3m"), None)
-    if not axil or axil["kind"] != "perspectives" or axil["source"] != "https://alearesearch.io/reports/perspectives/axil-prime-credit-3m":
-        raise RuntimeError("Axil public perspective is missing or misclassified")
+    if not axil or axil["kind"] != "strategies" or axil["source"] != "https://alearesearch.io/reports/perspectives/axil-prime-credit-3m":
+        raise RuntimeError("Axil public strategy is missing or misclassified")
     soup = BeautifulSoup((SITE / "index.html").read_text(), "html.parser")
     cards = soup.select("#work-grid article.work-card")
     if len(cards) != len(manifest):
         raise RuntimeError("Index and manifest publication counts differ")
+    if soup.select_one('[data-filter="perspectives"]') or not soup.select_one('[data-filter="strategies"]'):
+        raise RuntimeError("Perspectives filter was not renamed Strategies")
     if not soup.select_one('a[href="https://meditationsbyd.substack.com/"]'):
         raise RuntimeError("Substack link is missing")
     total_bytes = 0

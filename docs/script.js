@@ -2,7 +2,8 @@ const filters = Array.from(document.querySelectorAll('[data-filter]'));
 const cards = Array.from(document.querySelectorAll('#work-grid .work-card'));
 
 function setFilter(kind) {
-  const selected = filters.some((button) => button.dataset.filter === kind) ? kind : 'all';
+  const requested = kind === 'perspectives' ? 'strategies' : kind;
+  const selected = filters.some((button) => button.dataset.filter === requested) ? requested : 'all';
   for (const button of filters) {
     const active = button.dataset.filter === selected;
     button.classList.toggle('active', active);
@@ -27,3 +28,9 @@ if (initialFilter !== 'all') {
   setFilter(initialFilter);
   document.getElementById('library').scrollIntoView();
 }
+
+window.addEventListener('hashchange', () => {
+  if (location.hash === '#library' || location.hash.startsWith('#library-')) {
+    setFilter(location.hash.startsWith('#library-') ? location.hash.slice('#library-'.length) : 'all');
+  }
+});

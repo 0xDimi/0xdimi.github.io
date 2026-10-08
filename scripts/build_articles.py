@@ -32,6 +32,8 @@ ARTICLES = [
     ("perspectives", "axil-prime-credit-3m", "axil-prime-credit-3m"),
     ("perspectives", "rwa-perpetuals", "rwa-perpetuals"),
     ("perspectives", "when-agents-pay", "when-agents-pay"),
+    ("benchmark", "etherfi-q1-2026", "etherfi-q1-2026"),
+    ("benchmark", "threshold-q1-26", "threshold-q1-26"),
     ("theses", "hyperliquid", "hyperliquid-2025"),
     ("theses", "ethena", "ethena"),
     ("theses", "derive", "derive"),
@@ -50,6 +52,8 @@ SUBTITLES = {
     "axil-prime-credit-3m": "Tokenized consumer credit: structure, protections, and risks",
     "rwa-perpetuals": "Where around-the-clock equity and commodity trading finds demand",
     "when-agents-pay": "Authorization, settlement, and value capture in agentic payments",
+    "etherfi-q1-2026": "Quarter-to-date review of Cash, Stake, Liquid, and ETHFI",
+    "threshold-q1-26": "Quarterly review of tBTC, protocol fees, and T",
     "derive": "Onchain options investment thesis",
     "ether-fi": "The full-stack neobank thesis",
     "hyperliquid-2": "HIP-4: Outcome Markets",
@@ -185,8 +189,8 @@ def build_one(browser, kind: str, slug: str, filename: str) -> dict:
     published = date_match.group(0) if date_match else "Publication date not shown"
     figure_count = len(article.select("figure"))
     clean = clean_article(article, source)
-    portfolio_kind = "sector_reports" if slug in SECTOR_REPORTS else kind
-    cover_kind = "Sector Report" if portfolio_kind == "sector_reports" else {"theses": "Thesis", "memos": "Memo", "perspectives": "Perspective"}[kind]
+    portfolio_kind = "sector_reports" if slug in SECTOR_REPORTS else {"perspectives": "strategies", "benchmark": "quarterly_reports"}.get(kind, kind)
+    cover_kind = {"sector_reports": "Sector Report", "strategies": "Strategy", "quarterly_reports": "Quarterly Report", "theses": "Thesis", "memos": "Memo"}[portfolio_kind]
     doc = f"""<!doctype html><html><head><meta charset="utf-8"><title>{html.escape(title)}</title><style>{CSS}</style></head><body>
       {cover_html(title, subtitle, cover_kind, published, source)}
       <div class="article-kicker">ALEA RESEARCH / {kind.upper()} / {html.escape(published)}</div>

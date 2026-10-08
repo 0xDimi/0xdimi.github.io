@@ -14,6 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "docs"
 
 SUMMARIES = {
+    "etherfi-q1-2026": "Quarter-to-date review of Cash, Stake, Liquid, revenue, and ETHFI; data through February 9.",
+    "threshold-q1-26": "Q1 review of tBTC supply, DeFi use, fees, and T valuation; data through March 31.",
     "rwa-perpetuals": "Where RWA perps find demand: overnight markets, weekend risk, and pre-IPO price discovery.",
     "when-agents-pay": "Who authorizes an agent's payment, verifies delivery, and captures the economics.",
     "cross-asset-markets": "A cross-asset deck on crypto, rates, and market pricing around the 2026 Fed hike.",
@@ -37,11 +39,13 @@ SUMMARIES = {
     "usdai": "An investor relations deck on USD.AI.",
 }
 
-LABELS = {"collaboration": "Collaboration", "sector_reports": "Sector Wide Report", "perspectives": "Perspective", "theses": "Investment thesis", "memos": "Investment memo", "blueprints": "IR deck"}
-ORDER = {"collaboration": 0, "sector_reports": 1, "perspectives": 2, "theses": 3, "memos": 4, "blueprints": 5}
+LABELS = {"collaboration": "Collaboration", "sector_reports": "Sector Wide Report", "quarterly_reports": "Quarterly Report", "strategies": "Strategy", "theses": "Investment thesis", "memos": "Investment memo", "blueprints": "IR deck"}
+ORDER = {"collaboration": 0, "sector_reports": 1, "quarterly_reports": 2, "strategies": 3, "theses": 4, "memos": 5, "blueprints": 6}
 FEATURED = ["tokenized-stocks-chapters-2-3-8", "hyperliquid-2", "morpho", "steakhouse-financial"]
-DISPLAY_TITLES = {"hyperliquid": "Hyperliquid: Exchange Thesis", "hyperliquid-2": "Hyperliquid: HIP-4"}
+DISPLAY_TITLES = {"hyperliquid": "Hyperliquid: Exchange Thesis", "hyperliquid-2": "Hyperliquid: HIP-4", "etherfi-q1-2026": "Ether.fi: Q1 2026", "threshold-q1-26": "Threshold: Q1 2026"}
 REPORT_LOGOS = {
+    "etherfi-q1-2026": "ether-fi",
+    "threshold-q1-26": "threshold",
     "rwa-perpetuals": "alea",
     "when-agents-pay": "alea",
     "cross-asset-markets": "alea",
@@ -80,8 +84,8 @@ def load_items() -> list[dict]:
         "pdf": "pdfs/tokenized-stocks-chapters-2-3-8.pdf",
     }
     items = [collaboration, *articles, *decks]
-    if len(items) != 21:
-        raise RuntimeError(f"Expected 21 source publications, found {len(items)}")
+    if len(items) != 23:
+        raise RuntimeError(f"Expected 23 source publications, found {len(items)}")
     for item in items:
         path = SITE / item["pdf"]
         if not path.is_file():
@@ -146,9 +150,9 @@ def main() -> None:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#102c34">
-  <meta name="description" content="Selected sector research, investment theses, memos, perspectives, investor relations decks, and data tools by Dimitris Pechlivanidis.">
+  <meta name="description" content="Selected sector and quarterly reports, strategies, investment theses, memos, IR decks, and data tools by Dimitris Pechlivanidis.">
   <meta property="og:title" content="Dimitris Pechlivanidis — Research & Data">
-  <meta property="og:description" content="Sector reports, investment theses, memos, IR decks, and analytical tools.">
+  <meta property="og:description" content="Sector and quarterly reports, strategies, investment theses, memos, and analytical tools.">
   <meta property="og:type" content="website">
   <title>Dimitris Pechlivanidis · Research & Data</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -173,10 +177,11 @@ def main() -> None:
         <div class="hero-aside" aria-label="Portfolio sections">
           <div class="aside-label">INDEX / 2025—2026</div>
           <a href="#library" data-jump-filter="sector_reports"><span>01</span><strong>Sector Wide Reports</strong><span aria-hidden="true">↗</span></a>
-          <a href="#library" data-jump-filter="theses"><span>02</span><strong>Investment theses</strong><span aria-hidden="true">↗</span></a>
-          <a href="#library" data-jump-filter="memos"><span>03</span><strong>Investment memos</strong><span aria-hidden="true">↗</span></a>
-          <a href="#library" data-jump-filter="blueprints"><span>04</span><strong>IR decks</strong><span aria-hidden="true">↗</span></a>
-          <a href="#tools"><span>05</span><strong>Data tools</strong><span aria-hidden="true">↗</span></a>
+          <a href="#library" data-jump-filter="quarterly_reports"><span>02</span><strong>Quarterly Reports</strong><span aria-hidden="true">↗</span></a>
+          <a href="#library" data-jump-filter="theses"><span>03</span><strong>Investment theses</strong><span aria-hidden="true">↗</span></a>
+          <a href="#library" data-jump-filter="memos"><span>04</span><strong>Investment memos</strong><span aria-hidden="true">↗</span></a>
+          <a href="#library" data-jump-filter="blueprints"><span>05</span><strong>IR decks</strong><span aria-hidden="true">↗</span></a>
+          <a href="#tools"><span>06</span><strong>Data tools</strong><span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
@@ -195,7 +200,8 @@ def main() -> None:
           <button class="filter active" type="button" data-filter="all" aria-pressed="true">All <span>{len(items)}</span></button>
           <button class="filter" type="button" data-filter="collaboration" aria-pressed="false">Collaboration <span>{counts['collaboration']}</span></button>
           <button class="filter" type="button" data-filter="sector_reports" aria-pressed="false">Sector Wide Reports <span>{counts['sector_reports']}</span></button>
-          <button class="filter" type="button" data-filter="perspectives" aria-pressed="false">Perspectives <span>{counts['perspectives']}</span></button>
+          <button class="filter" type="button" data-filter="quarterly_reports" aria-pressed="false">Quarterly Reports <span>{counts['quarterly_reports']}</span></button>
+          <button class="filter" type="button" data-filter="strategies" aria-pressed="false">Strategies <span>{counts['strategies']}</span></button>
           <button class="filter" type="button" data-filter="theses" aria-pressed="false">Theses <span>{counts['theses']}</span></button>
           <button class="filter" type="button" data-filter="memos" aria-pressed="false">Memos <span>{counts['memos']}</span></button>
           <button class="filter" type="button" data-filter="blueprints" aria-pressed="false">IR decks <span>{counts['blueprints']}</span></button>

@@ -1,6 +1,6 @@
 [
   {
-    "kind": "perspectives",
+    "kind": "strategies",
     "slug": "axil-prime-credit-3m",
     "title": "Axil Prime Credit 3M",
     "subtitle": "Tokenized consumer credit: structure, protections, and risks",
@@ -9,7 +9,7 @@
     "pdf": "pdfs/axil-prime-credit-3m.pdf",
     "pages": 8,
     "figures": 3,
-    "bytes": 1691572
+    "bytes": 1827180
   },
   {
     "kind": "sector_reports",
@@ -34,6 +34,30 @@
     "pages": 22,
     "figures": 22,
     "bytes": 10449349
+  },
+  {
+    "kind": "quarterly_reports",
+    "slug": "etherfi-q1-2026",
+    "title": "Ether.fi - Q1 2026",
+    "subtitle": "Quarter-to-date review of Cash, Stake, Liquid, and ETHFI",
+    "published": "March 4, 2026",
+    "source": "https://alearesearch.io/reports/benchmark/etherfi-q1-2026",
+    "pdf": "pdfs/etherfi-q1-2026.pdf",
+    "pages": 37,
+    "figures": 47,
+    "bytes": 29389273
+  },
+  {
+    "kind": "quarterly_reports",
+    "slug": "threshold-q1-26",
+    "title": "Threshold - Q1 2026",
+    "subtitle": "Quarterly review of tBTC, protocol fees, and T",
+    "published": "May 8, 2026",
+    "source": "https://alearesearch.io/reports/benchmark/threshold-q1-26",
+    "pdf": "pdfs/threshold-q1-26.pdf",
+    "pages": 28,
+    "figures": 34,
+    "bytes": 19714550
   },
   {
     "kind": "theses",
