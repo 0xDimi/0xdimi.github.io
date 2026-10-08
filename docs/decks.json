@@ -1,5 +1,17 @@
 [
   {
+    "kind": "sector_reports",
+    "slug": "cross-asset-markets",
+    "title": "Cross-Asset Markets",
+    "subtitle": "Crypto, rates, and cross-asset markets",
+    "published": "October 7, 2026",
+    "source": "https://alearesearch.io/reports/blueprints/cross-asset-markets",
+    "pdf": "pdfs/cross-asset-markets.pdf",
+    "pages": 21,
+    "figures": 20,
+    "bytes": 4663219
+  },
+  {
     "kind": "blueprints",
     "slug": "steakhouse-financial",
     "title": "Steakhouse Financial",

@@ -30,6 +30,8 @@ AS_OF = "8 October 2026"
 
 ARTICLES = [
     ("perspectives", "axil-prime-credit-3m", "axil-prime-credit-3m"),
+    ("perspectives", "rwa-perpetuals", "rwa-perpetuals"),
+    ("perspectives", "when-agents-pay", "when-agents-pay"),
     ("theses", "hyperliquid", "hyperliquid-2025"),
     ("theses", "ethena", "ethena"),
     ("theses", "derive", "derive"),
@@ -46,12 +48,16 @@ ARTICLES = [
 
 SUBTITLES = {
     "axil-prime-credit-3m": "Tokenized consumer credit: structure, protections, and risks",
+    "rwa-perpetuals": "Where around-the-clock equity and commodity trading finds demand",
+    "when-agents-pay": "Authorization, settlement, and value capture in agentic payments",
     "derive": "Onchain options investment thesis",
     "ether-fi": "The full-stack neobank thesis",
     "hyperliquid-2": "HIP-4: Outcome Markets",
     "polymarket": "$POLY token launch thesis",
     "pendle-one-venue-all-of-fixed-income": "One Venue, All of Fixed Income",
 }
+
+SECTOR_REPORTS = {"rwa-perpetuals", "when-agents-pay"}
 
 
 def source_image_url(src: str, base_url: str) -> str:
@@ -179,8 +185,10 @@ def build_one(browser, kind: str, slug: str, filename: str) -> dict:
     published = date_match.group(0) if date_match else "Publication date not shown"
     figure_count = len(article.select("figure"))
     clean = clean_article(article, source)
+    portfolio_kind = "sector_reports" if slug in SECTOR_REPORTS else kind
+    cover_kind = "Sector Report" if portfolio_kind == "sector_reports" else {"theses": "Thesis", "memos": "Memo", "perspectives": "Perspective"}[kind]
     doc = f"""<!doctype html><html><head><meta charset="utf-8"><title>{html.escape(title)}</title><style>{CSS}</style></head><body>
-      {cover_html(title, subtitle, {"theses": "Thesis", "memos": "Memo", "perspectives": "Perspective"}[kind], published, source)}
+      {cover_html(title, subtitle, cover_kind, published, source)}
       <div class="article-kicker">ALEA RESEARCH / {kind.upper()} / {html.escape(published)}</div>
       {clean}
       </body></html>"""
@@ -203,7 +211,7 @@ def build_one(browser, kind: str, slug: str, filename: str) -> dict:
     body_text = " ".join(p.get_text() for p in list(reader)[1:])
     if len(body_text) < 0.85 * len(article.get_text(" ", strip=True)):
         raise RuntimeError(f"Text dropped during PDF render: {output}")
-    return {"kind": kind, "slug": slug, "title": title, "subtitle": subtitle, "published": published, "source": source, "pdf": f"pdfs/{filename}.pdf", "pages": len(reader), "figures": figure_count, "bytes": output.stat().st_size}
+    return {"kind": portfolio_kind, "slug": slug, "title": title, "subtitle": subtitle, "published": published, "source": source, "pdf": f"pdfs/{filename}.pdf", "pages": len(reader), "figures": figure_count, "bytes": output.stat().st_size}
 
 
 def main() -> None:

@@ -6,11 +6,13 @@ faithful to the published deck. A selectable-text cover supplies attribution.
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 from hashlib import sha256
 from io import BytesIO
 from pathlib import Path
+from urllib.parse import urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -27,11 +29,13 @@ ROOT = Path(__file__).resolve().parents[1]
 PDF_DIR = ROOT / "docs" / "pdfs"
 TEMP_DIR = ROOT / "tmp" / "decks"
 DECKS = [
+    ("cross-asset-markets", "Cross-Asset Markets", "October 7, 2026"),
     ("steakhouse-financial", "Steakhouse Financial", "September 2, 2026"),
     ("re-protocol", "Re Protocol", "August 3, 2026"),
     ("theo", "Theo", "April 23, 2026"),
     ("usdai", "USD.AI", "March 2, 2026"),
 ]
+SECTOR_DECKS = {"cross-asset-markets"}
 
 
 def figma_embed_url(source: str) -> str:
@@ -39,9 +43,13 @@ def figma_embed_url(source: str) -> str:
     response.raise_for_status()
     soup = BeautifulSoup(response.text, "html.parser")
     frame = soup.select_one("main iframe[src*='figma.com']")
-    if not frame:
+    if frame:
+        return frame["src"]
+    link = soup.select_one("main a[href^='https://www.figma.com/deck/']")
+    if not link:
         raise RuntimeError(f"No public Figma deck at {source}")
-    return frame["src"]
+    path = urlparse(link["href"]).path
+    return f"https://embed.figma.com{path}?embed-host=share&footer=false&theme=dark"
 
 
 def counter(page) -> tuple[int, int]:
@@ -94,12 +102,12 @@ def capture_deck(browser, source: str, slug: str) -> list[Path]:
     return images
 
 
-def write_pdf(images: list[Path], title: str, published: str, source: str, target: Path) -> None:
+def write_pdf(images: list[Path], title: str, published: str, source: str, target: Path, sector_report: bool = False) -> None:
     width, height = 960, 540
     pdf = canvas.Canvas(str(target), pagesize=(width, height), pageCompression=1)
     pdf.setTitle(f"{title} — Portfolio edition")
     pdf.setAuthor("Dimitris Pechlivanidis")
-    pdf.setSubject("Selected Alea Research deck")
+    pdf.setSubject("Selected Alea Research sector report" if sector_report else "Selected Alea Research deck")
     pdf.setFillColorRGB(0.063, 0.173, 0.204)
     pdf.rect(0, 0, width, height, stroke=0, fill=1)
     pdf.setStrokeColorRGB(0.80, 0.61, 0.33)
@@ -108,7 +116,7 @@ def write_pdf(images: list[Path], title: str, published: str, source: str, targe
     pdf.setFont("Times-Roman", 18)
     pdf.drawString(59, 463, "DP")
     pdf.setFont("Helvetica", 9)
-    pdf.drawRightString(908, 470, "SELECTED RESEARCH  /  IR DECK")
+    pdf.drawRightString(908, 470, "SELECTED RESEARCH  /  SECTOR REPORT" if sector_report else "SELECTED RESEARCH  /  IR DECK")
     pdf.setFont("Helvetica", 10)
     pdf.drawString(52, 335, "DIMITRIS PECHLIVANIDIS")
     pdf.setFillColorRGB(0.97, 0.96, 0.92)
@@ -116,7 +124,7 @@ def write_pdf(images: list[Path], title: str, published: str, source: str, targe
     pdf.drawString(52, 260, title)
     pdf.setFont("Helvetica", 17)
     pdf.setFillColorRGB(0.72, 0.82, 0.83)
-    pdf.drawString(52, 218, "Investor relations and business performance")
+    pdf.drawString(52, 218, "Crypto, rates, and cross-asset market pricing" if sector_report else "Investor relations and business performance")
     pdf.setStrokeColorRGB(0.80, 0.61, 0.33)
     pdf.line(52, 188, 190, 188)
     pdf.setFont("Helvetica", 11)
@@ -135,25 +143,37 @@ def write_pdf(images: list[Path], title: str, published: str, source: str, targe
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--only", help="Build one deck by slug")
+    args = parser.parse_args()
+    selected = [deck for deck in DECKS if not args.only or deck[0] == args.only]
+    if not selected:
+        raise SystemExit(f"Unknown deck slug: {args.only}")
     PDF_DIR.mkdir(parents=True, exist_ok=True)
     results = []
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=True, executable_path=CHROME)
         try:
-            for slug, title, published in DECKS:
+            for slug, title, published in selected:
                 source = f"https://alearesearch.io/reports/blueprints/{slug}"
                 images = capture_deck(browser, source, slug)
                 target = PDF_DIR / f"{slug}.pdf"
-                write_pdf(images, title, published, source, target)
+                sector_report = slug in SECTOR_DECKS
+                write_pdf(images, title, published, source, target, sector_report=sector_report)
                 pages = len(PdfReader(str(target)).pages)
                 if pages != len(images) + 1:
                     raise RuntimeError(f"PDF page count mismatch: {target}")
-                result = {"kind": "blueprints", "slug": slug, "title": title, "subtitle": "Investor relations deck", "published": published, "source": source, "pdf": f"pdfs/{slug}.pdf", "pages": pages, "figures": len(images), "bytes": target.stat().st_size}
+                result = {"kind": "sector_reports" if sector_report else "blueprints", "slug": slug, "title": title, "subtitle": "Crypto, rates, and cross-asset markets" if sector_report else "Investor relations deck", "published": published, "source": source, "pdf": f"pdfs/{slug}.pdf", "pages": pages, "figures": len(images), "bytes": target.stat().st_size}
                 print(result, flush=True)
                 results.append(result)
         finally:
             browser.close()
-    (ROOT / "docs" / "decks.json").write_text(json.dumps(results, indent=2) + "\n")
+    metadata = ROOT / "docs" / "decks.json"
+    if args.only and metadata.exists():
+        known = {item["slug"]: item for item in json.loads(metadata.read_text())}
+        known.update({item["slug"]: item for item in results})
+        results = [known[slug] for slug, _, _ in DECKS if slug in known]
+    metadata.write_text(json.dumps(results, indent=2) + "\n")
 
 
 if __name__ == "__main__":

@@ -12,6 +12,30 @@
     "bytes": 1691572
   },
   {
+    "kind": "sector_reports",
+    "slug": "rwa-perpetuals",
+    "title": "RWA Perpetuals",
+    "subtitle": "Where around-the-clock equity and commodity trading finds demand",
+    "published": "July 16, 2026",
+    "source": "https://alearesearch.io/reports/perspectives/rwa-perpetuals",
+    "pdf": "pdfs/rwa-perpetuals.pdf",
+    "pages": 23,
+    "figures": 31,
+    "bytes": 17360327
+  },
+  {
+    "kind": "sector_reports",
+    "slug": "when-agents-pay",
+    "title": "When Agents Pay",
+    "subtitle": "Authorization, settlement, and value capture in agentic payments",
+    "published": "June 23, 2026",
+    "source": "https://alearesearch.io/reports/perspectives/when-agents-pay",
+    "pdf": "pdfs/when-agents-pay.pdf",
+    "pages": 22,
+    "figures": 22,
+    "bytes": 10449349
+  },
+  {
     "kind": "theses",
     "slug": "hyperliquid",
     "title": "Hyperliquid",

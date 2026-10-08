@@ -12,6 +12,48 @@
     "logo": "logos/redstone.png"
   },
   {
+    "kind": "sector_reports",
+    "slug": "cross-asset-markets",
+    "title": "Cross-Asset Markets",
+    "subtitle": "Crypto, rates, and cross-asset markets",
+    "published": "October 7, 2026",
+    "source": "https://alearesearch.io/reports/blueprints/cross-asset-markets",
+    "pdf": "pdfs/cross-asset-markets.pdf",
+    "pages": 21,
+    "figures": 20,
+    "bytes": 4663219,
+    "summary": "A cross-asset deck on crypto, rates, and market pricing around the 2026 Fed hike.",
+    "logo": "logos/alea.svg"
+  },
+  {
+    "kind": "sector_reports",
+    "slug": "rwa-perpetuals",
+    "title": "RWA Perpetuals",
+    "subtitle": "Where around-the-clock equity and commodity trading finds demand",
+    "published": "July 16, 2026",
+    "source": "https://alearesearch.io/reports/perspectives/rwa-perpetuals",
+    "pdf": "pdfs/rwa-perpetuals.pdf",
+    "pages": 23,
+    "figures": 31,
+    "bytes": 17360327,
+    "summary": "Where RWA perps find demand: overnight markets, weekend risk, and pre-IPO price discovery.",
+    "logo": "logos/alea.svg"
+  },
+  {
+    "kind": "sector_reports",
+    "slug": "when-agents-pay",
+    "title": "When Agents Pay",
+    "subtitle": "Authorization, settlement, and value capture in agentic payments",
+    "published": "June 23, 2026",
+    "source": "https://alearesearch.io/reports/perspectives/when-agents-pay",
+    "pdf": "pdfs/when-agents-pay.pdf",
+    "pages": 22,
+    "figures": 22,
+    "bytes": 10449349,
+    "summary": "Who authorizes an agent's payment, verifies delivery, and captures the economics.",
+    "logo": "logos/alea.svg"
+  },
+  {
     "kind": "perspectives",
     "slug": "axil-prime-credit-3m",
     "title": "Axil Prime Credit 3M",

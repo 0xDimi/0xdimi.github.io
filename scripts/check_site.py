@@ -16,8 +16,18 @@ SITE = ROOT / "docs"
 
 def main() -> None:
     manifest = json.loads((SITE / "manifest.json").read_text())
-    if len(manifest) != 18:
-        raise RuntimeError(f"Expected 18 publications, found {len(manifest)}")
+    if len(manifest) != 21:
+        raise RuntimeError(f"Expected 21 publications, found {len(manifest)}")
+    sector_sources = {
+        "rwa-perpetuals": "https://alearesearch.io/reports/perspectives/rwa-perpetuals",
+        "when-agents-pay": "https://alearesearch.io/reports/perspectives/when-agents-pay",
+        "cross-asset-markets": "https://alearesearch.io/reports/blueprints/cross-asset-markets",
+    }
+    sector_items = {item["slug"]: item for item in manifest if item["kind"] == "sector_reports"}
+    if set(sector_items) != set(sector_sources):
+        raise RuntimeError("Sector Wide Reports category is incomplete")
+    if any(sector_items[slug]["source"] != source for slug, source in sector_sources.items()):
+        raise RuntimeError("Sector report source URL mismatch")
     axil = next((item for item in manifest if item["slug"] == "axil-prime-credit-3m"), None)
     if not axil or axil["kind"] != "perspectives" or axil["source"] != "https://alearesearch.io/reports/perspectives/axil-prime-credit-3m":
         raise RuntimeError("Axil public perspective is missing or misclassified")
