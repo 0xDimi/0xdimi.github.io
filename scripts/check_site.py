@@ -7,6 +7,7 @@ from pathlib import Path
 
 import fitz
 from bs4 import BeautifulSoup
+from PIL import Image
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,6 +31,17 @@ def main() -> None:
             raise RuntimeError(f"Missing or invalid PDF: {path}")
         if not soup.select_one(f"#work-{item['slug']} a.primary-link[href='{item['pdf']}']"):
             raise RuntimeError(f"PDF has no library link: {path}")
+        logo = SITE / item["logo"]
+        if not logo.is_file():
+            raise RuntimeError(f"Missing logo: {logo}")
+        if logo.suffix != ".svg":
+            with Image.open(logo) as image:
+                if min(image.size) < 180:
+                    raise RuntimeError(f"Logo resolution is too low: {logo} ({image.size})")
+        for section in ("#selected", "#work-grid"):
+            card = soup.select_one(f"{section} #work-{item['slug']}")
+            if card is not None and not card.select_one(f'.protocol-logo img[src="{item["logo"]}"]'):
+                raise RuntimeError(f"Card has no matching logo: {item['slug']}")
         with fitz.open(path) as pdf:
             if len(pdf) != item["pages"]:
                 raise RuntimeError(f"Manifest page count mismatch: {path}")

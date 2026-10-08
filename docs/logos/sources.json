@@ -1,0 +1,18 @@
+{
+  "redstone": {"file": "redstone.png", "source": "https://www.redstone.finance/images/android-chrome-512x512.png"},
+  "hyperliquid": {"file": "hyperliquid.webp", "source": "https://icons.llamao.fi/icons/protocols/hyperliquid"},
+  "polymarket": {"file": "polymarket.webp", "source": "https://icons.llamao.fi/icons/protocols/polymarket-international"},
+  "pendle": {"file": "pendle.webp", "source": "https://icons.llamao.fi/icons/protocols/pendle-v2"},
+  "ether-fi": {"file": "ether-fi.webp", "source": "https://icons.llamao.fi/icons/protocols/ether.fi"},
+  "derive": {"file": "derive.webp", "source": "https://icons.llamao.fi/icons/protocols/derive"},
+  "ethena": {"file": "ethena.svg", "source": "https://ethena.fi/shared/ethena.svg"},
+  "lighter": {"file": "lighter.webp", "source": "https://icons.llamao.fi/icons/protocols/lighter"},
+  "morpho": {"file": "morpho.webp", "source": "https://icons.llamao.fi/icons/protocols/morpho-blue"},
+  "venice": {"file": "venice.webp", "source": "https://icons.llamao.fi/icons/protocols/venice"},
+  "near": {"file": "near.webp", "source": "https://icons.llamao.fi/icons/protocols/near"},
+  "layerzero": {"file": "layerzero.webp", "source": "https://icons.llamao.fi/icons/protocols/layerzero-v2"},
+  "steakhouse": {"file": "steakhouse.webp", "source": "https://icons.llamao.fi/icons/protocols/steakhouse-financial"},
+  "re": {"file": "re.png", "source": "https://re.xyz/icon.png"},
+  "theo": {"file": "theo.svg", "source": "https://theo.xyz/"},
+  "usdai": {"file": "usdai.svg", "source": "https://docs.usd.ai/brand-guidelines/logo"}
+}

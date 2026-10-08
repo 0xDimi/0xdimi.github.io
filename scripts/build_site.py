@@ -37,11 +37,31 @@ LABELS = {"collaboration": "Collaboration", "theses": "Investment thesis", "memo
 ORDER = {"collaboration": 0, "theses": 1, "memos": 2, "blueprints": 3}
 FEATURED = ["tokenized-stocks-chapters-2-3-8", "hyperliquid-2", "morpho", "steakhouse-financial"]
 DISPLAY_TITLES = {"hyperliquid": "Hyperliquid: Exchange Thesis", "hyperliquid-2": "Hyperliquid: HIP-4"}
+REPORT_LOGOS = {
+    "tokenized-stocks-chapters-2-3-8": "redstone",
+    "hyperliquid": "hyperliquid",
+    "hyperliquid-2": "hyperliquid",
+    "polymarket": "polymarket",
+    "pendle-one-venue-all-of-fixed-income": "pendle",
+    "ether-fi": "ether-fi",
+    "derive": "derive",
+    "ethena": "ethena",
+    "lit": "lighter",
+    "morpho": "morpho",
+    "vvv": "venice",
+    "near": "near",
+    "zro": "layerzero",
+    "steakhouse-financial": "steakhouse",
+    "re-protocol": "re",
+    "theo": "theo",
+    "usdai": "usdai",
+}
 
 
 def load_items() -> list[dict]:
     articles = json.loads((SITE / "articles.json").read_text())
     decks = json.loads((SITE / "decks.json").read_text())
+    logos = json.loads((SITE / "logos" / "sources.json").read_text())
     collaboration = {
         "kind": "collaboration",
         "slug": "tokenized-stocks-chapters-2-3-8",
@@ -61,6 +81,10 @@ def load_items() -> list[dict]:
         with fitz.open(path) as pdf:
             item["pages"] = len(pdf)
         item["summary"] = SUMMARIES[item["slug"]]
+        logo_key = REPORT_LOGOS[item["slug"]]
+        item["logo"] = f"logos/{logos[logo_key]['file']}"
+        if not (SITE / item["logo"]).is_file():
+            raise FileNotFoundError(SITE / item["logo"])
     items.sort(key=lambda item: (ORDER[item["kind"]], -datetime.strptime(item["published"], "%B %d, %Y").timestamp()))
     return items
 
@@ -90,7 +114,7 @@ def card(item: dict, featured: bool = False) -> str:
         {image}
         <div class="card-content">
           <div class="card-meta"><span>{e(LABELS[item['kind']])}</span><span>{e(item['published'])}</span></div>
-          <h3>{e(DISPLAY_TITLES.get(item['slug'], item['title']))}</h3>
+          <div class="card-title-row"><span class="protocol-logo" aria-hidden="true"><img src="{e(item['logo'])}" alt="" width="58" height="58" loading="lazy" decoding="async"></span><h3>{e(DISPLAY_TITLES.get(item['slug'], item['title']))}</h3></div>
           <p>{e(item['summary'])}</p>
           <div class="card-bottom"><span>{item['pages']} pages · PDF</span><div class="card-links">
             <a class="primary-link" href="{e(item['pdf'])}" target="_blank" rel="noopener">Read PDF <span aria-hidden="true">↗</span></a>
@@ -194,10 +218,10 @@ def main() -> None:
       <div class="container about-grid">
         <div class="about-heading"><p class="section-no">04 / THE PERSON BEHIND THE WORK</p><h2 id="about-title">About</h2><div class="about-rule" aria-hidden="true"></div></div>
         <div class="about-copy">
-          <p class="about-lead">I want to know what would change my mind.</p>
-          <p>I've made market calls that sounded tidy until I tried to explain the rule behind them. I wrote about that mistake on Substack. It shapes how I research now: show who pays, who gets paid, and what would break the view.</p>
-          <p>At Alea Research, I write theses and memos, evaluate businesses, and work with founders and clients from the first call to the final report. I lead two analysts. When existing tools don't show me what I need, I build my own.</p>
-          <p>Before research, I spent twelve years in competitive football and five years in sales in Greece. Both gave me immediate feedback. A match ends. A client buys or walks away. Research can hide behind words for longer, so I try to make my assumptions visible.</p>
+          <p class="about-lead">Give a damn and you'll be great.</p>
+          <p>I've evaluated more than 50 businesses and protocols, sourced at least 20 blockchain startups, and invested in many of them. I've also invested in robotics and AI companies. Skin in the game matters to me. I put my conviction up for judgment, test the assumptions behind it, and change my mind when the evidence calls for it.</p>
+          <p>Client work matters just as much. At Alea Research, I've helped teams raise money, shape go-to-market strategies and business models, plan incentive campaigns, and prepare investor materials. The work goes beyond a report: I stay involved with the decisions teams have to make.</p>
+          <p>Before research, I spent twelve years in competitive football and five years in sales in Greece. Both taught me to care about the result. A match ends. A client buys or walks away. I bring the same attitude to research and investing.</p>
           <a class="about-link" href="https://meditationsbyd.substack.com/" target="_blank" rel="noopener">Read more of my writing on Substack <span aria-hidden="true">↗</span></a>
         </div>
       </div>

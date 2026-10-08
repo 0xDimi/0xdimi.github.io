@@ -8,7 +8,8 @@
     "source": "https://www.redstone.finance/research/tokenized-stocks-2026",
     "pdf": "pdfs/tokenized-stocks-chapters-2-3-8.pdf",
     "pages": 21,
-    "summary": "My credited chapters on investor rights, the tokenized stock ecosystem, and DeFi use."
+    "summary": "My credited chapters on investor rights, the tokenized stock ecosystem, and DeFi use.",
+    "logo": "logos/redstone.png"
   },
   {
     "kind": "theses",
@@ -21,7 +22,8 @@
     "pages": 14,
     "figures": 14,
     "bytes": 2363784,
-    "summary": "HIP-4 outcome markets, user overlap, fee scenarios, and invalidation points."
+    "summary": "HIP-4 outcome markets, user overlap, fee scenarios, and invalidation points.",
+    "logo": "logos/hyperliquid.webp"
   },
   {
     "kind": "theses",
@@ -34,7 +36,8 @@
     "pages": 13,
     "figures": 16,
     "bytes": 2930952,
-    "summary": "Market structure and the investment case around a potential POLY token."
+    "summary": "Market structure and the investment case around a potential POLY token.",
+    "logo": "logos/polymarket.webp"
   },
   {
     "kind": "theses",
@@ -47,7 +50,8 @@
     "pages": 17,
     "figures": 20,
     "bytes": 3960123,
-    "summary": "Pendle's yield-trading position, Boros, and the case for a broader fixed-income venue."
+    "summary": "Pendle's yield-trading position, Boros, and the case for a broader fixed-income venue.",
+    "logo": "logos/pendle.webp"
   },
   {
     "kind": "theses",
@@ -60,7 +64,8 @@
     "pages": 20,
     "figures": 22,
     "bytes": 5259366,
-    "summary": "How staking, vaults, and payments fit into ether.fi's business model."
+    "summary": "How staking, vaults, and payments fit into ether.fi's business model.",
+    "logo": "logos/ether-fi.webp"
   },
   {
     "kind": "theses",
@@ -73,7 +78,8 @@
     "pages": 15,
     "figures": 11,
     "bytes": 2198272,
-    "summary": "The investment case for an onchain options venue."
+    "summary": "The investment case for an onchain options venue.",
+    "logo": "logos/derive.webp"
   },
   {
     "kind": "theses",
@@ -86,7 +92,8 @@
     "pages": 22,
     "figures": 20,
     "bytes": 5672966,
-    "summary": "Stablecoin issuance, Converge, and the economics of ENA."
+    "summary": "Stablecoin issuance, Converge, and the economics of ENA.",
+    "logo": "logos/ethena.svg"
   },
   {
     "kind": "theses",
@@ -99,7 +106,8 @@
     "pages": 20,
     "figures": 17,
     "bytes": 3939223,
-    "summary": "Exchange and chain economics, holder base, and the case for HYPE."
+    "summary": "Exchange and chain economics, holder base, and the case for HYPE.",
+    "logo": "logos/hyperliquid.webp"
   },
   {
     "kind": "memos",
@@ -112,7 +120,8 @@
     "pages": 6,
     "figures": 6,
     "bytes": 1251842,
-    "summary": "Lighter's valuation and the Robinhood distribution route."
+    "summary": "Lighter's valuation and the Robinhood distribution route.",
+    "logo": "logos/lighter.webp"
   },
   {
     "kind": "memos",
@@ -125,7 +134,8 @@
     "pages": 6,
     "figures": 6,
     "bytes": 1020118,
-    "summary": "A memo on Morpho's fee opportunity and the timing risk to holders."
+    "summary": "A memo on Morpho's fee opportunity and the timing risk to holders.",
+    "logo": "logos/morpho.webp"
   },
   {
     "kind": "memos",
@@ -138,7 +148,8 @@
     "pages": 9,
     "figures": 9,
     "bytes": 1658746,
-    "summary": "Private AI inference and the economics of the VVV token."
+    "summary": "Private AI inference and the economics of the VVV token.",
+    "logo": "logos/venice.webp"
   },
   {
     "kind": "memos",
@@ -151,7 +162,8 @@
     "pages": 6,
     "figures": 5,
     "bytes": 938643,
-    "summary": "NEAR's pivots, current positioning, and token valuation."
+    "summary": "NEAR's pivots, current positioning, and token valuation.",
+    "logo": "logos/near.webp"
   },
   {
     "kind": "memos",
@@ -164,7 +176,8 @@
     "pages": 6,
     "figures": 7,
     "bytes": 1020233,
-    "summary": "LayerZero's Zero network and the ZRO value-capture case."
+    "summary": "LayerZero's Zero network and the ZRO value-capture case.",
+    "logo": "logos/layerzero.webp"
   },
   {
     "kind": "blueprints",
@@ -177,7 +190,8 @@
     "pages": 19,
     "figures": 18,
     "bytes": 7963680,
-    "summary": "A public vault business performance review for Q2 2026."
+    "summary": "A public vault business performance review for Q2 2026.",
+    "logo": "logos/steakhouse.webp"
   },
   {
     "kind": "blueprints",
@@ -190,7 +204,8 @@
     "pages": 31,
     "figures": 30,
     "bytes": 13617970,
-    "summary": "An investor relations deck on Re Protocol."
+    "summary": "An investor relations deck on Re Protocol.",
+    "logo": "logos/re.png"
   },
   {
     "kind": "blueprints",
@@ -203,7 +218,8 @@
     "pages": 31,
     "figures": 30,
     "bytes": 13305343,
-    "summary": "An investor relations deck on Theo."
+    "summary": "An investor relations deck on Theo.",
+    "logo": "logos/theo.svg"
   },
   {
     "kind": "blueprints",
@@ -216,6 +232,7 @@
     "pages": 49,
     "figures": 48,
     "bytes": 28375593,
-    "summary": "An investor relations deck on USD.AI."
+    "summary": "An investor relations deck on USD.AI.",
+    "logo": "logos/usdai.svg"
   }
 ]
