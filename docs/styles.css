@@ -85,6 +85,14 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 .tool-links{margin-top:auto;display:flex;flex-wrap:wrap;gap:18px;padding-top:15px;border-top:1px solid #d9ddd7}
 .tool-links a{font-size:12px;font-weight:700;color:#315b64;border-bottom:1px solid #93a9a5;padding-bottom:2px}
 .tool-links a:hover{color:#a16c35}
+.data-room-card{grid-column:1/-1;min-height:265px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);align-items:center;gap:8%;padding:33px 35px;background:#e9eee9;border-top-color:#173b43}
+.data-room-copy h3{margin:22px 0 12px}
+.data-room-copy p{max-width:410px;margin:0}
+.room-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.room-links a{display:flex;justify-content:space-between;align-items:center;gap:12px;min-width:0;background:#f9f8f2;border:1px solid #ced9d3;padding:12px 15px;color:#244a52;font-size:13px;font-weight:700;transition:background .2s ease,border-color .2s ease,transform .2s ease}
+.room-links a:hover{background:#fff;border-color:#a0b4ae;transform:translateY(-2px)}
+.room-links a span:last-child{color:#a2733f}
+.room-links a:first-child{grid-column:1/-1;background:#dce8e1;border-color:#b6cbc0}
 .about-section{position:relative;overflow:hidden;background:#153740;color:var(--cream);border-top:1px solid #30515a}
 .about-section:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.13;background:linear-gradient(115deg,transparent 0 46%,#86a0a1 46.06%,transparent 46.12%)}
 .about-grid{position:relative;display:grid;grid-template-columns:minmax(220px,.75fr) minmax(0,1.25fr);gap:10%;align-items:start}
@@ -104,6 +112,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 .footer-links{display:flex;gap:27px;flex-wrap:wrap;color:#c3d1cf;font-size:12px}
 .footer-links a:hover{color:#e3bb82}
 @media(max-width:1050px){.hero-grid{gap:5%}.hero h1{font-size:64px}.library-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card-bottom{align-items:flex-start;flex-direction:column}.card-links{justify-content:flex-start}}
-@media(max-width:760px){.container{width:min(100% - 36px,1280px)}.site-header{height:auto;min-height:76px}.header-inner{align-items:flex-start;flex-direction:column;justify-content:center;padding:15px 0;gap:13px}.site-header nav{gap:17px;font-size:10px;flex-wrap:wrap}.nav-contact{padding-left:0;border-left:0}.hero-grid{display:block;min-height:0}.hero-copy{padding:76px 0 44px}.hero h1{font-size:clamp(44px,11vw,70px);max-width:620px}.hero-aside{margin:0 0 56px}.section{padding:70px 0 76px}.section-heading{align-items:flex-start;flex-direction:column;gap:17px}.featured-grid,.library-grid,.tool-grid{grid-template-columns:1fr}.feature-image{height:220px}.library-grid .work-card p{min-height:0}.about-grid{grid-template-columns:1fr;gap:35px}.about-heading h2{margin-bottom:18px}.footer-inner{align-items:flex-start;flex-direction:column}.footer-links{gap:18px}}
+@media(max-width:760px){.container{width:min(100% - 36px,1280px)}.site-header{height:auto;min-height:76px}.header-inner{align-items:flex-start;flex-direction:column;justify-content:center;padding:15px 0;gap:13px}.site-header nav{gap:17px;font-size:10px;flex-wrap:wrap}.nav-contact{padding-left:0;border-left:0}.hero-grid{display:block;min-height:0}.hero-copy{padding:76px 0 44px}.hero h1{font-size:clamp(44px,11vw,70px);max-width:620px}.hero-aside{margin:0 0 56px}.section{padding:70px 0 76px}.section-heading{align-items:flex-start;flex-direction:column;gap:17px}.featured-grid,.library-grid,.tool-grid{grid-template-columns:1fr}.feature-image{height:220px}.library-grid .work-card p{min-height:0}.data-room-card{grid-template-columns:1fr;gap:23px}.about-grid{grid-template-columns:1fr;gap:35px}.about-heading h2{margin-bottom:18px}.footer-inner{align-items:flex-start;flex-direction:column}.footer-links{gap:18px}}
 @media(max-width:440px){.site-header nav a:nth-child(2){display:none}.hero h1{font-size:44px}.hero-actions{align-items:flex-start;flex-direction:column;gap:19px}.section-heading h2{font-size:44px}.card-content{padding:22px}.work-card h3{font-size:29px}.card-meta{font-size:9px;letter-spacing:.09em}.feature-image{height:190px}.filter{font-size:11px;padding:9px 10px}.tool-card{min-height:245px}}
+@media(max-width:440px){.data-room-card{padding:24px}.room-links{grid-template-columns:1fr}.room-links a:first-child{grid-column:auto}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
