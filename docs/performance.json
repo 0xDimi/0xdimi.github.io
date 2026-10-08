@@ -1,0 +1,713 @@
+{
+  "as_of_utc": "2026-10-07",
+  "method": "USD spot observations nearest 00:00 UTC (within two hours) on the day after publication versus the day after the as-of date, and separately after 30 days. Relative return is token return minus BTC return in percentage points. Prices are DefiLlama historical observations; returns exclude fees, slippage, staking, dividends, and funding. This is token price performance, not a realized trade or a verdict on thesis quality.",
+  "source_docs": "https://github.com/DefiLlama/api-sdk#prices",
+  "items": {
+    "hyperliquid": {
+      "status": "verified",
+      "published": "2025-02-25",
+      "asset": "HYPE",
+      "coin_id": "coingecko:hyperliquid",
+      "since_publication": {
+        "start_utc": "2025-02-26",
+        "end_utc": "2026-10-08",
+        "holding_days": 589,
+        "token_start": {
+          "usd": 20.28,
+          "observed_at_utc": "2025-02-26T00:00:04+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1740528000/coingecko:hyperliquid"
+        },
+        "token_end": {
+          "usd": 88.47476902557493,
+          "observed_at_utc": "2026-10-08T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:hyperliquid"
+        },
+        "btc_start": {
+          "usd": 88623,
+          "observed_at_utc": "2025-02-26T00:00:02+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1740528000/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 83282.04538340426,
+          "observed_at_utc": "2026-10-08T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:bitcoin"
+        },
+        "token_return_pct": 336.2661194554977,
+        "btc_return_pct": -6.026601013953203,
+        "relative_to_btc_pp": 342.2927204694509
+      },
+      "first_30_days": {
+        "start_utc": "2025-02-26",
+        "end_utc": "2025-03-28",
+        "holding_days": 30,
+        "token_start": {
+          "usd": 20.28,
+          "observed_at_utc": "2025-02-26T00:00:04+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1740528000/coingecko:hyperliquid"
+        },
+        "token_end": {
+          "usd": 14.71,
+          "observed_at_utc": "2025-03-28T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1743120000/coingecko:hyperliquid"
+        },
+        "btc_start": {
+          "usd": 88623,
+          "observed_at_utc": "2025-02-26T00:00:02+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1740528000/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 87183,
+          "observed_at_utc": "2025-03-27T23:59:56+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1743120000/coingecko:bitcoin"
+        },
+        "token_return_pct": -27.465483234714007,
+        "btc_return_pct": -1.624860363562508,
+        "relative_to_btc_pp": -25.8406228711515
+      }
+    },
+    "ethena": {
+      "status": "verified",
+      "published": "2025-06-20",
+      "asset": "ENA",
+      "coin_id": "coingecko:ethena",
+      "since_publication": {
+        "start_utc": "2025-06-21",
+        "end_utc": "2026-10-08",
+        "holding_days": 474,
+        "token_start": {
+          "usd": 0.265768,
+          "observed_at_utc": "2025-06-21T00:00:05+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1750464000/coingecko:ethena"
+        },
+        "token_end": {
+          "usd": 0.2263983119080278,
+          "observed_at_utc": "2026-10-08T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:ethena"
+        },
+        "btc_start": {
+          "usd": 103289,
+          "observed_at_utc": "2025-06-21T00:00:01+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1750464000/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 83282.04538340426,
+          "observed_at_utc": "2026-10-08T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:bitcoin"
+        },
+        "token_return_pct": -14.813554713875332,
+        "btc_return_pct": -19.36987928685121,
+        "relative_to_btc_pp": 4.556324572975877
+      },
+      "first_30_days": {
+        "start_utc": "2025-06-21",
+        "end_utc": "2025-07-21",
+        "holding_days": 30,
+        "token_start": {
+          "usd": 0.265768,
+          "observed_at_utc": "2025-06-21T00:00:05+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1750464000/coingecko:ethena"
+        },
+        "token_end": {
+          "usd": 0.49402278112662895,
+          "observed_at_utc": "2025-07-21T00:01:34+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1753056000/coingecko:ethena"
+        },
+        "btc_start": {
+          "usd": 103289,
+          "observed_at_utc": "2025-06-21T00:00:01+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1750464000/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 117269.11884296437,
+          "observed_at_utc": "2025-07-21T00:01:18+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1753056000/coingecko:bitcoin"
+        },
+        "token_return_pct": 85.88497528921049,
+        "btc_return_pct": 13.534954199347826,
+        "relative_to_btc_pp": 72.35002108986266
+      }
+    },
+    "derive": {
+      "status": "verified",
+      "published": "2025-06-25",
+      "asset": "DRV",
+      "coin_id": "coingecko:derive",
+      "since_publication": {
+        "start_utc": "2025-06-26",
+        "end_utc": "2026-10-08",
+        "holding_days": 469,
+        "token_start": {
+          "usd": 0.03084918,
+          "observed_at_utc": "2025-06-26T00:59:03+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1750896000/coingecko:derive"
+        },
+        "token_end": {
+          "usd": 0.37481607670873746,
+          "observed_at_utc": "2026-10-08T00:00:30+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:derive"
+        },
+        "btc_start": {
+          "usd": 107337,
+          "observed_at_utc": "2025-06-25T23:59:59+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1750896000/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 83282.04538340426,
+          "observed_at_utc": "2026-10-08T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:bitcoin"
+        },
+        "token_return_pct": 1114.9952663530682,
+        "btc_return_pct": -22.41068281822274,
+        "relative_to_btc_pp": 1137.405949171291
+      },
+      "first_30_days": {
+        "start_utc": "2025-06-26",
+        "end_utc": "2025-07-26",
+        "holding_days": 30,
+        "token_start": {
+          "usd": 0.03084918,
+          "observed_at_utc": "2025-06-26T00:59:03+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1750896000/coingecko:derive"
+        },
+        "token_end": {
+          "usd": 0.076407,
+          "observed_at_utc": "2025-07-25T23:59:02+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1753488000/coingecko:derive"
+        },
+        "btc_start": {
+          "usd": 107337,
+          "observed_at_utc": "2025-06-25T23:59:59+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1750896000/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 117605,
+          "observed_at_utc": "2025-07-26T00:00:02+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1753488000/coingecko:bitcoin"
+        },
+        "token_return_pct": 147.67919276946748,
+        "btc_return_pct": 9.566132833971519,
+        "relative_to_btc_pp": 138.11305993549595
+      }
+    },
+    "ether-fi": {
+      "status": "verified",
+      "published": "2025-09-20",
+      "asset": "ETHFI",
+      "coin_id": "coingecko:ether-fi",
+      "since_publication": {
+        "start_utc": "2025-09-21",
+        "end_utc": "2026-10-08",
+        "holding_days": 382,
+        "token_start": {
+          "usd": 1.5,
+          "observed_at_utc": "2025-09-20T23:59:57+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1758412800/coingecko:ether-fi"
+        },
+        "token_end": {
+          "usd": 0.7220239219408483,
+          "observed_at_utc": "2026-10-08T00:00:30+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:ether-fi"
+        },
+        "btc_start": {
+          "usd": 115720,
+          "observed_at_utc": "2025-09-21T00:00:03+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1758412800/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 83282.04538340426,
+          "observed_at_utc": "2026-10-08T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:bitcoin"
+        },
+        "token_return_pct": -51.865071870610116,
+        "btc_return_pct": -28.03141601848923,
+        "relative_to_btc_pp": -23.833655852120884
+      },
+      "first_30_days": {
+        "start_utc": "2025-09-21",
+        "end_utc": "2025-10-21",
+        "holding_days": 30,
+        "token_start": {
+          "usd": 1.5,
+          "observed_at_utc": "2025-09-20T23:59:57+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1758412800/coingecko:ether-fi"
+        },
+        "token_end": {
+          "usd": 1.0690768337432157,
+          "observed_at_utc": "2025-10-20T23:59:58+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1761004800/coingecko:ether-fi"
+        },
+        "btc_start": {
+          "usd": 115720,
+          "observed_at_utc": "2025-09-21T00:00:03+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1758412800/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 110563.06187004181,
+          "observed_at_utc": "2025-10-21T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1761004800/coingecko:bitcoin"
+        },
+        "token_return_pct": -28.728211083785617,
+        "btc_return_pct": -4.456393129932756,
+        "relative_to_btc_pp": -24.27181795385286
+      }
+    },
+    "hyperliquid-2": {
+      "status": "verified",
+      "published": "2026-06-11",
+      "asset": "HYPE",
+      "coin_id": "coingecko:hyperliquid",
+      "since_publication": {
+        "start_utc": "2026-06-12",
+        "end_utc": "2026-10-08",
+        "holding_days": 118,
+        "token_start": {
+          "usd": 58.92360359183071,
+          "observed_at_utc": "2026-06-11T23:59:44+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1781222400/coingecko:hyperliquid"
+        },
+        "token_end": {
+          "usd": 88.47476902557493,
+          "observed_at_utc": "2026-10-08T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:hyperliquid"
+        },
+        "btc_start": {
+          "usd": 63552.24375431069,
+          "observed_at_utc": "2026-06-12T00:00:04+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1781222400/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 83282.04538340426,
+          "observed_at_utc": "2026-10-08T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:bitcoin"
+        },
+        "token_return_pct": 50.15166017076602,
+        "btc_return_pct": 31.045011888750686,
+        "relative_to_btc_pp": 19.106648282015335
+      },
+      "first_30_days": {
+        "start_utc": "2026-06-12",
+        "end_utc": "2026-07-12",
+        "holding_days": 30,
+        "token_start": {
+          "usd": 58.92360359183071,
+          "observed_at_utc": "2026-06-11T23:59:44+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1781222400/coingecko:hyperliquid"
+        },
+        "token_end": {
+          "usd": 66.91415637416851,
+          "observed_at_utc": "2026-07-12T00:00:03+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1783814400/coingecko:hyperliquid"
+        },
+        "btc_start": {
+          "usd": 63552.24375431069,
+          "observed_at_utc": "2026-06-12T00:00:04+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1781222400/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 63785.019944129,
+          "observed_at_utc": "2026-07-12T00:00:02+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1783814400/coingecko:bitcoin"
+        },
+        "token_return_pct": 13.560869151332122,
+        "btc_return_pct": 0.3662753288746323,
+        "relative_to_btc_pp": 13.19459382245749
+      }
+    },
+    "polymarket": {
+      "status": "not_applicable",
+      "reason": "The report discusses a potential POLY token; no identified traded token was available at publication.",
+      "published": "2026-03-28",
+      "asset": "POLY"
+    },
+    "lit": {
+      "status": "verified",
+      "published": "2026-07-31",
+      "asset": "LIT",
+      "coin_id": "coingecko:lighter",
+      "since_publication": {
+        "start_utc": "2026-08-01",
+        "end_utc": "2026-10-08",
+        "holding_days": 68,
+        "token_start": {
+          "usd": 2.0673110198568123,
+          "observed_at_utc": "2026-08-01T00:03:04+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1785542400/coingecko:lighter"
+        },
+        "token_end": {
+          "usd": 3.573059391670653,
+          "observed_at_utc": "2026-10-08T00:00:30+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:lighter"
+        },
+        "btc_start": {
+          "usd": 62810.21819970551,
+          "observed_at_utc": "2026-08-01T00:00:01+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1785542400/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 83282.04538340426,
+          "observed_at_utc": "2026-10-08T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:bitcoin"
+        },
+        "token_return_pct": 72.83608307366025,
+        "btc_return_pct": 32.59314769232044,
+        "relative_to_btc_pp": 40.242935381339805
+      },
+      "first_30_days": {
+        "start_utc": "2026-08-01",
+        "end_utc": "2026-08-31",
+        "holding_days": 30,
+        "token_start": {
+          "usd": 2.0673110198568123,
+          "observed_at_utc": "2026-08-01T00:03:04+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1785542400/coingecko:lighter"
+        },
+        "token_end": {
+          "usd": 3.5159546295944235,
+          "observed_at_utc": "2026-08-31T00:01:50+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1788134400/coingecko:lighter"
+        },
+        "btc_start": {
+          "usd": 62810.21819970551,
+          "observed_at_utc": "2026-08-01T00:00:01+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1785542400/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 77658.23133225394,
+          "observed_at_utc": "2026-08-31T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1788134400/coingecko:bitcoin"
+        },
+        "token_return_pct": 70.07381065660591,
+        "btc_return_pct": 23.639486628336613,
+        "relative_to_btc_pp": 46.4343240282693
+      }
+    },
+    "morpho": {
+      "status": "verified",
+      "published": "2026-05-14",
+      "asset": "MORPHO",
+      "coin_id": "coingecko:morpho",
+      "since_publication": {
+        "start_utc": "2026-05-15",
+        "end_utc": "2026-10-08",
+        "holding_days": 146,
+        "token_start": {
+          "usd": 1.9524967550519576,
+          "observed_at_utc": "2026-05-14T23:59:45+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1778803200/coingecko:morpho"
+        },
+        "token_end": {
+          "usd": 2.538579766310867,
+          "observed_at_utc": "2026-10-08T00:00:30+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:morpho"
+        },
+        "btc_start": {
+          "usd": 81051.9828878728,
+          "observed_at_utc": "2026-05-14T23:59:58+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1778803200/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 83282.04538340426,
+          "observed_at_utc": "2026-10-08T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:bitcoin"
+        },
+        "token_return_pct": 30.017105521044172,
+        "btc_return_pct": 2.7513978265238936,
+        "relative_to_btc_pp": 27.26570769452028
+      },
+      "first_30_days": {
+        "start_utc": "2026-05-15",
+        "end_utc": "2026-06-14",
+        "holding_days": 30,
+        "token_start": {
+          "usd": 1.9524967550519576,
+          "observed_at_utc": "2026-05-14T23:59:45+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1778803200/coingecko:morpho"
+        },
+        "token_end": {
+          "usd": 1.958912081497587,
+          "observed_at_utc": "2026-06-14T00:00:05+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1781395200/coingecko:morpho"
+        },
+        "btc_start": {
+          "usd": 81051.9828878728,
+          "observed_at_utc": "2026-05-14T23:59:58+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1778803200/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 64415.22089619007,
+          "observed_at_utc": "2026-06-14T00:00:01+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1781395200/coingecko:bitcoin"
+        },
+        "token_return_pct": 0.328570402436279,
+        "btc_return_pct": -20.526039461240575,
+        "relative_to_btc_pp": 20.854609863676856
+      }
+    },
+    "vvv": {
+      "status": "verified",
+      "published": "2026-04-06",
+      "asset": "VVV",
+      "coin_id": "coingecko:venice-token",
+      "since_publication": {
+        "start_utc": "2026-04-07",
+        "end_utc": "2026-10-08",
+        "holding_days": 184,
+        "token_start": {
+          "usd": 6.79336700482325,
+          "observed_at_utc": "2026-04-07T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1775520000/coingecko:venice-token"
+        },
+        "token_end": {
+          "usd": 25.554117686024274,
+          "observed_at_utc": "2026-10-08T00:00:30+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:venice-token"
+        },
+        "btc_start": {
+          "usd": 68863.45027038263,
+          "observed_at_utc": "2026-04-07T00:00:02+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1775520000/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 83282.04538340426,
+          "observed_at_utc": "2026-10-08T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:bitcoin"
+        },
+        "token_return_pct": 276.16277271463474,
+        "btc_return_pct": 20.93795047504743,
+        "relative_to_btc_pp": 255.2248222395873
+      },
+      "first_30_days": {
+        "start_utc": "2026-04-07",
+        "end_utc": "2026-05-07",
+        "holding_days": 30,
+        "token_start": {
+          "usd": 6.79336700482325,
+          "observed_at_utc": "2026-04-07T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1775520000/coingecko:venice-token"
+        },
+        "token_end": {
+          "usd": 12.277177645415687,
+          "observed_at_utc": "2026-05-07T00:00:06+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1778112000/coingecko:venice-token"
+        },
+        "btc_start": {
+          "usd": 68863.45027038263,
+          "observed_at_utc": "2026-04-07T00:00:02+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1775520000/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 81425.45714855506,
+          "observed_at_utc": "2026-05-07T00:00:04+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1778112000/coingecko:bitcoin"
+        },
+        "token_return_pct": 80.72301462145302,
+        "btc_return_pct": 18.241907468837937,
+        "relative_to_btc_pp": 62.48110715261508
+      }
+    },
+    "near": {
+      "status": "verified",
+      "published": "2026-03-12",
+      "asset": "NEAR",
+      "coin_id": "coingecko:near",
+      "since_publication": {
+        "start_utc": "2026-03-13",
+        "end_utc": "2026-10-08",
+        "holding_days": 209,
+        "token_start": {
+          "usd": 1.3675133222731386,
+          "observed_at_utc": "2026-03-12T23:59:57+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1773360000/coingecko:near"
+        },
+        "token_end": {
+          "usd": 5.334629329884487,
+          "observed_at_utc": "2026-10-08T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:near"
+        },
+        "btc_start": {
+          "usd": 70488.8492395242,
+          "observed_at_utc": "2026-03-13T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1773360000/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 83282.04538340426,
+          "observed_at_utc": "2026-10-08T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:bitcoin"
+        },
+        "token_return_pct": 290.0970647230727,
+        "btc_return_pct": 18.14924811782386,
+        "relative_to_btc_pp": 271.9478166052489
+      },
+      "first_30_days": {
+        "start_utc": "2026-03-13",
+        "end_utc": "2026-04-12",
+        "holding_days": 30,
+        "token_start": {
+          "usd": 1.3675133222731386,
+          "observed_at_utc": "2026-03-12T23:59:57+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1773360000/coingecko:near"
+        },
+        "token_end": {
+          "usd": 1.402621077879653,
+          "observed_at_utc": "2026-04-12T00:00:04+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1775952000/coingecko:near"
+        },
+        "btc_start": {
+          "usd": 70488.8492395242,
+          "observed_at_utc": "2026-03-13T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1773360000/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 73060.36459805572,
+          "observed_at_utc": "2026-04-12T00:00:01+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1775952000/coingecko:bitcoin"
+        },
+        "token_return_pct": 2.5672697321995175,
+        "btc_return_pct": 3.6481165266202487,
+        "relative_to_btc_pp": -1.0808467944207312
+      }
+    },
+    "zro": {
+      "status": "verified",
+      "published": "2026-02-21",
+      "asset": "ZRO",
+      "coin_id": "coingecko:layerzero",
+      "since_publication": {
+        "start_utc": "2026-02-22",
+        "end_utc": "2026-10-08",
+        "holding_days": 228,
+        "token_start": {
+          "usd": 1.70666604318032,
+          "observed_at_utc": "2026-02-22T00:00:08+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1771718400/coingecko:layerzero"
+        },
+        "token_end": {
+          "usd": 2.1948352931731656,
+          "observed_at_utc": "2026-10-08T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:layerzero"
+        },
+        "btc_start": {
+          "usd": 67995.8330449221,
+          "observed_at_utc": "2026-02-22T00:00:04+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1771718400/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 83282.04538340426,
+          "observed_at_utc": "2026-10-08T00:00:00+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1791417600/coingecko:bitcoin"
+        },
+        "token_return_pct": 28.603677441379038,
+        "btc_return_pct": 22.48110164101258,
+        "relative_to_btc_pp": 6.122575800366459
+      },
+      "first_30_days": {
+        "start_utc": "2026-02-22",
+        "end_utc": "2026-03-24",
+        "holding_days": 30,
+        "token_start": {
+          "usd": 1.70666604318032,
+          "observed_at_utc": "2026-02-22T00:00:08+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1771718400/coingecko:layerzero"
+        },
+        "token_end": {
+          "usd": 2.2197285797724877,
+          "observed_at_utc": "2026-03-23T23:59:52+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1774310400/coingecko:layerzero"
+        },
+        "btc_start": {
+          "usd": 67995.8330449221,
+          "observed_at_utc": "2026-02-22T00:00:04+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1771718400/coingecko:bitcoin"
+        },
+        "btc_end": {
+          "usd": 70892.82823994374,
+          "observed_at_utc": "2026-03-23T23:59:58+00:00",
+          "confidence": 0.99,
+          "source": "https://coins.llama.fi/prices/historical/1774310400/coingecko:bitcoin"
+        },
+        "token_return_pct": 30.062268985916617,
+        "btc_return_pct": 4.260548132571196,
+        "relative_to_btc_pp": 25.801720853345422
+      }
+    }
+  }
+}

@@ -1,14 +1,14 @@
 [
   {
     "kind": "collaboration",
-    "slug": "tokenized-stocks-ecosystem",
-    "title": "Tokenized Stock Ecosystem",
-    "subtitle": "Credited chapter in Tokenized Stocks 2026",
+    "slug": "tokenized-stocks-chapters-2-3-8",
+    "title": "Tokenized Stocks: Chapters 2, 3, and 8",
+    "subtitle": "My credited chapters in Tokenized Stocks 2026",
     "published": "October 6, 2026",
-    "source": "https://www.redstone.finance/research/tokenized-stocks-2026#ecosystem-key-players",
-    "pdf": "pdfs/tokenized-stocks-ecosystem.pdf",
-    "pages": 7,
-    "summary": "A credited chapter on tokenized stock platforms, distribution, and DeFi use."
+    "source": "https://www.redstone.finance/research/tokenized-stocks-2026",
+    "pdf": "pdfs/tokenized-stocks-chapters-2-3-8.pdf",
+    "pages": 21,
+    "summary": "My credited chapters on investor rights, the tokenized stock ecosystem, and DeFi use."
   },
   {
     "kind": "theses",
