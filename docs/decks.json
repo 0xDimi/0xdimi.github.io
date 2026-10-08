@@ -1,0 +1,50 @@
+[
+  {
+    "kind": "blueprints",
+    "slug": "steakhouse-financial",
+    "title": "Steakhouse Financial",
+    "subtitle": "Investor relations deck",
+    "published": "September 2, 2026",
+    "source": "https://alearesearch.io/reports/blueprints/steakhouse-financial",
+    "pdf": "pdfs/steakhouse-financial.pdf",
+    "pages": 19,
+    "figures": 18,
+    "bytes": 7963680
+  },
+  {
+    "kind": "blueprints",
+    "slug": "re-protocol",
+    "title": "Re Protocol",
+    "subtitle": "Investor relations deck",
+    "published": "August 3, 2026",
+    "source": "https://alearesearch.io/reports/blueprints/re-protocol",
+    "pdf": "pdfs/re-protocol.pdf",
+    "pages": 31,
+    "figures": 30,
+    "bytes": 13617970
+  },
+  {
+    "kind": "blueprints",
+    "slug": "theo",
+    "title": "Theo",
+    "subtitle": "Investor relations deck",
+    "published": "April 23, 2026",
+    "source": "https://alearesearch.io/reports/blueprints/theo",
+    "pdf": "pdfs/theo.pdf",
+    "pages": 31,
+    "figures": 30,
+    "bytes": 13305343
+  },
+  {
+    "kind": "blueprints",
+    "slug": "usdai",
+    "title": "USD.AI",
+    "subtitle": "Investor relations deck",
+    "published": "March 2, 2026",
+    "source": "https://alearesearch.io/reports/blueprints/usdai",
+    "pdf": "pdfs/usdai.pdf",
+    "pages": 49,
+    "figures": 48,
+    "bytes": 28375593
+  }
+]
