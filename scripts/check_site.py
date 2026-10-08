@@ -15,8 +15,8 @@ SITE = ROOT / "docs"
 
 def main() -> None:
     manifest = json.loads((SITE / "manifest.json").read_text())
-    if len(manifest) != 16:
-        raise RuntimeError(f"Expected 16 publications, found {len(manifest)}")
+    if len(manifest) != 17:
+        raise RuntimeError(f"Expected 17 publications, found {len(manifest)}")
     soup = BeautifulSoup((SITE / "index.html").read_text(), "html.parser")
     cards = soup.select("#work-grid article.work-card")
     if len(cards) != len(manifest):

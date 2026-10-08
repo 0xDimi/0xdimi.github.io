@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import html
+import json
 import os
 import re
 from datetime import date
@@ -34,6 +35,7 @@ ARTICLES = [
     ("theses", "ether-fi", "ether-fi"),
     ("theses", "hyperliquid-2", "hyperliquid-2026"),
     ("theses", "polymarket", "polymarket"),
+    ("theses", "pendle-one-venue-all-of-fixed-income", "pendle"),
     ("memos", "lit", "lit"),
     ("memos", "morpho", "morpho"),
     ("memos", "vvv", "vvv"),
@@ -46,6 +48,7 @@ SUBTITLES = {
     "ether-fi": "The full-stack neobank thesis",
     "hyperliquid-2": "HIP-4: Outcome Markets",
     "polymarket": "$POLY token launch thesis",
+    "pendle-one-venue-all-of-fixed-income": "One Venue, All of Fixed Income",
 }
 
 
@@ -219,9 +222,12 @@ def main() -> None:
                 results.append(result)
         finally:
             browser.close()
-    if not args.only:
-        import json
-        (ROOT / "docs" / "articles.json").write_text(json.dumps(results, indent=2) + "\n")
+    metadata = ROOT / "docs" / "articles.json"
+    if args.only and metadata.exists():
+        known = {item["slug"]: item for item in json.loads(metadata.read_text())}
+        known.update({item["slug"]: item for item in results})
+        results = [known[slug] for _, slug, _ in ARTICLES if slug in known]
+    metadata.write_text(json.dumps(results, indent=2) + "\n")
 
 
 if __name__ == "__main__":

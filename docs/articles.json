@@ -72,6 +72,18 @@
     "bytes": 2930952
   },
   {
+    "kind": "theses",
+    "slug": "pendle-one-venue-all-of-fixed-income",
+    "title": "Pendle",
+    "subtitle": "One Venue, All of Fixed Income",
+    "published": "January 8, 2026",
+    "source": "https://alearesearch.io/reports/theses/pendle-one-venue-all-of-fixed-income",
+    "pdf": "pdfs/pendle.pdf",
+    "pages": 17,
+    "figures": 20,
+    "bytes": 3960123
+  },
+  {
     "kind": "memos",
     "slug": "lit",
     "title": "LIT",

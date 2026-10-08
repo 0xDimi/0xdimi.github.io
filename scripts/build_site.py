@@ -21,6 +21,7 @@ SUMMARIES = {
     "ether-fi": "How staking, vaults, and payments fit into ether.fi's business model.",
     "hyperliquid-2": "HIP-4 outcome markets, user overlap, fee scenarios, and invalidation points.",
     "polymarket": "Market structure and the investment case around a potential POLY token.",
+    "pendle-one-venue-all-of-fixed-income": "Pendle's yield-trading position, Boros, and the case for a broader fixed-income venue.",
     "lit": "Lighter's valuation and the Robinhood distribution route.",
     "morpho": "A memo on Morpho's fee opportunity and the timing risk to holders.",
     "vvv": "Private AI inference and the economics of the VVV token.",
@@ -51,8 +52,8 @@ def load_items() -> list[dict]:
         "pdf": "pdfs/tokenized-stocks-chapters-2-3-8.pdf",
     }
     items = [collaboration, *articles, *decks]
-    if len(items) != 16:
-        raise RuntimeError(f"Expected 16 source publications, found {len(items)}")
+    if len(items) != 17:
+        raise RuntimeError(f"Expected 17 source publications, found {len(items)}")
     for item in items:
         path = SITE / item["pdf"]
         if not path.is_file():
@@ -106,6 +107,7 @@ def main() -> None:
         make_thumbnail(item)
     featured = "\n".join(card(next(item for item in items if item["slug"] == slug), featured=True) for slug in FEATURED)
     library = "\n".join(card(item) for item in items)
+    counts = {kind: sum(item["kind"] == kind for item in items) for kind in LABELS}
     doc = f"""<!doctype html>
 <html lang="en">
 <head>
@@ -125,7 +127,7 @@ def main() -> None:
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="Dimitris Pechlivanidis, back to top"><span class="brand-mark">DP</span><span>Dimitris Pechlivanidis</span></a>
-      <nav aria-label="Main navigation"><a href="#selected">Selected work</a><a href="#library">Library</a><a href="#tools">Tools</a><a class="nav-contact" href="https://www.linkedin.com/in/dimitris-pechlivanidis-a6ab38195/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></nav>
+      <nav aria-label="Main navigation"><a href="#selected">Selected work</a><a href="#library">Library</a><a href="#tools">Tools</a><a href="#about">About</a><a class="nav-contact" href="https://www.linkedin.com/in/dimitris-pechlivanidis-a6ab38195/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></nav>
     </div>
   </header>
   <main id="main">
@@ -134,7 +136,6 @@ def main() -> None:
         <div class="hero-copy">
           <p class="eyebrow"><span class="eyebrow-line"></span> INVESTMENT RESEARCH / DATA</p>
           <h1 id="hero-title">Dimitris<br><em>Pechlivanidis.</em></h1>
-          <p class="hero-intro">I research crypto markets and build tools that make the evidence easier to inspect. Here is selected work for Alea Research, my credited chapters in a RedStone report, and public projects. Each report opens as a readable PDF.</p>
           <div class="hero-actions"><a class="button button-light" href="#selected">Explore the work <span aria-hidden="true">↓</span></a><a class="text-link" href="https://github.com/0xDimi" target="_blank" rel="noopener">GitHub profile <span aria-hidden="true">↗</span></a></div>
         </div>
         <div class="hero-aside" aria-label="Portfolio sections">
@@ -143,27 +144,26 @@ def main() -> None:
           <a href="#library" data-jump-filter="memos"><span>02</span><strong>Investment memos</strong><span aria-hidden="true">↗</span></a>
           <a href="#library" data-jump-filter="blueprints"><span>03</span><strong>IR decks</strong><span aria-hidden="true">↗</span></a>
           <a href="#tools"><span>04</span><strong>Data tools</strong><span aria-hidden="true">↗</span></a>
-          <div class="aside-note">Work for Alea Research and a RedStone collaboration. The original publication remains linked beside every PDF.</div>
         </div>
       </div>
     </section>
 
     <section class="section selected-section" id="selected" aria-labelledby="selected-title">
       <div class="container">
-        <div class="section-heading"><div><p class="section-no">01 / START HERE</p><h2 id="selected-title">Selected work</h2></div><p>Four samples across research, collaboration, memos, and investor communication.</p></div>
+        <div class="section-heading"><div><p class="section-no">01 / START HERE</p><h2 id="selected-title">Selected work</h2></div></div>
         <div class="featured-grid">{featured}</div>
       </div>
     </section>
 
     <section class="section library-section" id="library" aria-labelledby="library-title">
       <div class="container">
-        <div class="section-heading"><div><p class="section-no">02 / FULL LIBRARY</p><h2 id="library-title">Work for Alea Research</h2></div><p>Investment theses, memos, and IR decks. My RedStone chapters appear here too. Open a PDF or follow the original publication.</p></div>
+        <div class="section-heading"><div><p class="section-no">02 / FULL LIBRARY</p><h2 id="library-title">Work Samples</h2></div><p class="sample-note">A small selection from more than 50 reports I've produced across Alea Research and Revelo.</p></div>
         <div class="filter-bar" role="group" aria-label="Filter research by type">
-          <button class="filter active" type="button" data-filter="all" aria-pressed="true">All <span>16</span></button>
-          <button class="filter" type="button" data-filter="collaboration" aria-pressed="false">Collaboration <span>1</span></button>
-          <button class="filter" type="button" data-filter="theses" aria-pressed="false">Theses <span>6</span></button>
-          <button class="filter" type="button" data-filter="memos" aria-pressed="false">Memos <span>5</span></button>
-          <button class="filter" type="button" data-filter="blueprints" aria-pressed="false">IR decks <span>4</span></button>
+          <button class="filter active" type="button" data-filter="all" aria-pressed="true">All <span>{len(items)}</span></button>
+          <button class="filter" type="button" data-filter="collaboration" aria-pressed="false">Collaboration <span>{counts['collaboration']}</span></button>
+          <button class="filter" type="button" data-filter="theses" aria-pressed="false">Theses <span>{counts['theses']}</span></button>
+          <button class="filter" type="button" data-filter="memos" aria-pressed="false">Memos <span>{counts['memos']}</span></button>
+          <button class="filter" type="button" data-filter="blueprints" aria-pressed="false">IR decks <span>{counts['blueprints']}</span></button>
         </div>
         <div class="library-grid" id="work-grid">{library}</div>
         <p class="library-note">PDF editions preserve original publication credit and link back to the source. Market views reflect their publication dates.</p>
@@ -177,6 +177,18 @@ def main() -> None:
           <article class="tool-card"><span class="tool-index">A / DATA VISUALIZATION</span><h3>Atlas Chart Builder</h3><p>A CSV chart builder for research data, with chart export and configurable data sources.</p><div class="tool-links"><a href="https://github.com/0xDimi/atlas-chart-builder" target="_blank" rel="noopener">View code ↗</a></div></article>
           <article class="tool-card"><span class="tool-index">B / MARKET SCREENING</span><h3>Alea Signal</h3><p>A Polymarket researchability screener for crypto, finance, and economy markets. Public preview.</p><div class="tool-links"><a href="https://alea-signal.vercel.app/" target="_blank" rel="noopener">Open preview ↗</a><a href="https://github.com/0xDimi/alea-signal" target="_blank" rel="noopener">View code ↗</a></div></article>
           <article class="tool-card"><span class="tool-index">C / PRODUCT PROTOTYPE</span><h3>MANTIS</h3><p>A Greek-first prediction-market product prototype. Demo only; no real-money trading.</p><div class="tool-links"><a href="https://mantis-demo.xyz/" target="_blank" rel="noopener">Open demo ↗</a><a href="https://github.com/0xDimi/MANTIS" target="_blank" rel="noopener">View code ↗</a></div></article>
+        </div>
+      </div>
+    </section>
+    <section class="section about-section" id="about" aria-labelledby="about-title">
+      <div class="container about-grid">
+        <div class="about-heading"><p class="section-no">04 / THE PERSON BEHIND THE WORK</p><h2 id="about-title">About</h2><div class="about-rule" aria-hidden="true"></div></div>
+        <div class="about-copy">
+          <p class="about-lead">I want to know what would change my mind.</p>
+          <p>I've made market calls that sounded tidy until I tried to explain the rule behind them. I wrote about that mistake on Substack. It shapes how I research now: show who pays, who gets paid, and what would break the view.</p>
+          <p>At Alea Research, I write theses and memos, evaluate businesses, and work with founders and clients from the first call to the final report. I lead two analysts. When existing tools don't show me what I need, I build my own.</p>
+          <p>Before research, I spent twelve years in competitive football and five years in sales in Greece. Both gave me immediate feedback. A match ends. A client buys or walks away. Research can hide behind words for longer, so I try to make my assumptions visible.</p>
+          <a class="about-link" href="https://meditationsbyd.substack.com/" target="_blank" rel="noopener">Read more of my writing on Substack <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>

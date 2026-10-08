@@ -38,6 +38,19 @@
   },
   {
     "kind": "theses",
+    "slug": "pendle-one-venue-all-of-fixed-income",
+    "title": "Pendle",
+    "subtitle": "One Venue, All of Fixed Income",
+    "published": "January 8, 2026",
+    "source": "https://alearesearch.io/reports/theses/pendle-one-venue-all-of-fixed-income",
+    "pdf": "pdfs/pendle.pdf",
+    "pages": 17,
+    "figures": 20,
+    "bytes": 3960123,
+    "summary": "Pendle's yield-trading position, Boros, and the case for a broader fixed-income venue."
+  },
+  {
+    "kind": "theses",
     "slug": "ether-fi",
     "title": "Ether.fi",
     "subtitle": "The full-stack neobank thesis",
