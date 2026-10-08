@@ -26,7 +26,6 @@ python3 scripts/build_articles.py
 python3 scripts/build_redstone.py
 python3 scripts/build_decks.py
 python3 scripts/optimize_pdfs.py
-python3 scripts/build_performance.py --as-of 2026-10-07
 python3 scripts/build_site.py
 python3 scripts/check_site.py
 ```
@@ -38,13 +37,6 @@ RedStone PDF includes chapters 2, 3, and 8, each credited to Dimitris on the
 source page. Deck PDFs capture every slide from the public Figma audience
 view; their slide pages are high-resolution images, so the original deck link
 remains available alongside the PDF.
-
-The portfolio also shows 30-day and since-publication token price returns for
-the theses and memos, with BTC as a benchmark. `build_performance.py` records
-the exact historical observations and source URLs in `docs/performance.json`.
-Because publication times are not given, the entry point is near 00:00 UTC on
-the next day. These price returns are not simulated trade results or judgments
-of a report's direction. Polymarket has no applicable token return.
 
 ## Publishing
 

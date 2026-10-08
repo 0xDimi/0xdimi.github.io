@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import html
 import json
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
 import fitz
@@ -41,8 +41,6 @@ DISPLAY_TITLES = {"hyperliquid": "Hyperliquid: Exchange Thesis", "hyperliquid-2"
 def load_items() -> list[dict]:
     articles = json.loads((SITE / "articles.json").read_text())
     decks = json.loads((SITE / "decks.json").read_text())
-    performance = json.loads((SITE / "performance.json").read_text())
-    as_of = datetime.fromisoformat(performance["as_of_utc"])
     collaboration = {
         "kind": "collaboration",
         "slug": "tokenized-stocks-chapters-2-3-8",
@@ -62,11 +60,6 @@ def load_items() -> list[dict]:
         with fitz.open(path) as pdf:
             item["pages"] = len(pdf)
         item["summary"] = SUMMARIES[item["slug"]]
-        if item["kind"] in {"theses", "memos"}:
-            item["performance"] = performance["items"][item["slug"]]
-            item["as_of_label"] = as_of.strftime("%-d %b %Y")
-            if item["performance"]["published"] != datetime.strptime(item["published"], "%B %d, %Y").date().isoformat():
-                raise ValueError(f"Publication date changed for {item['slug']}")
     items.sort(key=lambda item: (ORDER[item["kind"]], -datetime.strptime(item["published"], "%B %d, %Y").timestamp()))
     return items
 
@@ -91,20 +84,6 @@ def card(item: dict, featured: bool = False) -> str:
     slug = e(item["slug"])
     image = f'<div class="feature-image"><img src="thumbs/{slug}.jpg" alt="Page from {e(item["title"])}" loading="lazy"></div>' if featured else ""
     class_name = "work-card featured-card" if featured else "work-card"
-    score = ""
-    if "performance" in item:
-        data = item["performance"]
-        if data["status"] == "verified":
-            def signed(value: float) -> str:
-                return f"{value:+,.1f}"
-
-            rows = []
-            for label, key in (("First 30 days", "first_30_days"), (f"To {item['as_of_label']}", "since_publication")):
-                period = data[key]
-                rows.append(f'<div class="performance-row"><span>{label}</span><strong>{signed(period["token_return_pct"])}%</strong><small>{signed(period["relative_to_btc_pp"])} pp vs BTC</small></div>')
-            score = f'<div class="performance" aria-label="{e(data["asset"])} historical token price performance"><div class="performance-title">{e(data["asset"])} PRICE RETURN <a href="#performance-method">Method ↓</a></div>{"".join(rows)}</div>'
-        else:
-            score = '<div class="performance performance-na"><div class="performance-title">TOKEN PERFORMANCE</div><span>Not applicable: this thesis discusses a potential POLY token.</span></div>'
     return f"""
       <article class="{class_name}" data-kind="{e(item['kind'])}" id="work-{slug}">
         {image}
@@ -112,7 +91,6 @@ def card(item: dict, featured: bool = False) -> str:
           <div class="card-meta"><span>{e(LABELS[item['kind']])}</span><span>{e(item['published'])}</span></div>
           <h3>{e(DISPLAY_TITLES.get(item['slug'], item['title']))}</h3>
           <p>{e(item['summary'])}</p>
-          {score}
           <div class="card-bottom"><span>{item['pages']} pages · PDF</span><div class="card-links">
             <a class="primary-link" href="{e(item['pdf'])}" target="_blank" rel="noopener">Read PDF <span aria-hidden="true">↗</span></a>
             <a href="{e(item['pdf'])}" download>Download</a>
@@ -124,10 +102,6 @@ def card(item: dict, featured: bool = False) -> str:
 
 def main() -> None:
     items = load_items()
-    performance = json.loads((SITE / "performance.json").read_text())
-    as_of = datetime.fromisoformat(performance["as_of_utc"])
-    end_observed = (as_of.date() + timedelta(days=1)).strftime("%-d %B %Y")
-    as_of_long = as_of.strftime("%-d %B %Y")
     for item in items:
         make_thumbnail(item)
     featured = "\n".join(card(next(item for item in items if item["slug"] == slug), featured=True) for slug in FEATURED)
@@ -192,7 +166,6 @@ def main() -> None:
           <button class="filter" type="button" data-filter="blueprints" aria-pressed="false">IR decks <span>4</span></button>
         </div>
         <div class="library-grid" id="work-grid">{library}</div>
-        <div class="performance-method" id="performance-method"><h3>How returns are measured</h3><p>Publication dates come from the original Alea reports. Since the pages do not give a release time, the entry observation is near 00:00 UTC on the following day. The fixed window ends 30 days later; the longer window ends near 00:00 UTC on {end_observed} (through {as_of_long}). Each observation is within two hours of its target time. “vs BTC” is the token’s USD return minus BTC’s USD return, in percentage points.</p><p>These are token price changes, not simulated trades or a score for the research call. They exclude fees, slippage, funding, staking, and dividends. A negative token return may be consistent with a bearish memo. The Polymarket thesis concerned a potential token, so it has no token return. <a href="https://github.com/DefiLlama/api-sdk#prices" target="_blank" rel="noopener">Price data: DefiLlama ↗</a> · <a href="performance.json">Raw observations and source URLs ↗</a></p></div>
         <p class="library-note">PDF editions preserve original publication credit and link back to the source. Market views reflect their publication dates.</p>
       </div>
     </section>
@@ -214,8 +187,7 @@ def main() -> None:
 </html>"""
     (SITE / "index.html").write_text(doc)
     (SITE / ".nojekyll").touch()
-    manifest = [{key: value for key, value in item.items() if key not in {"performance", "as_of_label"}} for item in items]
-    (SITE / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    (SITE / "manifest.json").write_text(json.dumps(items, indent=2) + "\n")
     print(f"Generated {SITE / 'index.html'} with {len(items)} publications")
 
 
