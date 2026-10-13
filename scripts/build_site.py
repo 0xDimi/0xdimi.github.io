@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "docs"
 
 SUMMARIES = {
+    "tokenized-stocks-ecosystem-2026": "Personal sector research on market size, product rights, platform activity, DeFi use, and execution costs.",
     "etherfi-q1-2026": "Quarter-to-date review of Cash, Stake, Liquid, revenue, and ETHFI; data through February 9.",
     "threshold-q1-26": "Q1 review of tBTC supply, DeFi use, fees, and T valuation; data through March 31.",
     "rwa-perpetuals": "Where RWA perps find demand: overnight markets, weekend risk, and pre-IPO price discovery.",
@@ -44,6 +45,7 @@ ORDER = {"collaboration": 0, "sector_reports": 1, "quarterly_reports": 2, "strat
 FEATURED = ["tokenized-stocks-chapters-2-3-8", "hyperliquid-2", "morpho", "steakhouse-financial"]
 DISPLAY_TITLES = {"hyperliquid": "Hyperliquid: Exchange Thesis", "hyperliquid-2": "Hyperliquid: HIP-4", "etherfi-q1-2026": "Ether.fi: Q1 2026", "threshold-q1-26": "Threshold: Q1 2026"}
 REPORT_LOGOS = {
+    "tokenized-stocks-ecosystem-2026": "dimi",
     "etherfi-q1-2026": "ether-fi",
     "threshold-q1-26": "threshold",
     "rwa-perpetuals": "alea",
@@ -73,6 +75,7 @@ REPORT_LOGOS = {
 def load_items() -> list[dict]:
     articles = json.loads((SITE / "articles.json").read_text())
     decks = json.loads((SITE / "decks.json").read_text())
+    personal = json.loads((SITE / "personal.json").read_text())
     logos = json.loads((SITE / "logos" / "sources.json").read_text())
     collaboration = {
         "kind": "collaboration",
@@ -83,9 +86,9 @@ def load_items() -> list[dict]:
         "source": "https://www.redstone.finance/research/tokenized-stocks-2026",
         "pdf": "pdfs/tokenized-stocks-chapters-2-3-8.pdf",
     }
-    items = [collaboration, *articles, *decks]
-    if len(items) != 23:
-        raise RuntimeError(f"Expected 23 source publications, found {len(items)}")
+    items = [collaboration, *articles, *decks, *personal]
+    if len(items) != 24:
+        raise RuntimeError(f"Expected 24 portfolio publications, found {len(items)}")
     for item in items:
         path = SITE / item["pdf"]
         if not path.is_file():
@@ -97,7 +100,7 @@ def load_items() -> list[dict]:
         item["logo"] = f"logos/{logos[logo_key]['file']}"
         if not (SITE / item["logo"]).is_file():
             raise FileNotFoundError(SITE / item["logo"])
-    items.sort(key=lambda item: (ORDER[item["kind"]], -datetime.strptime(item["published"], "%B %d, %Y").timestamp()))
+    items.sort(key=lambda item: (ORDER[item["kind"]], -datetime.strptime(item.get("sort_date") or item["published"], "%B %d, %Y").timestamp()))
     return items
 
 
@@ -121,17 +124,19 @@ def card(item: dict, featured: bool = False) -> str:
     slug = e(item["slug"])
     image = f'<div class="feature-image"><img src="thumbs/{slug}.jpg" alt="Page from {e(item["title"])}" loading="lazy"></div>' if featured else ""
     class_name = "work-card featured-card" if featured else "work-card"
+    source_link = f'<a href="{e(item["source"])}" target="_blank" rel="noopener">Original</a>' if item.get("source") else ""
+    date_label = item.get("date_label") or item["published"]
     return f"""
       <article class="{class_name}" data-kind="{e(item['kind'])}" id="work-{slug}">
         {image}
         <div class="card-content">
-          <div class="card-meta"><span>{e(LABELS[item['kind']])}</span><span>{e(item['published'])}</span></div>
+          <div class="card-meta"><span>{e(LABELS[item['kind']])}</span><span>{e(date_label)}</span></div>
           <div class="card-title-row"><span class="protocol-logo" aria-hidden="true"><img src="{e(item['logo'])}" alt="" width="58" height="58" loading="lazy" decoding="async"></span><h3>{e(DISPLAY_TITLES.get(item['slug'], item['title']))}</h3></div>
           <p>{e(item['summary'])}</p>
           <div class="card-bottom"><span>{item['pages']} pages · PDF</span><div class="card-links">
             <a class="primary-link" href="{e(item['pdf'])}" target="_blank" rel="noopener">Read PDF <span aria-hidden="true">↗</span></a>
             <a href="{e(item['pdf'])}" download>Download</a>
-            <a href="{e(item['source'])}" target="_blank" rel="noopener">Original</a>
+            {source_link}
           </div></div>
         </div>
       </article>"""
@@ -207,7 +212,7 @@ def main() -> None:
           <button class="filter" type="button" data-filter="blueprints" aria-pressed="false">IR decks <span>{counts['blueprints']}</span></button>
         </div>
         <div class="library-grid" id="work-grid">{library}</div>
-        <p class="library-note">PDF editions preserve original publication credit and link back to the source. Market views reflect their publication dates.</p>
+        <p class="library-note">Published reports retain publisher credit and links to the source. The personal report shows its data cutoff. Market views reflect the dates shown.</p>
       </div>
     </section>
 

@@ -16,8 +16,8 @@ SITE = ROOT / "docs"
 
 def main() -> None:
     manifest = json.loads((SITE / "manifest.json").read_text())
-    if len(manifest) != 23:
-        raise RuntimeError(f"Expected 23 publications, found {len(manifest)}")
+    if len(manifest) != 24:
+        raise RuntimeError(f"Expected 24 publications, found {len(manifest)}")
     quarterly_sources = {
         "etherfi-q1-2026": "https://alearesearch.io/reports/benchmark/etherfi-q1-2026",
         "threshold-q1-26": "https://alearesearch.io/reports/benchmark/threshold-q1-26",
@@ -28,6 +28,7 @@ def main() -> None:
     if any(quarterly_items[slug]["source"] != source for slug, source in quarterly_sources.items()):
         raise RuntimeError("Quarterly report source URL mismatch")
     sector_sources = {
+        "tokenized-stocks-ecosystem-2026": None,
         "rwa-perpetuals": "https://alearesearch.io/reports/perspectives/rwa-perpetuals",
         "when-agents-pay": "https://alearesearch.io/reports/perspectives/when-agents-pay",
         "cross-asset-markets": "https://alearesearch.io/reports/blueprints/cross-asset-markets",
@@ -37,6 +38,9 @@ def main() -> None:
         raise RuntimeError("Sector Wide Reports category is incomplete")
     if any(sector_items[slug]["source"] != source for slug, source in sector_sources.items()):
         raise RuntimeError("Sector report source URL mismatch")
+    personal = sector_items["tokenized-stocks-ecosystem-2026"]
+    if personal.get("provenance") != "personal" or personal["published"] is not None:
+        raise RuntimeError("Personal sector report attribution or date is incorrect")
     axil = next((item for item in manifest if item["slug"] == "axil-prime-credit-3m"), None)
     if not axil or axil["kind"] != "strategies" or axil["source"] != "https://alearesearch.io/reports/perspectives/axil-prime-credit-3m":
         raise RuntimeError("Axil public strategy is missing or misclassified")
@@ -69,8 +73,19 @@ def main() -> None:
         with fitz.open(path) as pdf:
             if len(pdf) != item["pages"]:
                 raise RuntimeError(f"Manifest page count mismatch: {path}")
-            if not pdf[0].get_links():
+            if item.get("source") and not pdf[0].get_links():
                 raise RuntimeError(f"Cover has no canonical-source link: {path}")
+            if item["slug"] == "tokenized-stocks-ecosystem-2026":
+                if soup.select_one(f"#work-{item['slug']} a:not(.primary-link):not([download])"):
+                    raise RuntimeError("Personal report incorrectly has an Original link")
+                handles = [page.get_text().count("@demetriusweb3") for page in pdf]
+                if any(count < 1 for count in handles) or sum(count == 2 for count in handles) != item["watermarked_charts"]:
+                    raise RuntimeError("Personal handle or chart watermarks are missing")
+                for number in (17, 26):
+                    old_mark_area = fitz.Rect(1825, 1005, 1888, 1055)
+                    pixels = pdf[number - 1].get_pixmap(clip=old_mark_area, alpha=False)
+                    if min(pixels.samples) < 250:
+                        raise RuntimeError(f"Legacy Alea chart mark remains visible on page {number}")
             for number, page in enumerate(pdf, 1):
                 if not page.get_text().strip() and not page.get_images():
                     raise RuntimeError(f"Blank page in {path}: page {number}")
@@ -84,7 +99,7 @@ def main() -> None:
             raise RuntimeError(f"Thumbnail appears broken: {thumbnail}")
     if soup.select(".performance, .performance-method"):
         raise RuntimeError("Performance section was not fully removed")
-    print(f"PASS: {len(manifest)} linked PDFs, all pages nonblank, source links present; {total_bytes / 1024 / 1024:.1f} MiB total")
+    print(f"PASS: {len(manifest)} linked PDFs, all pages nonblank, source links present where applicable; {total_bytes / 1024 / 1024:.1f} MiB total")
 
 
 if __name__ == "__main__":

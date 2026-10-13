@@ -27,6 +27,23 @@
   },
   {
     "kind": "sector_reports",
+    "slug": "tokenized-stocks-ecosystem-2026",
+    "title": "Tokenized Stocks: An Ecosystem & Platform Overview",
+    "subtitle": "Personal sector report",
+    "published": null,
+    "sort_date": "September 30, 2026",
+    "date_label": "Data cutoff: Sep 30, 2026",
+    "source": null,
+    "provenance": "personal",
+    "pdf": "pdfs/tokenized-stocks-ecosystem-2026.pdf",
+    "pages": 37,
+    "watermarked_charts": 24,
+    "bytes": 26471778,
+    "summary": "Personal sector research on market size, product rights, platform activity, DeFi use, and execution costs.",
+    "logo": "logos/dimi.svg"
+  },
+  {
+    "kind": "sector_reports",
     "slug": "rwa-perpetuals",
     "title": "RWA Perpetuals",
     "subtitle": "Where around-the-clock equity and commodity trading finds demand",
