@@ -27,6 +27,7 @@ python3 scripts/build_redstone.py
 python3 scripts/build_decks.py
 python3 scripts/build_personal.py
 python3 scripts/build_stacks.py
+python3 scripts/build_quarterly_exports.py
 python3 scripts/optimize_pdfs.py
 python3 scripts/build_site.py
 python3 scripts/check_site.py
@@ -54,6 +55,13 @@ cover that credits Dimitris and Alea Research. All 50 report pages, links,
 and the commissioned-research disclosure remain in the public PDF. The card
 uses the reporting quarter rather than claiming a publication date, and it
 does not link to the private Google Doc.
+
+The State of Crypto ETFs and Robinhood Chain Q3 2026 reports are rebuilt from
+`source-pdfs/crypto-etfs-q3-2026-export.pdf` and
+`source-pdfs/robinhood-chain-q3-2026-export.pdf`. These are author-supplied
+Google Docs exports kept out of Git. `build_quarterly_exports.py` adds a cover
+under Dimitris's name while preserving every report page and source link. The
+cards show the reporting quarter and do not expose the Google Doc edit links.
 
 ## Publishing
 

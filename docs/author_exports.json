@@ -13,5 +13,33 @@
     "bytes": 14600951,
     "provenance": "alea_commissioned",
     "client": "Stacks"
+  },
+  {
+    "kind": "quarterly_reports",
+    "slug": "crypto-etfs-q3-2026",
+    "title": "State of Crypto ETFs: Q3 2026",
+    "subtitle": "U.S. fund assets, flows, issuers, and returns",
+    "published": null,
+    "date_label": "Q3 2026",
+    "sort_date": "October 14, 2026",
+    "source": null,
+    "pdf": "pdfs/crypto-etfs-q3-2026.pdf",
+    "pages": 19,
+    "bytes": 4885910,
+    "provenance": "author_supplied"
+  },
+  {
+    "kind": "quarterly_reports",
+    "slug": "robinhood-chain-q3-2026",
+    "title": "Robinhood Chain: Q3 2026",
+    "subtitle": "Network activity, DeFi, stock tokens, and fees",
+    "published": null,
+    "date_label": "Q3 2026",
+    "sort_date": "October 14, 2026",
+    "source": null,
+    "pdf": "pdfs/robinhood-chain-q3-2026.pdf",
+    "pages": 50,
+    "bytes": 4095797,
+    "provenance": "author_supplied"
   }
 ]

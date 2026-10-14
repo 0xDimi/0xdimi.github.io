@@ -16,6 +16,8 @@ SITE = ROOT / "docs"
 SUMMARIES = {
     "tokenized-stocks-ecosystem-2026": "Personal sector research on market size, product rights, platform activity, DeFi use, and execution costs.",
     "stacks-q3-2026": "Q3 review of Bitcoin Staking, sBTC, DeFi balances, fees, and STX valuation. Commissioned Alea Research work.",
+    "crypto-etfs-q3-2026": "Q3 review of U.S. crypto ETF assets, fund flows, issuer economics, and product structure.",
+    "robinhood-chain-q3-2026": "Robinhood Chain's first public quarter: network activity, DeFi balances, stock tokens, and fee economics.",
     "etherfi-q1-2026": "Quarter-to-date review of Cash, Stake, Liquid, revenue, and ETHFI; data through February 9.",
     "threshold-q1-26": "Q1 review of tBTC supply, DeFi use, fees, and T valuation; data through March 31.",
     "rwa-perpetuals": "Where RWA perps find demand: overnight markets, weekend risk, and pre-IPO price discovery.",
@@ -48,6 +50,8 @@ DISPLAY_TITLES = {"hyperliquid": "Hyperliquid: Exchange Thesis", "hyperliquid-2"
 REPORT_LOGOS = {
     "tokenized-stocks-ecosystem-2026": "dimi",
     "stacks-q3-2026": "stacks",
+    "crypto-etfs-q3-2026": "dimi",
+    "robinhood-chain-q3-2026": "robinhood-chain",
     "etherfi-q1-2026": "ether-fi",
     "threshold-q1-26": "threshold",
     "rwa-perpetuals": "alea",
@@ -90,8 +94,8 @@ def load_items() -> list[dict]:
         "pdf": "pdfs/tokenized-stocks-chapters-2-3-8.pdf",
     }
     items = [collaboration, *articles, *decks, *personal, *author_exports]
-    if len(items) != 25:
-        raise RuntimeError(f"Expected 25 portfolio publications, found {len(items)}")
+    if len(items) != 27:
+        raise RuntimeError(f"Expected 27 portfolio publications, found {len(items)}")
     for item in items:
         path = SITE / item["pdf"]
         if not path.is_file():

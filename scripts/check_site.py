@@ -16,12 +16,14 @@ SITE = ROOT / "docs"
 
 def main() -> None:
     manifest = json.loads((SITE / "manifest.json").read_text())
-    if len(manifest) != 25:
-        raise RuntimeError(f"Expected 25 publications, found {len(manifest)}")
+    if len(manifest) != 27:
+        raise RuntimeError(f"Expected 27 publications, found {len(manifest)}")
     quarterly_sources = {
         "etherfi-q1-2026": "https://alearesearch.io/reports/benchmark/etherfi-q1-2026",
         "threshold-q1-26": "https://alearesearch.io/reports/benchmark/threshold-q1-26",
         "stacks-q3-2026": None,
+        "crypto-etfs-q3-2026": None,
+        "robinhood-chain-q3-2026": None,
     }
     quarterly_items = {item["slug"]: item for item in manifest if item["kind"] == "quarterly_reports"}
     if set(quarterly_items) != set(quarterly_sources):
@@ -31,6 +33,10 @@ def main() -> None:
     stacks = quarterly_items["stacks-q3-2026"]
     if stacks.get("provenance") != "alea_commissioned" or stacks.get("client") != "Stacks" or stacks["published"] is not None or stacks.get("date_label") != "Q3 2026":
         raise RuntimeError("Stacks attribution or reporting date is incorrect")
+    for slug in ("crypto-etfs-q3-2026", "robinhood-chain-q3-2026"):
+        item = quarterly_items[slug]
+        if item.get("provenance") != "author_supplied" or item["published"] is not None or item.get("date_label") != "Q3 2026":
+            raise RuntimeError(f"Author-supplied report attribution or period is incorrect: {slug}")
     sector_sources = {
         "tokenized-stocks-ecosystem-2026": None,
         "rwa-perpetuals": "https://alearesearch.io/reports/perspectives/rwa-perpetuals",
@@ -97,6 +103,11 @@ def main() -> None:
                     raise RuntimeError("Stacks commissioned-research disclosure is missing")
                 if soup.select_one(f"#work-{item['slug']} a:not(.primary-link):not([download])"):
                     raise RuntimeError("Stacks card links to a private source")
+            if item["slug"] in ("crypto-etfs-q3-2026", "robinhood-chain-q3-2026"):
+                if "Research by Dimitris Pechlivanidis" not in pdf[0].get_text():
+                    raise RuntimeError(f"Author cover is missing: {item['slug']}")
+                if soup.select_one(f"#work-{item['slug']} a:not(.primary-link):not([download])"):
+                    raise RuntimeError(f"Private Google Doc is linked publicly: {item['slug']}")
             for number, page in enumerate(pdf, 1):
                 if not page.get_text().strip() and not page.get_images():
                     raise RuntimeError(f"Blank page in {path}: page {number}")

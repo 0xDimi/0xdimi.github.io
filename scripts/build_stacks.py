@@ -89,7 +89,9 @@ def main() -> None:
         "provenance": "alea_commissioned",
         "client": "Stacks",
     }
-    METADATA.write_text(json.dumps([record], indent=2) + "\n")
+    existing = json.loads(METADATA.read_text()) if METADATA.exists() else []
+    records = [record, *(item for item in existing if item["slug"] != record["slug"])]
+    METADATA.write_text(json.dumps(records, indent=2) + "\n")
     print(f"Built {OUTPUT} ({record['pages']} pages, {record['bytes']} bytes)")
 
 
