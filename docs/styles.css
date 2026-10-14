@@ -66,11 +66,12 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 .card-links a:hover{color:#985f31}
 .card-links .primary-link{color:#255363}
 .library-section{background:var(--paper-deep);border-top:1px solid #d8d5cb}
-.filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;border-bottom:1px solid #c9cbc4;padding-bottom:18px}
+.filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 15px;border-bottom:1px solid #c9cbc4;padding-bottom:18px}
 .filter{border:1px solid transparent;background:transparent;color:#536268;padding:10px 13px;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:.03em;transition:background .2s ease,color .2s ease,border-color .2s ease}
 .filter:hover{background:#dedfd7}
 .filter.active{background:var(--pine);color:#fff}
 .filter span{font-size:10px;opacity:.62;margin-left:7px}
+.category-description{min-height:24px;max-width:850px;margin:0 0 28px;color:#536268;font-size:14px;line-height:1.55}
 .library-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
 .library-grid .work-card .card-content{padding:22px 22px 19px}
 .library-grid .protocol-logo{flex-basis:48px;width:48px;height:48px}

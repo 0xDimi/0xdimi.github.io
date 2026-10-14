@@ -45,6 +45,17 @@ SUMMARIES = {
 
 LABELS = {"collaboration": "Collaboration", "sector_reports": "Sector Wide Report", "quarterly_reports": "Quarterly Report", "strategies": "Strategy", "theses": "Investment thesis", "memos": "Investment memo", "blueprints": "IR deck", "data_rooms": "Data room"}
 ORDER = {"collaboration": 0, "sector_reports": 1, "quarterly_reports": 2, "strategies": 3, "theses": 4, "memos": 5, "blueprints": 6, "data_rooms": 7}
+CATEGORY_DESCRIPTIONS = {
+    "all": "Selected research, investor materials, and live data products.",
+    "collaboration": "Research written with partners, with my contributions clearly credited.",
+    "sector_reports": "Sector-wide reports cover emerging narratives and shifts in market structure.",
+    "quarterly_reports": "Quarterly reports track markets and protocols through operating data.",
+    "strategies": "Strategies explain how an investment product works and where its risks sit.",
+    "theses": "Investment theses weigh a protocol's upside against its risks and valuation.",
+    "memos": "Investment memos give a short view on an asset and its key assumptions.",
+    "blueprints": "IR decks present a business case and its operating record to investors.",
+    "data_rooms": "Data Rooms pair protocol research with the data behind it.",
+}
 FEATURED = ["tokenized-stocks-chapters-2-3-8", "hyperliquid-2", "morpho", "steakhouse-financial"]
 DISPLAY_TITLES = {"hyperliquid": "Hyperliquid: Exchange Thesis", "hyperliquid-2": "Hyperliquid: HIP-4", "etherfi-q1-2026": "Ether.fi: Q1 2026", "threshold-q1-26": "Threshold: Q1 2026", "stacks-q3-2026": "Stacks: Q3 2026"}
 REPORT_LOGOS = {
@@ -226,16 +237,17 @@ def main() -> None:
       <div class="container">
         <div class="section-heading"><div><p class="section-no">02 / FULL LIBRARY</p><h2 id="library-title">Work Samples</h2></div><p class="sample-note">A small selection from more than 50 reports I've produced across Alea Research and Revelo.</p></div>
         <div class="filter-bar" role="group" aria-label="Filter research by type">
-          <button class="filter active" type="button" data-filter="all" aria-pressed="true">All <span>{len(items)}</span></button>
-          <button class="filter" type="button" data-filter="collaboration" aria-pressed="false">Collaboration <span>{counts['collaboration']}</span></button>
-          <button class="filter" type="button" data-filter="sector_reports" aria-pressed="false">Sector Wide Reports <span>{counts['sector_reports']}</span></button>
-          <button class="filter" type="button" data-filter="quarterly_reports" aria-pressed="false">Quarterly Reports <span>{counts['quarterly_reports']}</span></button>
-          <button class="filter" type="button" data-filter="strategies" aria-pressed="false">Strategies <span>{counts['strategies']}</span></button>
-          <button class="filter" type="button" data-filter="theses" aria-pressed="false">Theses <span>{counts['theses']}</span></button>
-          <button class="filter" type="button" data-filter="memos" aria-pressed="false">Memos <span>{counts['memos']}</span></button>
-          <button class="filter" type="button" data-filter="blueprints" aria-pressed="false">IR decks <span>{counts['blueprints']}</span></button>
-          <button class="filter" type="button" data-filter="data_rooms" aria-pressed="false">Data Rooms <span>{counts['data_rooms']}</span></button>
+          <button class="filter active" type="button" data-filter="all" data-description="{html.escape(CATEGORY_DESCRIPTIONS['all'], quote=True)}" aria-pressed="true">All <span>{len(items)}</span></button>
+          <button class="filter" type="button" data-filter="collaboration" data-description="{html.escape(CATEGORY_DESCRIPTIONS['collaboration'], quote=True)}" aria-pressed="false">Collaboration <span>{counts['collaboration']}</span></button>
+          <button class="filter" type="button" data-filter="sector_reports" data-description="{html.escape(CATEGORY_DESCRIPTIONS['sector_reports'], quote=True)}" aria-pressed="false">Sector Wide Reports <span>{counts['sector_reports']}</span></button>
+          <button class="filter" type="button" data-filter="quarterly_reports" data-description="{html.escape(CATEGORY_DESCRIPTIONS['quarterly_reports'], quote=True)}" aria-pressed="false">Quarterly Reports <span>{counts['quarterly_reports']}</span></button>
+          <button class="filter" type="button" data-filter="strategies" data-description="{html.escape(CATEGORY_DESCRIPTIONS['strategies'], quote=True)}" aria-pressed="false">Strategies <span>{counts['strategies']}</span></button>
+          <button class="filter" type="button" data-filter="theses" data-description="{html.escape(CATEGORY_DESCRIPTIONS['theses'], quote=True)}" aria-pressed="false">Theses <span>{counts['theses']}</span></button>
+          <button class="filter" type="button" data-filter="memos" data-description="{html.escape(CATEGORY_DESCRIPTIONS['memos'], quote=True)}" aria-pressed="false">Memos <span>{counts['memos']}</span></button>
+          <button class="filter" type="button" data-filter="blueprints" data-description="{html.escape(CATEGORY_DESCRIPTIONS['blueprints'], quote=True)}" aria-pressed="false">IR decks <span>{counts['blueprints']}</span></button>
+          <button class="filter" type="button" data-filter="data_rooms" data-description="{html.escape(CATEGORY_DESCRIPTIONS['data_rooms'], quote=True)}" aria-pressed="false">Data Rooms <span>{counts['data_rooms']}</span></button>
         </div>
+        <p class="category-description" id="category-description" aria-live="polite">{html.escape(CATEGORY_DESCRIPTIONS['all'])}</p>
         <div class="library-grid" id="work-grid">{library}</div>
         <p class="library-note">Reports link to published originals where available. The Stacks benchmark retains its commissioned-research disclosure, and the personal report shows its data cutoff. Market views reflect the dates shown.</p>
       </div>
@@ -243,7 +255,7 @@ def main() -> None:
 
     <section class="section tools-section" id="tools" aria-labelledby="tools-title">
       <div class="container">
-        <div class="section-heading"><div><p class="section-no">03 / BUILT WORK</p><h2 id="tools-title">Data & product tools</h2></div><p>Public projects with code or live previews.</p></div>
+        <div class="section-heading"><div><p class="section-no">03 / BUILT WORK</p><h2 id="tools-title">Data & product tools</h2></div><p>Tools to screen markets, build charts, and test product ideas.</p></div>
         <div class="tool-grid">
           <article class="tool-card"><span class="tool-index">A / DATA VISUALIZATION</span><h3>Atlas Chart Builder</h3><p>A CSV chart builder for research data, with chart export and configurable data sources.</p><div class="tool-links"><a href="https://github.com/0xDimi/atlas-chart-builder" target="_blank" rel="noopener">View code ↗</a></div></article>
           <article class="tool-card"><span class="tool-index">B / MARKET SCREENING</span><h3>Alea Signal</h3><p>A Polymarket researchability screener for crypto, finance, and economy markets. Public preview.</p><div class="tool-links"><a href="https://alea-signal.vercel.app/" target="_blank" rel="noopener">Open preview ↗</a><a href="https://github.com/0xDimi/alea-signal" target="_blank" rel="noopener">View code ↗</a></div></article>

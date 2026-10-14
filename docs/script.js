@@ -1,5 +1,6 @@
 const filters = Array.from(document.querySelectorAll('[data-filter]'));
 const cards = Array.from(document.querySelectorAll('#work-grid .work-card'));
+const categoryDescription = document.getElementById('category-description');
 
 function setFilter(kind) {
   const requested = kind === 'perspectives' ? 'strategies' : kind;
@@ -10,6 +11,9 @@ function setFilter(kind) {
     button.setAttribute('aria-pressed', String(active));
   }
   for (const card of cards) card.hidden = selected !== 'all' && card.dataset.kind !== selected;
+  if (categoryDescription) {
+    categoryDescription.textContent = filters.find((button) => button.dataset.filter === selected).dataset.description;
+  }
   const libraryNote = document.querySelector('.library-note');
   if (libraryNote) libraryNote.hidden = selected === 'data_rooms';
   if (selected === 'all') history.replaceState(null, '', location.pathname + location.search + '#library');

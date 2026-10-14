@@ -63,6 +63,10 @@ def main() -> None:
     filters = [button["data-filter"] for button in soup.select(".filter-bar [data-filter]")]
     if filters[-2:] != ["blueprints", "data_rooms"] or "Alea Data Rooms" in soup.get_text():
         raise RuntimeError("Data Rooms is not an independent category after IR decks")
+    if any(not button.get("data-description") for button in soup.select(".filter-bar [data-filter]")):
+        raise RuntimeError("A portfolio category has no description")
+    if not soup.select_one("#category-description"):
+        raise RuntimeError("Category description has no display element")
     jump_filters = [link.get("data-jump-filter") for link in soup.select(".hero-aside a")]
     if jump_filters[-2] != "data_rooms":
         raise RuntimeError("Hero index is missing Data Rooms after IR decks")
