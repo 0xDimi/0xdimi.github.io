@@ -26,6 +26,7 @@ python3 scripts/build_articles.py
 python3 scripts/build_redstone.py
 python3 scripts/build_decks.py
 python3 scripts/build_personal.py
+python3 scripts/build_stacks.py
 python3 scripts/optimize_pdfs.py
 python3 scripts/build_site.py
 python3 scripts/check_site.py
@@ -45,6 +46,14 @@ from Git. Restore that private source file before running `build_personal.py`.
 The published edition adds `@demetriusweb3` in the footer and a light chart
 watermark, and removes two old Alea template marks from chart footers. Its
 September 30, 2026 date is a data cutoff, not a publication date.
+
+The Stacks Q3 2026 benchmark is rebuilt from
+`source-pdfs/stacks-q3-2026-export.pdf`, a local export of the author-supplied
+Google Doc. The source stays out of Git. `build_stacks.py` adds a portfolio
+cover that credits Dimitris and Alea Research. All 50 report pages, links,
+and the commissioned-research disclosure remain in the public PDF. The card
+uses the reporting quarter rather than claiming a publication date, and it
+does not link to the private Google Doc.
 
 ## Publishing
 

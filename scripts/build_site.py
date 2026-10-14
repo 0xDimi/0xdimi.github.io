@@ -15,6 +15,7 @@ SITE = ROOT / "docs"
 
 SUMMARIES = {
     "tokenized-stocks-ecosystem-2026": "Personal sector research on market size, product rights, platform activity, DeFi use, and execution costs.",
+    "stacks-q3-2026": "Q3 review of Bitcoin Staking, sBTC, DeFi balances, fees, and STX valuation. Commissioned Alea Research work.",
     "etherfi-q1-2026": "Quarter-to-date review of Cash, Stake, Liquid, revenue, and ETHFI; data through February 9.",
     "threshold-q1-26": "Q1 review of tBTC supply, DeFi use, fees, and T valuation; data through March 31.",
     "rwa-perpetuals": "Where RWA perps find demand: overnight markets, weekend risk, and pre-IPO price discovery.",
@@ -43,9 +44,10 @@ SUMMARIES = {
 LABELS = {"collaboration": "Collaboration", "sector_reports": "Sector Wide Report", "quarterly_reports": "Quarterly Report", "strategies": "Strategy", "theses": "Investment thesis", "memos": "Investment memo", "blueprints": "IR deck"}
 ORDER = {"collaboration": 0, "sector_reports": 1, "quarterly_reports": 2, "strategies": 3, "theses": 4, "memos": 5, "blueprints": 6}
 FEATURED = ["tokenized-stocks-chapters-2-3-8", "hyperliquid-2", "morpho", "steakhouse-financial"]
-DISPLAY_TITLES = {"hyperliquid": "Hyperliquid: Exchange Thesis", "hyperliquid-2": "Hyperliquid: HIP-4", "etherfi-q1-2026": "Ether.fi: Q1 2026", "threshold-q1-26": "Threshold: Q1 2026"}
+DISPLAY_TITLES = {"hyperliquid": "Hyperliquid: Exchange Thesis", "hyperliquid-2": "Hyperliquid: HIP-4", "etherfi-q1-2026": "Ether.fi: Q1 2026", "threshold-q1-26": "Threshold: Q1 2026", "stacks-q3-2026": "Stacks: Q3 2026"}
 REPORT_LOGOS = {
     "tokenized-stocks-ecosystem-2026": "dimi",
+    "stacks-q3-2026": "stacks",
     "etherfi-q1-2026": "ether-fi",
     "threshold-q1-26": "threshold",
     "rwa-perpetuals": "alea",
@@ -76,6 +78,7 @@ def load_items() -> list[dict]:
     articles = json.loads((SITE / "articles.json").read_text())
     decks = json.loads((SITE / "decks.json").read_text())
     personal = json.loads((SITE / "personal.json").read_text())
+    author_exports = json.loads((SITE / "author_exports.json").read_text())
     logos = json.loads((SITE / "logos" / "sources.json").read_text())
     collaboration = {
         "kind": "collaboration",
@@ -86,9 +89,9 @@ def load_items() -> list[dict]:
         "source": "https://www.redstone.finance/research/tokenized-stocks-2026",
         "pdf": "pdfs/tokenized-stocks-chapters-2-3-8.pdf",
     }
-    items = [collaboration, *articles, *decks, *personal]
-    if len(items) != 24:
-        raise RuntimeError(f"Expected 24 portfolio publications, found {len(items)}")
+    items = [collaboration, *articles, *decks, *personal, *author_exports]
+    if len(items) != 25:
+        raise RuntimeError(f"Expected 25 portfolio publications, found {len(items)}")
     for item in items:
         path = SITE / item["pdf"]
         if not path.is_file():
@@ -212,7 +215,7 @@ def main() -> None:
           <button class="filter" type="button" data-filter="blueprints" aria-pressed="false">IR decks <span>{counts['blueprints']}</span></button>
         </div>
         <div class="library-grid" id="work-grid">{library}</div>
-        <p class="library-note">Published reports retain publisher credit and links to the source. The personal report shows its data cutoff. Market views reflect the dates shown.</p>
+        <p class="library-note">Public originals are linked where available. The Stacks benchmark retains its commissioned-research disclosure, and the personal report shows its data cutoff. Market views reflect the dates shown.</p>
       </div>
     </section>
 

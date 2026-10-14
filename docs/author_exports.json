@@ -1,0 +1,17 @@
+[
+  {
+    "kind": "quarterly_reports",
+    "slug": "stacks-q3-2026",
+    "title": "Stacks Q3 2026 Benchmark",
+    "subtitle": "Bitcoin Staking, DeFi balances, network fees, and STX",
+    "published": null,
+    "date_label": "Q3 2026",
+    "sort_date": "October 14, 2026",
+    "source": null,
+    "pdf": "pdfs/stacks-q3-2026.pdf",
+    "pages": 51,
+    "bytes": 14600951,
+    "provenance": "alea_commissioned",
+    "client": "Stacks"
+  }
+]

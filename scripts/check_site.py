@@ -16,17 +16,21 @@ SITE = ROOT / "docs"
 
 def main() -> None:
     manifest = json.loads((SITE / "manifest.json").read_text())
-    if len(manifest) != 24:
-        raise RuntimeError(f"Expected 24 publications, found {len(manifest)}")
+    if len(manifest) != 25:
+        raise RuntimeError(f"Expected 25 publications, found {len(manifest)}")
     quarterly_sources = {
         "etherfi-q1-2026": "https://alearesearch.io/reports/benchmark/etherfi-q1-2026",
         "threshold-q1-26": "https://alearesearch.io/reports/benchmark/threshold-q1-26",
+        "stacks-q3-2026": None,
     }
     quarterly_items = {item["slug"]: item for item in manifest if item["kind"] == "quarterly_reports"}
     if set(quarterly_items) != set(quarterly_sources):
         raise RuntimeError("Quarterly Reports category is incomplete")
     if any(quarterly_items[slug]["source"] != source for slug, source in quarterly_sources.items()):
         raise RuntimeError("Quarterly report source URL mismatch")
+    stacks = quarterly_items["stacks-q3-2026"]
+    if stacks.get("provenance") != "alea_commissioned" or stacks.get("client") != "Stacks" or stacks["published"] is not None or stacks.get("date_label") != "Q3 2026":
+        raise RuntimeError("Stacks attribution or reporting date is incorrect")
     sector_sources = {
         "tokenized-stocks-ecosystem-2026": None,
         "rwa-perpetuals": "https://alearesearch.io/reports/perspectives/rwa-perpetuals",
@@ -86,6 +90,13 @@ def main() -> None:
                     pixels = pdf[number - 1].get_pixmap(clip=old_mark_area, alpha=False)
                     if min(pixels.samples) < 250:
                         raise RuntimeError(f"Legacy Alea chart mark remains visible on page {number}")
+            if item["slug"] == "stacks-q3-2026":
+                if len(pdf) != 51 or "Work for Alea Research" not in pdf[0].get_text():
+                    raise RuntimeError("Stacks cover or page count is incorrect")
+                if "Alea Research is engaged in a commercial relationship with Stacks" not in pdf[-1].get_text():
+                    raise RuntimeError("Stacks commissioned-research disclosure is missing")
+                if soup.select_one(f"#work-{item['slug']} a:not(.primary-link):not([download])"):
+                    raise RuntimeError("Stacks card links to a private source")
             for number, page in enumerate(pdf, 1):
                 if not page.get_text().strip() and not page.get_images():
                     raise RuntimeError(f"Blank page in {path}: page {number}")
