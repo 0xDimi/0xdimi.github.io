@@ -10,6 +10,8 @@ function setFilter(kind) {
     button.setAttribute('aria-pressed', String(active));
   }
   for (const card of cards) card.hidden = selected !== 'all' && card.dataset.kind !== selected;
+  const libraryNote = document.querySelector('.library-note');
+  if (libraryNote) libraryNote.hidden = selected === 'data_rooms';
   if (selected === 'all') history.replaceState(null, '', location.pathname + location.search + '#library');
   else history.replaceState(null, '', location.pathname + location.search + '#library-' + selected);
 }

@@ -63,6 +63,11 @@ Google Docs exports kept out of Git. `build_quarterly_exports.py` adds a cover
 under Dimitris's name while preserving every report page and source link. The
 cards show the reporting quarter and do not expose the Google Doc edit links.
 
+`docs/data_rooms.json` supplies the Data Rooms category, which appears after
+IR decks. Its six cards link to the live Tempo, Aave, Hyperliquid, Morpho,
+Polymarket, and Derive rooms. Tempo through Polymarket currently require a
+sign-in; Derive opens directly. Room cards are web links, not PDF exports.
+
 ## Publishing
 
 The intended GitHub Pages repository is `0xDimi/0xDimi.github.io`, with `docs/`

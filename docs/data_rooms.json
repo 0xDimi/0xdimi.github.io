@@ -1,0 +1,56 @@
+[
+  {
+    "kind": "data_rooms",
+    "slug": "data-room-tempo",
+    "title": "Tempo",
+    "summary": "Payments network research and operating data.",
+    "url": "https://tempo.alearesearch.io/#what-it-does",
+    "logo_key": "tempo",
+    "access": "Sign-in required"
+  },
+  {
+    "kind": "data_rooms",
+    "slug": "data-room-aave",
+    "title": "Aave",
+    "summary": "Lending markets, usage, and protocol economics.",
+    "url": "https://aave.alearesearch.io/",
+    "logo_key": "aave",
+    "access": "Sign-in required"
+  },
+  {
+    "kind": "data_rooms",
+    "slug": "data-room-hyperliquid",
+    "title": "Hyperliquid",
+    "summary": "Exchange activity and protocol economics.",
+    "url": "https://hyperliquid.alearesearch.io/",
+    "logo_key": "hyperliquid",
+    "access": "Sign-in required"
+  },
+  {
+    "kind": "data_rooms",
+    "slug": "data-room-morpho",
+    "title": "Morpho",
+    "summary": "Lending markets, vaults, and protocol economics.",
+    "url": "https://morpho.alearesearch.io/",
+    "logo_key": "morpho",
+    "access": "Sign-in required"
+  },
+  {
+    "kind": "data_rooms",
+    "slug": "data-room-polymarket",
+    "title": "Polymarket",
+    "summary": "Prediction-market activity and venue economics.",
+    "url": "https://polymarket.alearesearch.io/",
+    "logo_key": "polymarket",
+    "access": "Sign-in required"
+  },
+  {
+    "kind": "data_rooms",
+    "slug": "data-room-derive",
+    "title": "Derive",
+    "summary": "Options and perpetuals fees and protocol economics.",
+    "url": "https://derive.alearesearch.io/analytics?subtab=fees&tab=custom-economics",
+    "logo_key": "derive",
+    "access": "Open access"
+  }
+]

@@ -43,8 +43,8 @@ SUMMARIES = {
     "usdai": "An investor relations deck on USD.AI.",
 }
 
-LABELS = {"collaboration": "Collaboration", "sector_reports": "Sector Wide Report", "quarterly_reports": "Quarterly Report", "strategies": "Strategy", "theses": "Investment thesis", "memos": "Investment memo", "blueprints": "IR deck"}
-ORDER = {"collaboration": 0, "sector_reports": 1, "quarterly_reports": 2, "strategies": 3, "theses": 4, "memos": 5, "blueprints": 6}
+LABELS = {"collaboration": "Collaboration", "sector_reports": "Sector Wide Report", "quarterly_reports": "Quarterly Report", "strategies": "Strategy", "theses": "Investment thesis", "memos": "Investment memo", "blueprints": "IR deck", "data_rooms": "Data room"}
+ORDER = {"collaboration": 0, "sector_reports": 1, "quarterly_reports": 2, "strategies": 3, "theses": 4, "memos": 5, "blueprints": 6, "data_rooms": 7}
 FEATURED = ["tokenized-stocks-chapters-2-3-8", "hyperliquid-2", "morpho", "steakhouse-financial"]
 DISPLAY_TITLES = {"hyperliquid": "Hyperliquid: Exchange Thesis", "hyperliquid-2": "Hyperliquid: HIP-4", "etherfi-q1-2026": "Ether.fi: Q1 2026", "threshold-q1-26": "Threshold: Q1 2026", "stacks-q3-2026": "Stacks: Q3 2026"}
 REPORT_LOGOS = {
@@ -83,6 +83,7 @@ def load_items() -> list[dict]:
     decks = json.loads((SITE / "decks.json").read_text())
     personal = json.loads((SITE / "personal.json").read_text())
     author_exports = json.loads((SITE / "author_exports.json").read_text())
+    data_rooms = json.loads((SITE / "data_rooms.json").read_text())
     logos = json.loads((SITE / "logos" / "sources.json").read_text())
     collaboration = {
         "kind": "collaboration",
@@ -93,21 +94,24 @@ def load_items() -> list[dict]:
         "source": "https://www.redstone.finance/research/tokenized-stocks-2026",
         "pdf": "pdfs/tokenized-stocks-chapters-2-3-8.pdf",
     }
-    items = [collaboration, *articles, *decks, *personal, *author_exports]
-    if len(items) != 27:
-        raise RuntimeError(f"Expected 27 portfolio publications, found {len(items)}")
+    items = [collaboration, *articles, *decks, *personal, *author_exports, *data_rooms]
+    if len(items) != 33:
+        raise RuntimeError(f"Expected 33 portfolio samples, found {len(items)}")
     for item in items:
-        path = SITE / item["pdf"]
-        if not path.is_file():
-            raise FileNotFoundError(path)
-        with fitz.open(path) as pdf:
-            item["pages"] = len(pdf)
-        item["summary"] = SUMMARIES[item["slug"]]
-        logo_key = REPORT_LOGOS[item["slug"]]
+        if item["kind"] != "data_rooms":
+            path = SITE / item["pdf"]
+            if not path.is_file():
+                raise FileNotFoundError(path)
+            with fitz.open(path) as pdf:
+                item["pages"] = len(pdf)
+            item["summary"] = SUMMARIES[item["slug"]]
+        logo_key = item["logo_key"] if item["kind"] == "data_rooms" else REPORT_LOGOS[item["slug"]]
         item["logo"] = f"logos/{logos[logo_key]['file']}"
         if not (SITE / item["logo"]).is_file():
             raise FileNotFoundError(SITE / item["logo"])
-    items.sort(key=lambda item: (ORDER[item["kind"]], -datetime.strptime(item.get("sort_date") or item["published"], "%B %d, %Y").timestamp()))
+    for index, room in enumerate(data_rooms):
+        room["sort_order"] = index
+    items.sort(key=lambda item: (ORDER[item["kind"]], item["sort_order"] if item["kind"] == "data_rooms" else -datetime.strptime(item.get("sort_date") or item["published"], "%B %d, %Y").timestamp()))
     return items
 
 
@@ -131,6 +135,18 @@ def card(item: dict, featured: bool = False) -> str:
     slug = e(item["slug"])
     image = f'<div class="feature-image"><img src="thumbs/{slug}.jpg" alt="Page from {e(item["title"])}" loading="lazy"></div>' if featured else ""
     class_name = "work-card featured-card" if featured else "work-card"
+    if item["kind"] == "data_rooms":
+        return f"""
+      <article class="{class_name}" data-kind="data_rooms" id="work-{slug}">
+        <div class="card-content">
+          <div class="card-meta"><span>Data room</span><span>Live site</span></div>
+          <div class="card-title-row"><span class="protocol-logo" aria-hidden="true"><img src="{e(item['logo'])}" alt="" width="58" height="58" loading="lazy" decoding="async"></span><h3>{e(item['title'])}</h3></div>
+          <p>{e(item['summary'])}</p>
+          <div class="card-bottom"><span>{e(item['access'])}</span><div class="card-links">
+            <a class="primary-link" href="{e(item['url'])}" target="_blank" rel="noopener">Open data room <span aria-hidden="true">↗</span></a>
+          </div></div>
+        </div>
+      </article>"""
     source_link = f'<a href="{e(item["source"])}" target="_blank" rel="noopener">Original</a>' if item.get("source") else ""
     date_label = item.get("date_label") or item["published"]
     return f"""
@@ -162,9 +178,9 @@ def main() -> None:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#102c34">
-  <meta name="description" content="Selected sector and quarterly reports, strategies, investment theses, memos, IR decks, and data tools by Dimitris Pechlivanidis.">
+  <meta name="description" content="Selected sector and quarterly reports, strategies, investment theses, memos, IR decks, data rooms, and tools by Dimitris Pechlivanidis.">
   <meta property="og:title" content="Dimitris Pechlivanidis — Research & Data">
-  <meta property="og:description" content="Sector and quarterly reports, strategies, investment theses, memos, and analytical tools.">
+  <meta property="og:description" content="Sector and quarterly reports, strategies, investment theses, memos, data rooms, and analytical tools.">
   <meta property="og:type" content="website">
   <title>Dimitris Pechlivanidis · Research & Data</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -193,7 +209,8 @@ def main() -> None:
           <a href="#library" data-jump-filter="theses"><span>03</span><strong>Investment theses</strong><span aria-hidden="true">↗</span></a>
           <a href="#library" data-jump-filter="memos"><span>04</span><strong>Investment memos</strong><span aria-hidden="true">↗</span></a>
           <a href="#library" data-jump-filter="blueprints"><span>05</span><strong>IR decks</strong><span aria-hidden="true">↗</span></a>
-          <a href="#tools"><span>06</span><strong>Data tools</strong><span aria-hidden="true">↗</span></a>
+          <a href="#library" data-jump-filter="data_rooms"><span>06</span><strong>Data Rooms</strong><span aria-hidden="true">↗</span></a>
+          <a href="#tools"><span>07</span><strong>Data tools</strong><span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
@@ -217,9 +234,10 @@ def main() -> None:
           <button class="filter" type="button" data-filter="theses" aria-pressed="false">Theses <span>{counts['theses']}</span></button>
           <button class="filter" type="button" data-filter="memos" aria-pressed="false">Memos <span>{counts['memos']}</span></button>
           <button class="filter" type="button" data-filter="blueprints" aria-pressed="false">IR decks <span>{counts['blueprints']}</span></button>
+          <button class="filter" type="button" data-filter="data_rooms" aria-pressed="false">Data Rooms <span>{counts['data_rooms']}</span></button>
         </div>
         <div class="library-grid" id="work-grid">{library}</div>
-        <p class="library-note">Public originals are linked where available. The Stacks benchmark retains its commissioned-research disclosure, and the personal report shows its data cutoff. Market views reflect the dates shown.</p>
+        <p class="library-note">Reports link to published originals where available. The Stacks benchmark retains its commissioned-research disclosure, and the personal report shows its data cutoff. Market views reflect the dates shown.</p>
       </div>
     </section>
 
@@ -230,16 +248,6 @@ def main() -> None:
           <article class="tool-card"><span class="tool-index">A / DATA VISUALIZATION</span><h3>Atlas Chart Builder</h3><p>A CSV chart builder for research data, with chart export and configurable data sources.</p><div class="tool-links"><a href="https://github.com/0xDimi/atlas-chart-builder" target="_blank" rel="noopener">View code ↗</a></div></article>
           <article class="tool-card"><span class="tool-index">B / MARKET SCREENING</span><h3>Alea Signal</h3><p>A Polymarket researchability screener for crypto, finance, and economy markets. Public preview.</p><div class="tool-links"><a href="https://alea-signal.vercel.app/" target="_blank" rel="noopener">Open preview ↗</a><a href="https://github.com/0xDimi/alea-signal" target="_blank" rel="noopener">View code ↗</a></div></article>
           <article class="tool-card"><span class="tool-index">C / PRODUCT PROTOTYPE</span><h3>MANTIS</h3><p>A Greek-first prediction-market product prototype. Demo only; no real-money trading.</p><div class="tool-links"><a href="https://mantis-demo.xyz/" target="_blank" rel="noopener">Open demo ↗</a><a href="https://github.com/0xDimi/MANTIS" target="_blank" rel="noopener">View code ↗</a></div></article>
-          <article class="tool-card data-room-card">
-            <div class="data-room-copy"><span class="tool-index">D / RESEARCH PRODUCT</span><h3>Alea Data Rooms</h3><p>Protocol research in one place: what the business does, how value accrues, the data behind the case, and dated research notes.</p></div>
-            <div class="room-links" aria-label="Explore Alea data rooms">
-              <a href="https://tempo.alearesearch.io/#what-it-does" target="_blank" rel="noopener"><span>Tempo</span><span aria-hidden="true">↗</span></a>
-              <a href="https://aave.alearesearch.io/" target="_blank" rel="noopener"><span>Aave</span><span aria-hidden="true">↗</span></a>
-              <a href="https://hyperliquid.alearesearch.io/" target="_blank" rel="noopener"><span>Hyperliquid</span><span aria-hidden="true">↗</span></a>
-              <a href="https://morpho.alearesearch.io/" target="_blank" rel="noopener"><span>Morpho</span><span aria-hidden="true">↗</span></a>
-              <a href="https://polymarket.alearesearch.io/" target="_blank" rel="noopener"><span>Polymarket</span><span aria-hidden="true">↗</span></a>
-            </div>
-          </article>
         </div>
       </div>
     </section>
@@ -263,7 +271,7 @@ def main() -> None:
     (SITE / "index.html").write_text("\n".join(line.rstrip() for line in doc.splitlines()) + "\n")
     (SITE / ".nojekyll").touch()
     (SITE / "manifest.json").write_text(json.dumps(items, indent=2) + "\n")
-    print(f"Generated {SITE / 'index.html'} with {len(items)} publications")
+    print(f"Generated {SITE / 'index.html'} with {len(items)} work samples")
 
 
 if __name__ == "__main__":

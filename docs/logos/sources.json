@@ -1,6 +1,8 @@
 {
   "dimi": {"file": "dimi.svg", "source": "personal portfolio mark"},
   "stacks": {"file": "stacks.webp", "source": "https://icons.llamao.fi/icons/protocols/stacks"},
+  "tempo": {"file": "tempo.png", "source": "https://github.com/tempoxyz (official organization avatar)"},
+  "aave": {"file": "aave.webp", "source": "https://icons.llamao.fi/icons/protocols/aave"},
   "robinhood-chain": {"file": "robinhood-chain.jpg", "source": "https://cdn.robinhood.com/robinhood_chain/brand_assets/robinhood-chain-brand-assets-v1.zip (Robinhood_Avatar.jpg)"},
   "threshold": {"file": "threshold.svg", "source": "https://cdn.prod.website-files.com/68f7acb28e2423ac92e4dd06/69c564570951247dcc3ad03b_T%20Token%20in%20Circular%20purple%20BG%20-%20for%20light%20background.svg"},
   "alea": {"file": "alea.svg", "source": "https://alearesearch.io/favicon.svg?v=5"},

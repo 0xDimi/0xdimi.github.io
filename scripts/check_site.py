@@ -1,4 +1,4 @@
-"""Validate built PDF outputs and the static portfolio index."""
+"""Validate built PDFs, data room links, and the static portfolio index."""
 
 from __future__ import annotations
 
@@ -16,8 +16,8 @@ SITE = ROOT / "docs"
 
 def main() -> None:
     manifest = json.loads((SITE / "manifest.json").read_text())
-    if len(manifest) != 27:
-        raise RuntimeError(f"Expected 27 publications, found {len(manifest)}")
+    if len(manifest) != 33:
+        raise RuntimeError(f"Expected 33 work samples, found {len(manifest)}")
     quarterly_sources = {
         "etherfi-q1-2026": "https://alearesearch.io/reports/benchmark/etherfi-q1-2026",
         "threshold-q1-26": "https://alearesearch.io/reports/benchmark/threshold-q1-26",
@@ -60,15 +60,22 @@ def main() -> None:
         raise RuntimeError("Index and manifest publication counts differ")
     if soup.select_one('[data-filter="perspectives"]') or not soup.select_one('[data-filter="strategies"]'):
         raise RuntimeError("Perspectives filter was not renamed Strategies")
+    filters = [button["data-filter"] for button in soup.select(".filter-bar [data-filter]")]
+    if filters[-2:] != ["blueprints", "data_rooms"] or "Alea Data Rooms" in soup.get_text():
+        raise RuntimeError("Data Rooms is not an independent category after IR decks")
+    jump_filters = [link.get("data-jump-filter") for link in soup.select(".hero-aside a")]
+    if jump_filters[-2] != "data_rooms":
+        raise RuntimeError("Hero index is missing Data Rooms after IR decks")
+    rooms = [item for item in manifest if item["kind"] == "data_rooms"]
+    if [item["title"] for item in rooms] != ["Tempo", "Aave", "Hyperliquid", "Morpho", "Polymarket", "Derive"]:
+        raise RuntimeError("Data Rooms category is incomplete or out of order")
+    if rooms[-1]["url"] != "https://derive.alearesearch.io/analytics?subtab=fees&tab=custom-economics":
+        raise RuntimeError("Derive data room does not use the requested URL")
     if not soup.select_one('a[href="https://meditationsbyd.substack.com/"]'):
         raise RuntimeError("Substack link is missing")
     total_bytes = 0
+    pdf_count = 0
     for item in manifest:
-        path = SITE / item["pdf"]
-        if not path.is_file() or path.read_bytes()[:5] != b"%PDF-":
-            raise RuntimeError(f"Missing or invalid PDF: {path}")
-        if not soup.select_one(f"#work-{item['slug']} a.primary-link[href='{item['pdf']}']"):
-            raise RuntimeError(f"PDF has no library link: {path}")
         logo = SITE / item["logo"]
         if not logo.is_file():
             raise RuntimeError(f"Missing logo: {logo}")
@@ -80,6 +87,19 @@ def main() -> None:
             card = soup.select_one(f"{section} #work-{item['slug']}")
             if card is not None and not card.select_one(f'.protocol-logo img[src="{item["logo"]}"]'):
                 raise RuntimeError(f"Card has no matching logo: {item['slug']}")
+        if item["kind"] == "data_rooms":
+            room_link = soup.select_one(f"#work-{item['slug']} a.primary-link")
+            if not room_link or room_link.get("href") != item["url"] or "pdf" in item:
+                raise RuntimeError(f"Data room card is not a live-site link: {item['slug']}")
+            if item["access"] not in soup.select_one(f"#work-{item['slug']}").get_text():
+                raise RuntimeError(f"Data room access label is missing: {item['slug']}")
+            continue
+        pdf_count += 1
+        path = SITE / item["pdf"]
+        if not path.is_file() or path.read_bytes()[:5] != b"%PDF-":
+            raise RuntimeError(f"Missing or invalid PDF: {path}")
+        if not soup.select_one(f"#work-{item['slug']} a.primary-link[href='{item['pdf']}']"):
+            raise RuntimeError(f"PDF has no library link: {path}")
         with fitz.open(path) as pdf:
             if len(pdf) != item["pages"]:
                 raise RuntimeError(f"Manifest page count mismatch: {path}")
@@ -121,7 +141,9 @@ def main() -> None:
             raise RuntimeError(f"Thumbnail appears broken: {thumbnail}")
     if soup.select(".performance, .performance-method"):
         raise RuntimeError("Performance section was not fully removed")
-    print(f"PASS: {len(manifest)} linked PDFs, all pages nonblank, source links present where applicable; {total_bytes / 1024 / 1024:.1f} MiB total")
+    if pdf_count != 27:
+        raise RuntimeError(f"Expected 27 linked PDFs, found {pdf_count}")
+    print(f"PASS: {pdf_count} linked PDFs and {len(rooms)} data rooms; all PDF pages nonblank; {total_bytes / 1024 / 1024:.1f} MiB total")
 
 
 if __name__ == "__main__":
