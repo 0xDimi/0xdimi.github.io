@@ -276,7 +276,7 @@ def main() -> None:
         <div class="about-copy">
           <p class="about-lead">Give a damn and you'll be great.</p>
           <p>I've evaluated more than 50 businesses and protocols, sourced at least 20 blockchain startups, and invested in many of them. I've also invested in robotics and AI companies. Skin in the game matters to me. I put my conviction up for judgment, test the assumptions behind it, and change my mind when the evidence calls for it.</p>
-          <p>Client work matters just as much. At Alea Research, I've helped teams raise money, shape go-to-market strategies and business models, plan incentive campaigns, and prepare investor materials. The work goes beyond a report: I stay involved with the decisions teams have to make.</p>
+          <p>Client work matters just as much. At Alea Research, I've sourced and closed four clients at an average $65k contract value, managing prospect calls, proposals and CRM follow-up. I've helped teams raise money, shape go-to-market strategies and business models, plan incentive campaigns, and prepare investor materials. The work goes beyond a report: I stay involved with the decisions teams have to make.</p>
           <p>Before research, I spent twelve years in competitive football and five years in sales in Greece. Both taught me to care about the result. A match ends. A client buys or walks away. I bring the same attitude to research and investing.</p>
           <a class="about-link" href="https://meditationsbyd.substack.com/" target="_blank" rel="noopener">Read more of my writing on Substack <span aria-hidden="true">↗</span></a>
         </div>
