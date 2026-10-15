@@ -21,9 +21,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 .hero:before{content:"";position:absolute;inset:0;opacity:.22;background-image:linear-gradient(120deg,transparent 0 61%,#5a7376 61.07%,transparent 61.14%),linear-gradient(120deg,transparent 0 70%,#5a7376 70.07%,transparent 70.14%),radial-gradient(circle at 83% 23%,#41626b,transparent 32%);pointer-events:none}
 .hero-grid{min-height:610px;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(290px,.8fr);gap:9%;position:relative}
 .hero-copy{padding:102px 0 96px;display:flex;flex-direction:column;align-items:flex-start}
-.eyebrow,.section-no{margin:0;font-size:11px;line-height:1.3;font-weight:700;letter-spacing:.22em;color:var(--gold)}
-.eyebrow{display:flex;align-items:center;gap:16px}
-.eyebrow-line{width:42px;height:1px;background:var(--gold)}
+.section-no{margin:0;font-size:11px;line-height:1.3;font-weight:700;letter-spacing:.22em;color:var(--gold)}
 .hero h1{font:normal clamp(60px,6vw,86px)/.98 var(--font-serif);letter-spacing:-.062em;max-width:850px;margin:38px 0 0;text-wrap:balance}
 .hero h1 em{font-style:italic;color:#d1ad7d;font-weight:normal}
 .hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:29px;margin-top:48px}
