@@ -1,0 +1,15 @@
+[
+  {
+    "kind": "financial_models",
+    "slug": "circle-financial-model",
+    "title": "Circle Financial Model",
+    "subtitle": "USDC Growth, Interest Rates and Equity Valuation",
+    "published": "October 14, 2026",
+    "source": null,
+    "provenance": "personal",
+    "pdf": "pdfs/circle-financial-model.pdf",
+    "workbook": "models/circle-financial-model.xlsx",
+    "pages": 19,
+    "bytes": 1461305
+  }
+]

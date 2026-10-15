@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 from pathlib import Path
 
 import fitz
@@ -16,8 +17,11 @@ SITE = ROOT / "docs"
 
 def main() -> None:
     manifest = json.loads((SITE / "manifest.json").read_text())
-    if len(manifest) != 33:
-        raise RuntimeError(f"Expected 33 work samples, found {len(manifest)}")
+    if len(manifest) != 34:
+        raise RuntimeError(f"Expected 34 work samples, found {len(manifest)}")
+    models = [item for item in manifest if item["kind"] == "financial_models"]
+    if len(models) != 1 or models[0]["slug"] != "circle-financial-model" or models[0]["published"] != "October 14, 2026" or models[0].get("provenance") != "personal":
+        raise RuntimeError("Circle financial model metadata is missing or incorrect")
     quarterly_sources = {
         "etherfi-q1-2026": "https://alearesearch.io/reports/benchmark/etherfi-q1-2026",
         "threshold-q1-26": "https://alearesearch.io/reports/benchmark/threshold-q1-26",
@@ -61,15 +65,15 @@ def main() -> None:
     if soup.select_one('[data-filter="perspectives"]') or not soup.select_one('[data-filter="strategies"]'):
         raise RuntimeError("Perspectives filter was not renamed Strategies")
     filters = [button["data-filter"] for button in soup.select(".filter-bar [data-filter]")]
-    if filters[-2:] != ["blueprints", "data_rooms"] or "Alea Data Rooms" in soup.get_text():
-        raise RuntimeError("Data Rooms is not an independent category after IR decks")
+    if filters[-3:] != ["blueprints", "financial_models", "data_rooms"] or "Alea Data Rooms" in soup.get_text():
+        raise RuntimeError("Financial Models and Data Rooms are not in category order")
     if any(not button.get("data-description") for button in soup.select(".filter-bar [data-filter]")):
         raise RuntimeError("A portfolio category has no description")
     if not soup.select_one("#category-description"):
         raise RuntimeError("Category description has no display element")
     jump_filters = [link.get("data-jump-filter") for link in soup.select(".hero-aside a")]
-    if jump_filters[-2] != "data_rooms":
-        raise RuntimeError("Hero index is missing Data Rooms after IR decks")
+    if jump_filters[-3:-1] != ["financial_models", "data_rooms"]:
+        raise RuntimeError("Hero index is missing Financial Models or Data Rooms")
     rooms = [item for item in manifest if item["kind"] == "data_rooms"]
     if [item["title"] for item in rooms] != ["Tempo", "Aave", "Hyperliquid", "Morpho", "Polymarket", "Derive"]:
         raise RuntimeError("Data Rooms category is incomplete or out of order")
@@ -132,6 +136,16 @@ def main() -> None:
                     raise RuntimeError(f"Author cover is missing: {item['slug']}")
                 if soup.select_one(f"#work-{item['slug']} a:not(.primary-link):not([download])"):
                     raise RuntimeError(f"Private Google Doc is linked publicly: {item['slug']}")
+            if item["slug"] == "circle-financial-model":
+                workbook_path = SITE / item["workbook"]
+                if hashlib.sha256(path.read_bytes()).hexdigest() != "b224e59d858aa36c73ff12c279feb97229d424cca885b95107dc2ab92d7ed052":
+                    raise RuntimeError("Circle PDF does not match the reviewed original")
+                if pdf.embfile_count() != 1 or workbook_path.read_bytes() != pdf.embfile_get(0):
+                    raise RuntimeError("Circle workbook differs from the PDF attachment")
+                if not soup.select_one(f"#work-{item['slug']} a[download][href='{item['workbook']}']"):
+                    raise RuntimeError("Circle workbook has no direct download link")
+                if soup.select_one(f"#work-{item['slug']} a:not(.primary-link):not([download])"):
+                    raise RuntimeError("Personal Circle report incorrectly has an Original link")
             for number, page in enumerate(pdf, 1):
                 if not page.get_text().strip() and not page.get_images():
                     raise RuntimeError(f"Blank page in {path}: page {number}")
@@ -145,8 +159,8 @@ def main() -> None:
             raise RuntimeError(f"Thumbnail appears broken: {thumbnail}")
     if soup.select(".performance, .performance-method"):
         raise RuntimeError("Performance section was not fully removed")
-    if pdf_count != 27:
-        raise RuntimeError(f"Expected 27 linked PDFs, found {pdf_count}")
+    if pdf_count != 28:
+        raise RuntimeError(f"Expected 28 linked PDFs, found {pdf_count}")
     print(f"PASS: {pdf_count} linked PDFs and {len(rooms)} data rooms; all PDF pages nonblank; {total_bytes / 1024 / 1024:.1f} MiB total")
 
 

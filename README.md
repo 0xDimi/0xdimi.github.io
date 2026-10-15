@@ -28,6 +28,7 @@ python3 scripts/build_decks.py
 python3 scripts/build_personal.py
 python3 scripts/build_stacks.py
 python3 scripts/build_quarterly_exports.py
+python3 scripts/build_circle_model.py
 python3 scripts/optimize_pdfs.py
 python3 scripts/build_site.py
 python3 scripts/check_site.py
@@ -63,8 +64,14 @@ Google Docs exports kept out of Git. `build_quarterly_exports.py` adds a cover
 under Dimitris's name while preserving every report page and source link. The
 cards show the reporting quarter and do not expose the Google Doc edit links.
 
+The independent Circle financial model is copied without changes from
+`source-pdfs/circle-financial-model-original.pdf` by `build_circle_model.py`.
+That local source is excluded from Git. The public PDF retains its embedded
+workbook, and the same workbook is also offered as a direct `.xlsx` download.
+The script checks the reviewed source hash, page count, date, and attribution.
+
 `docs/data_rooms.json` supplies the Data Rooms category, which appears after
-IR decks. Its six cards link to the live Tempo, Aave, Hyperliquid, Morpho,
+Financial Models. Its six cards link to the live Tempo, Aave, Hyperliquid, Morpho,
 Polymarket, and Derive rooms. Tempo through Polymarket currently require a
 sign-in; Derive opens directly. Room cards are web links, not PDF exports.
 

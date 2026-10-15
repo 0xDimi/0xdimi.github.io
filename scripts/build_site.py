@@ -41,10 +41,11 @@ SUMMARIES = {
     "re-protocol": "An investor relations deck on Re Protocol.",
     "theo": "An investor relations deck on Theo.",
     "usdai": "An investor relations deck on USD.AI.",
+    "circle-financial-model": "A scenario model connecting USDC circulation, reserve yield, retained income, and cash flow to Circle equity value.",
 }
 
-LABELS = {"collaboration": "Collaboration", "sector_reports": "Sector Wide Report", "quarterly_reports": "Quarterly Report", "strategies": "Strategy", "theses": "Investment thesis", "memos": "Investment memo", "blueprints": "IR deck", "data_rooms": "Data room"}
-ORDER = {"collaboration": 0, "sector_reports": 1, "quarterly_reports": 2, "strategies": 3, "theses": 4, "memos": 5, "blueprints": 6, "data_rooms": 7}
+LABELS = {"collaboration": "Collaboration", "sector_reports": "Sector Wide Report", "quarterly_reports": "Quarterly Report", "strategies": "Strategy", "theses": "Investment thesis", "memos": "Investment memo", "blueprints": "IR deck", "financial_models": "Financial model", "data_rooms": "Data room"}
+ORDER = {"collaboration": 0, "sector_reports": 1, "quarterly_reports": 2, "strategies": 3, "theses": 4, "memos": 5, "blueprints": 6, "financial_models": 7, "data_rooms": 8}
 CATEGORY_DESCRIPTIONS = {
     "all": "Selected research, investor materials, and live data products.",
     "collaboration": "Research written with partners, with my contributions clearly credited.",
@@ -54,6 +55,7 @@ CATEGORY_DESCRIPTIONS = {
     "theses": "Investment theses weigh a protocol's upside against its risks and valuation.",
     "memos": "Investment memos give a short view on an asset and its key assumptions.",
     "blueprints": "IR decks present a business case and its operating record to investors.",
+    "financial_models": "Financial models connect operating assumptions to forecasts and valuation.",
     "data_rooms": "Data Rooms pair protocol research with the data behind it.",
 }
 FEATURED = ["tokenized-stocks-chapters-2-3-8", "hyperliquid-2", "morpho", "steakhouse-financial"]
@@ -86,6 +88,7 @@ REPORT_LOGOS = {
     "re-protocol": "re",
     "theo": "theo",
     "usdai": "usdai",
+    "circle-financial-model": "circle",
 }
 
 
@@ -94,6 +97,7 @@ def load_items() -> list[dict]:
     decks = json.loads((SITE / "decks.json").read_text())
     personal = json.loads((SITE / "personal.json").read_text())
     author_exports = json.loads((SITE / "author_exports.json").read_text())
+    financial_models = json.loads((SITE / "financial_models.json").read_text())
     data_rooms = json.loads((SITE / "data_rooms.json").read_text())
     logos = json.loads((SITE / "logos" / "sources.json").read_text())
     collaboration = {
@@ -105,9 +109,9 @@ def load_items() -> list[dict]:
         "source": "https://www.redstone.finance/research/tokenized-stocks-2026",
         "pdf": "pdfs/tokenized-stocks-chapters-2-3-8.pdf",
     }
-    items = [collaboration, *articles, *decks, *personal, *author_exports, *data_rooms]
-    if len(items) != 33:
-        raise RuntimeError(f"Expected 33 portfolio samples, found {len(items)}")
+    items = [collaboration, *articles, *decks, *personal, *author_exports, *financial_models, *data_rooms]
+    if len(items) != 34:
+        raise RuntimeError(f"Expected 34 portfolio samples, found {len(items)}")
     for item in items:
         if item["kind"] != "data_rooms":
             path = SITE / item["pdf"]
@@ -159,6 +163,7 @@ def card(item: dict, featured: bool = False) -> str:
         </div>
       </article>"""
     source_link = f'<a href="{e(item["source"])}" target="_blank" rel="noopener">Original</a>' if item.get("source") else ""
+    workbook_link = f'<a href="{e(item["workbook"])}" download>Download model</a>' if item.get("workbook") else ""
     date_label = item.get("date_label") or item["published"]
     return f"""
       <article class="{class_name}" data-kind="{e(item['kind'])}" id="work-{slug}">
@@ -170,6 +175,7 @@ def card(item: dict, featured: bool = False) -> str:
           <div class="card-bottom"><span>{item['pages']} pages · PDF</span><div class="card-links">
             <a class="primary-link" href="{e(item['pdf'])}" target="_blank" rel="noopener">Read PDF <span aria-hidden="true">↗</span></a>
             <a href="{e(item['pdf'])}" download>Download</a>
+            {workbook_link}
             {source_link}
           </div></div>
         </div>
@@ -189,9 +195,9 @@ def main() -> None:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#102c34">
-  <meta name="description" content="Selected sector and quarterly reports, strategies, investment theses, memos, IR decks, data rooms, and tools by Dimitris Pechlivanidis.">
+  <meta name="description" content="Selected sector and quarterly reports, strategies, investment theses, memos, IR decks, financial models, data rooms, and tools by Dimitris Pechlivanidis.">
   <meta property="og:title" content="Dimitris Pechlivanidis — Research & Data">
-  <meta property="og:description" content="Sector and quarterly reports, strategies, investment theses, memos, data rooms, and analytical tools.">
+  <meta property="og:description" content="Sector and quarterly reports, strategies, investment theses, memos, financial models, data rooms, and analytical tools.">
   <meta property="og:type" content="website">
   <title>Dimitris Pechlivanidis · Research & Data</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -220,8 +226,9 @@ def main() -> None:
           <a href="#library" data-jump-filter="theses"><span>03</span><strong>Investment theses</strong><span aria-hidden="true">↗</span></a>
           <a href="#library" data-jump-filter="memos"><span>04</span><strong>Investment memos</strong><span aria-hidden="true">↗</span></a>
           <a href="#library" data-jump-filter="blueprints"><span>05</span><strong>IR decks</strong><span aria-hidden="true">↗</span></a>
-          <a href="#library" data-jump-filter="data_rooms"><span>06</span><strong>Data Rooms</strong><span aria-hidden="true">↗</span></a>
-          <a href="#tools"><span>07</span><strong>Data tools</strong><span aria-hidden="true">↗</span></a>
+          <a href="#library" data-jump-filter="financial_models"><span>06</span><strong>Financial Models</strong><span aria-hidden="true">↗</span></a>
+          <a href="#library" data-jump-filter="data_rooms"><span>07</span><strong>Data Rooms</strong><span aria-hidden="true">↗</span></a>
+          <a href="#tools"><span>08</span><strong>Data tools</strong><span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
@@ -245,6 +252,7 @@ def main() -> None:
           <button class="filter" type="button" data-filter="theses" data-description="{html.escape(CATEGORY_DESCRIPTIONS['theses'], quote=True)}" aria-pressed="false">Theses <span>{counts['theses']}</span></button>
           <button class="filter" type="button" data-filter="memos" data-description="{html.escape(CATEGORY_DESCRIPTIONS['memos'], quote=True)}" aria-pressed="false">Memos <span>{counts['memos']}</span></button>
           <button class="filter" type="button" data-filter="blueprints" data-description="{html.escape(CATEGORY_DESCRIPTIONS['blueprints'], quote=True)}" aria-pressed="false">IR decks <span>{counts['blueprints']}</span></button>
+          <button class="filter" type="button" data-filter="financial_models" data-description="{html.escape(CATEGORY_DESCRIPTIONS['financial_models'], quote=True)}" aria-pressed="false">Financial Models <span>{counts['financial_models']}</span></button>
           <button class="filter" type="button" data-filter="data_rooms" data-description="{html.escape(CATEGORY_DESCRIPTIONS['data_rooms'], quote=True)}" aria-pressed="false">Data Rooms <span>{counts['data_rooms']}</span></button>
         </div>
         <p class="category-description" id="category-description" aria-live="polite">{html.escape(CATEGORY_DESCRIPTIONS['all'])}</p>
