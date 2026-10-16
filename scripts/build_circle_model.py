@@ -1,4 +1,4 @@
-"""Publish the author-supplied Circle PDF and its embedded editable workbook."""
+"""Publish the author-supplied Circle PDF with its embedded workbook intact."""
 
 from __future__ import annotations
 
@@ -32,11 +32,8 @@ def main() -> None:
         workbook = pdf.embfile_get(0)
 
     pdf_output = SITE / "pdfs" / "circle-financial-model.pdf"
-    model_output = SITE / "models" / "circle-financial-model.xlsx"
     pdf_output.parent.mkdir(parents=True, exist_ok=True)
-    model_output.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(SOURCE, pdf_output)
-    model_output.write_bytes(workbook)
 
     item = {
         "kind": "financial_models",
@@ -47,12 +44,11 @@ def main() -> None:
         "source": None,
         "provenance": "personal",
         "pdf": "pdfs/circle-financial-model.pdf",
-        "workbook": "models/circle-financial-model.xlsx",
         "pages": 19,
         "bytes": len(source_bytes),
     }
     (SITE / "financial_models.json").write_text(json.dumps([item], indent=2) + "\n")
-    print(f"Published {pdf_output} and {model_output}")
+    print(f"Published {pdf_output} with embedded workbook ({len(workbook)} bytes)")
 
 
 if __name__ == "__main__":

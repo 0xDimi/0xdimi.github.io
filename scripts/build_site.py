@@ -163,7 +163,6 @@ def card(item: dict, featured: bool = False) -> str:
         </div>
       </article>"""
     source_link = f'<a href="{e(item["source"])}" target="_blank" rel="noopener">Original</a>' if item.get("source") else ""
-    workbook_link = f'<a href="{e(item["workbook"])}" download>Download model</a>' if item.get("workbook") else ""
     date_label = item.get("date_label") or item["published"]
     return f"""
       <article class="{class_name}" data-kind="{e(item['kind'])}" id="work-{slug}">
@@ -174,8 +173,6 @@ def card(item: dict, featured: bool = False) -> str:
           <p>{e(item['summary'])}</p>
           <div class="card-bottom"><span>{item['pages']} pages · PDF</span><div class="card-links">
             <a class="primary-link" href="{e(item['pdf'])}" target="_blank" rel="noopener">Read PDF <span aria-hidden="true">↗</span></a>
-            <a href="{e(item['pdf'])}" download>Download</a>
-            {workbook_link}
             {source_link}
           </div></div>
         </div>

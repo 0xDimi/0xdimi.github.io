@@ -67,7 +67,7 @@ cards show the reporting quarter and do not expose the Google Doc edit links.
 The independent Circle financial model is copied without changes from
 `source-pdfs/circle-financial-model-original.pdf` by `build_circle_model.py`.
 That local source is excluded from Git. The public PDF retains its embedded
-workbook, and the same workbook is also offered as a direct `.xlsx` download.
+workbook; there is no separate `.xlsx` download on the site.
 The script checks the reviewed source hash, page count, date, and attribution.
 
 `docs/data_rooms.json` supplies the Data Rooms category, which appears after

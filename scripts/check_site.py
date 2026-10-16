@@ -62,6 +62,8 @@ def main() -> None:
     cards = soup.select("#work-grid article.work-card")
     if len(cards) != len(manifest):
         raise RuntimeError("Index and manifest publication counts differ")
+    if soup.select("a[download]") or "Download model" in soup.get_text():
+        raise RuntimeError("Portfolio still offers a download link")
     if soup.select_one('[data-filter="perspectives"]') or not soup.select_one('[data-filter="strategies"]'):
         raise RuntimeError("Perspectives filter was not renamed Strategies")
     filters = [button["data-filter"] for button in soup.select(".filter-bar [data-filter]")]
@@ -114,7 +116,7 @@ def main() -> None:
             if item.get("source") and not pdf[0].get_links():
                 raise RuntimeError(f"Cover has no canonical-source link: {path}")
             if item["slug"] == "tokenized-stocks-ecosystem-2026":
-                if soup.select_one(f"#work-{item['slug']} a:not(.primary-link):not([download])"):
+                if soup.select_one(f"#work-{item['slug']} a:not(.primary-link)"):
                     raise RuntimeError("Personal report incorrectly has an Original link")
                 handles = [page.get_text().count("@demetriusweb3") for page in pdf]
                 if any(count < 1 for count in handles) or sum(count == 2 for count in handles) != item["watermarked_charts"]:
@@ -129,22 +131,21 @@ def main() -> None:
                     raise RuntimeError("Stacks cover or page count is incorrect")
                 if "Alea Research is engaged in a commercial relationship with Stacks" not in pdf[-1].get_text():
                     raise RuntimeError("Stacks commissioned-research disclosure is missing")
-                if soup.select_one(f"#work-{item['slug']} a:not(.primary-link):not([download])"):
+                if soup.select_one(f"#work-{item['slug']} a:not(.primary-link)"):
                     raise RuntimeError("Stacks card links to a private source")
             if item["slug"] in ("crypto-etfs-q3-2026", "robinhood-chain-q3-2026"):
                 if "Research by Dimitris Pechlivanidis" not in pdf[0].get_text():
                     raise RuntimeError(f"Author cover is missing: {item['slug']}")
-                if soup.select_one(f"#work-{item['slug']} a:not(.primary-link):not([download])"):
+                if soup.select_one(f"#work-{item['slug']} a:not(.primary-link)"):
                     raise RuntimeError(f"Private Google Doc is linked publicly: {item['slug']}")
             if item["slug"] == "circle-financial-model":
-                workbook_path = SITE / item["workbook"]
                 if hashlib.sha256(path.read_bytes()).hexdigest() != "b224e59d858aa36c73ff12c279feb97229d424cca885b95107dc2ab92d7ed052":
                     raise RuntimeError("Circle PDF does not match the reviewed original")
-                if pdf.embfile_count() != 1 or workbook_path.read_bytes() != pdf.embfile_get(0):
-                    raise RuntimeError("Circle workbook differs from the PDF attachment")
-                if not soup.select_one(f"#work-{item['slug']} a[download][href='{item['workbook']}']"):
-                    raise RuntimeError("Circle workbook has no direct download link")
-                if soup.select_one(f"#work-{item['slug']} a:not(.primary-link):not([download])"):
+                if pdf.embfile_count() != 1 or pdf.embfile_info(0)["filename"] != "Circle-financial-model.xlsx":
+                    raise RuntimeError("Circle embedded workbook is missing")
+                if item.get("workbook") or (SITE / "models" / "circle-financial-model.xlsx").exists():
+                    raise RuntimeError("Circle workbook is still separately published")
+                if soup.select_one(f"#work-{item['slug']} a:not(.primary-link)"):
                     raise RuntimeError("Personal Circle report incorrectly has an Original link")
             for number, page in enumerate(pdf, 1):
                 if not page.get_text().strip() and not page.get_images():
