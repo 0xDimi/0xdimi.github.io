@@ -28,6 +28,7 @@ python3 scripts/build_decks.py
 python3 scripts/build_personal.py
 python3 scripts/build_stacks.py
 python3 scripts/build_quarterly_exports.py
+python3 scripts/build_prediction_markets.py
 python3 scripts/build_circle_model.py
 python3 scripts/optimize_pdfs.py
 python3 scripts/build_site.py
@@ -63,6 +64,11 @@ The State of Crypto ETFs and Robinhood Chain Q3 2026 reports are rebuilt from
 Google Docs exports kept out of Git. `build_quarterly_exports.py` adds a cover
 under Dimitris's name while preserving every report page and source link. The
 cards show the reporting quarter and do not expose the Google Doc edit links.
+
+The independent State of Prediction Markets Q3 2026 report is copied without
+changes from `source-pdfs/prediction-markets-q3-2026-original.pdf` by
+`build_prediction_markets.py`. The source stays out of Git. Its card uses the
+reporting quarter because the PDF does not state a publication day.
 
 The independent Circle financial model is copied without changes from
 `source-pdfs/circle-financial-model-original.pdf` by `build_circle_model.py`.

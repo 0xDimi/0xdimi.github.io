@@ -17,8 +17,8 @@ SITE = ROOT / "docs"
 
 def main() -> None:
     manifest = json.loads((SITE / "manifest.json").read_text())
-    if len(manifest) != 34:
-        raise RuntimeError(f"Expected 34 work samples, found {len(manifest)}")
+    if len(manifest) != 35:
+        raise RuntimeError(f"Expected 35 work samples, found {len(manifest)}")
     models = [item for item in manifest if item["kind"] == "financial_models"]
     if len(models) != 1 or models[0]["slug"] != "circle-financial-model" or models[0]["published"] != "October 14, 2026" or models[0].get("provenance") != "personal":
         raise RuntimeError("Circle financial model metadata is missing or incorrect")
@@ -28,6 +28,7 @@ def main() -> None:
         "stacks-q3-2026": None,
         "crypto-etfs-q3-2026": None,
         "robinhood-chain-q3-2026": None,
+        "prediction-markets-q3-2026": None,
     }
     quarterly_items = {item["slug"]: item for item in manifest if item["kind"] == "quarterly_reports"}
     if set(quarterly_items) != set(quarterly_sources):
@@ -41,6 +42,9 @@ def main() -> None:
         item = quarterly_items[slug]
         if item.get("provenance") != "author_supplied" or item["published"] is not None or item.get("date_label") != "Q3 2026":
             raise RuntimeError(f"Author-supplied report attribution or period is incorrect: {slug}")
+    prediction_markets = quarterly_items["prediction-markets-q3-2026"]
+    if prediction_markets.get("provenance") != "personal" or prediction_markets["published"] is not None or prediction_markets.get("date_label") != "Q3 2026" or prediction_markets["title"] != "State of Prediction Markets: Q3 2026":
+        raise RuntimeError("Prediction markets report attribution, title, or reporting period is incorrect")
     sector_sources = {
         "tokenized-stocks-ecosystem-2026": None,
         "rwa-perpetuals": "https://alearesearch.io/reports/perspectives/rwa-perpetuals",
@@ -138,6 +142,15 @@ def main() -> None:
                     raise RuntimeError(f"Author cover is missing: {item['slug']}")
                 if soup.select_one(f"#work-{item['slug']} a:not(.primary-link)"):
                     raise RuntimeError(f"Private Google Doc is linked publicly: {item['slug']}")
+            if item["slug"] == "prediction-markets-q3-2026":
+                if hashlib.sha256(path.read_bytes()).hexdigest() != "f346ff4ae93110557ed7f9a2dd9d55851439c22742a936a6b29abd7248c6139f":
+                    raise RuntimeError("Prediction markets PDF does not match the reviewed original")
+                if len(pdf) != 14 or sum(len(page.get_links()) for page in pdf) != 57:
+                    raise RuntimeError("Prediction markets PDF lost pages or source links")
+                if "@demetriusweb3" not in pdf[0].get_text():
+                    raise RuntimeError("Prediction markets PDF lacks author attribution")
+                if soup.select_one(f"#work-{item['slug']} a:not(.primary-link)"):
+                    raise RuntimeError("Prediction markets card links to a private source")
             if item["slug"] == "circle-financial-model":
                 if hashlib.sha256(path.read_bytes()).hexdigest() != "b224e59d858aa36c73ff12c279feb97229d424cca885b95107dc2ab92d7ed052":
                     raise RuntimeError("Circle PDF does not match the reviewed original")
@@ -160,8 +173,8 @@ def main() -> None:
             raise RuntimeError(f"Thumbnail appears broken: {thumbnail}")
     if soup.select(".performance, .performance-method"):
         raise RuntimeError("Performance section was not fully removed")
-    if pdf_count != 28:
-        raise RuntimeError(f"Expected 28 linked PDFs, found {pdf_count}")
+    if pdf_count != 29:
+        raise RuntimeError(f"Expected 29 linked PDFs, found {pdf_count}")
     print(f"PASS: {pdf_count} linked PDFs and {len(rooms)} data rooms; all PDF pages nonblank; {total_bytes / 1024 / 1024:.1f} MiB total")
 
 

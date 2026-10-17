@@ -18,6 +18,7 @@ SUMMARIES = {
     "stacks-q3-2026": "Q3 review of Bitcoin Staking, sBTC, DeFi balances, fees, and STX valuation. Commissioned Alea Research work.",
     "crypto-etfs-q3-2026": "Q3 review of U.S. crypto ETF assets, fund flows, issuer economics, and product structure.",
     "robinhood-chain-q3-2026": "Robinhood Chain's first public quarter: network activity, DeFi balances, stock tokens, and fee economics.",
+    "prediction-markets-q3-2026": "Q3 review of Kalshi, Polymarket, fee retention, combo contracts, and broker distribution.",
     "etherfi-q1-2026": "Quarter-to-date review of Cash, Stake, Liquid, revenue, and ETHFI; data through February 9.",
     "threshold-q1-26": "Q1 review of tBTC supply, DeFi use, fees, and T valuation; data through March 31.",
     "rwa-perpetuals": "Where RWA perps find demand: overnight markets, weekend risk, and pre-IPO price discovery.",
@@ -65,6 +66,7 @@ REPORT_LOGOS = {
     "stacks-q3-2026": "stacks",
     "crypto-etfs-q3-2026": "dimi",
     "robinhood-chain-q3-2026": "robinhood-chain",
+    "prediction-markets-q3-2026": "dimi",
     "etherfi-q1-2026": "ether-fi",
     "threshold-q1-26": "threshold",
     "rwa-perpetuals": "alea",
@@ -110,8 +112,8 @@ def load_items() -> list[dict]:
         "pdf": "pdfs/tokenized-stocks-chapters-2-3-8.pdf",
     }
     items = [collaboration, *articles, *decks, *personal, *author_exports, *financial_models, *data_rooms]
-    if len(items) != 34:
-        raise RuntimeError(f"Expected 34 portfolio samples, found {len(items)}")
+    if len(items) != 35:
+        raise RuntimeError(f"Expected 35 portfolio samples, found {len(items)}")
     for item in items:
         if item["kind"] != "data_rooms":
             path = SITE / item["pdf"]

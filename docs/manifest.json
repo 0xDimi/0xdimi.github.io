@@ -72,6 +72,22 @@
   },
   {
     "kind": "quarterly_reports",
+    "slug": "prediction-markets-q3-2026",
+    "title": "State of Prediction Markets: Q3 2026",
+    "subtitle": "Kalshi, Polymarket, fee retention, and broker distribution",
+    "published": null,
+    "date_label": "Q3 2026",
+    "sort_date": "October 17, 2026",
+    "source": null,
+    "pdf": "pdfs/prediction-markets-q3-2026.pdf",
+    "pages": 14,
+    "bytes": 422903,
+    "provenance": "personal",
+    "summary": "Q3 review of Kalshi, Polymarket, fee retention, combo contracts, and broker distribution.",
+    "logo": "logos/dimi.svg"
+  },
+  {
+    "kind": "quarterly_reports",
     "slug": "stacks-q3-2026",
     "title": "Stacks Q3 2026 Benchmark",
     "subtitle": "Bitcoin Staking, DeFi balances, network fees, and STX",
