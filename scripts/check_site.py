@@ -94,6 +94,13 @@ def main() -> None:
         raise RuntimeError("Derive data room does not use the requested URL")
     if not soup.select_one('a[href="https://meditationsbyd.substack.com/"]'):
         raise RuntimeError("Substack link is missing")
+    tool_cards = {card.select_one("h3").get_text(strip=True): card for card in soup.select(".tool-card")}
+    if set(tool_cards) != {"Atlas Chart Builder", "Alea Signal", "MANTIS"}:
+        raise RuntimeError("Tool cards are missing")
+    if any(tool_cards[name].select_one(".tool-status") is None or tool_cards[name].select_one(".tool-status").get_text(strip=True) != "Currently inactive" for name in ("Alea Signal", "MANTIS")):
+        raise RuntimeError("Inactive status is missing from Alea Signal or MANTIS")
+    if tool_cards["Atlas Chart Builder"].select_one(".tool-status") or "Public preview" in tool_cards["Alea Signal"].get_text():
+        raise RuntimeError("Tool status or Alea Signal description is inconsistent")
     total_bytes = 0
     pdf_count = 0
     for item in manifest:
