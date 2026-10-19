@@ -69,6 +69,9 @@ def main() -> None:
     cards = soup.select("#work-grid article.work-card")
     if len(cards) != len(manifest):
         raise RuntimeError("Index and manifest publication counts differ")
+    featured_slugs = [card["id"].removeprefix("work-") for card in soup.select("#selected .featured-card")]
+    if featured_slugs != ["tokenized-stocks-ecosystem-2026", "prediction-markets-q3-2026", "pendle-one-venue-all-of-fixed-income", "derive"]:
+        raise RuntimeError("Selected work does not match the requested four reports in order")
     if soup.select("a[download]") or "Download model" in soup.get_text():
         raise RuntimeError("Portfolio still offers a download link")
     if soup.select_one('[data-filter="perspectives"]') or not soup.select_one('[data-filter="strategies"]'):

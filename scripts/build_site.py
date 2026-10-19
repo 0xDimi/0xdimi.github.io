@@ -60,7 +60,8 @@ CATEGORY_DESCRIPTIONS = {
     "financial_models": "Financial models connect operating assumptions to forecasts and valuation.",
     "data_rooms": "Data Rooms pair protocol research with the data behind it.",
 }
-FEATURED = ["tokenized-stocks-chapters-2-3-8", "hyperliquid-2", "morpho", "steakhouse-financial"]
+FEATURED = ["tokenized-stocks-ecosystem-2026", "prediction-markets-q3-2026", "pendle-one-venue-all-of-fixed-income", "derive"]
+THUMBNAIL_PAGES = {"tokenized-stocks-ecosystem-2026": 0, "prediction-markets-q3-2026": 1, "pendle-one-venue-all-of-fixed-income": 4, "derive": 5}
 DISPLAY_TITLES = {"hyperliquid": "Hyperliquid: Exchange Thesis", "hyperliquid-2": "Hyperliquid: HIP-4", "etherfi-q1-2026": "Ether.fi: Q1 2026", "threshold-q1-26": "Threshold: Q1 2026", "stacks-q3-2026": "Stacks: Q3 2026"}
 REPORT_LOGOS = {
     "tokenized-stocks-ecosystem-2026": "dimi",
@@ -141,7 +142,7 @@ def make_thumbnail(item: dict) -> None:
     output = SITE / "thumbs" / f"{item['slug']}.jpg"
     output.parent.mkdir(parents=True, exist_ok=True)
     with fitz.open(SITE / item["pdf"]) as pdf:
-        page_number = 1 if len(pdf) > 1 else 0
+        page_number = THUMBNAIL_PAGES[item["slug"]]
         pix = pdf[page_number].get_pixmap(matrix=fitz.Matrix(1.2, 1.2), alpha=False)
         from PIL import Image
 
