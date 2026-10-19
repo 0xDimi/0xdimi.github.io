@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title description">
+      <title id="title">Tokenized Stocks: An Ecosystem &amp; Platform Overview</title>
+      <desc id="description">Editorial portfolio cover with a conceptual illustration.</desc>
+      <defs><linearGradient id="background" x2="1" y2="1"><stop stop-color="#102d35"/><stop offset="1" stop-color="#173b42"/></linearGradient></defs>
+      <style>
+        .label{font:700 15px 'Avenir Next',Avenir,Arial,sans-serif;letter-spacing:3px;fill:#d5ad75}
+        .small{font:600 16px 'Avenir Next',Avenir,Arial,sans-serif;letter-spacing:1.2px;fill:#b7cbc5}
+        .title{font:normal 77px 'Iowan Old Style',Baskerville,Georgia,serif;letter-spacing:-2px;fill:#f8f4e9}
+        .subtitle{font:normal 22px 'Avenir Next',Avenir,Arial,sans-serif;fill:#e5d4b9}
+      </style>
+      <rect width="1200" height="600" fill="url(#background)"/>
+      <path d="M0 108h1200 M0 506h1200" stroke="#77918d" stroke-opacity=".45"/>
+      <rect x="58" y="38" width="43" height="43" fill="none" stroke="#cba168"/>
+      <text x="65" y="68" style="font:normal 24px Georgia,serif;fill:#d6ae77">DP</text>
+      <text x="124" y="66" class="label">SELECTED WORK / 01</text>
+      <text x="58" y="184" class="label">SECTOR WIDE REPORT</text>
+      <text x="58" y="289" class="title">Tokenized</text><text x="58" y="372" class="title">Stocks</text>
+      <text x="61" y="447" class="subtitle">An Ecosystem &amp; Platform Overview</text>
+      <text x="58" y="552" class="small">DIMITRIS PECHLIVANIDIS</text>
+      <text x="1143" y="552" text-anchor="end" class="small">PERSONAL RESEARCH</text>
+      <g transform="translate(772 114) rotate(-14 160 150)">
+          <rect x="0" y="24" width="314" height="370" rx="10" fill="#1a4248" stroke="#547d79" stroke-width="2"/>
+          <rect x="36" y="0" width="314" height="370" rx="10" fill="#204e52" stroke="#77a29a" stroke-width="2"/>
+          <rect x="72" y="-24" width="314" height="370" rx="10" fill="#123840" stroke="#d0a36a" stroke-width="2"/>
+          <path d="M72 93h314 M72 244h314 M182 -24v370 M287 -24v370" stroke="#6f9690" stroke-opacity=".55"/>
+          <circle cx="127" cy="40" r="19" fill="none" stroke="#d6b27f" stroke-width="3"/>
+          <path d="M116 40h22 M127 29v22" stroke="#d6b27f" stroke-width="2"/>
+          <path d="M228 42h61 M228 57h91 M98 141h69 M98 158h110 M203 141h57 M203 158h74 M310 141h47 M310 158h28" stroke="#aac6b9" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+          <path d="M98 294h53 M203 294h53 M310 294h45" stroke="#d4aa75" stroke-width="5" stroke-linecap="round"/>
+        </g>
+    </svg>

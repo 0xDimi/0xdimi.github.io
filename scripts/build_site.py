@@ -61,7 +61,28 @@ CATEGORY_DESCRIPTIONS = {
     "data_rooms": "Data Rooms pair protocol research with the data behind it.",
 }
 FEATURED = ["tokenized-stocks-ecosystem-2026", "prediction-markets-q3-2026", "pendle-one-venue-all-of-fixed-income", "derive"]
-THUMBNAIL_PAGES = {"tokenized-stocks-ecosystem-2026": 0, "prediction-markets-q3-2026": 1, "pendle-one-venue-all-of-fixed-income": 4, "derive": 5}
+FEATURED_COVERS = {
+    "tokenized-stocks-ecosystem-2026": {
+        "number": "01", "category": "SECTOR WIDE REPORT", "lines": ("Tokenized", "Stocks"),
+        "subtitle": "An Ecosystem & Platform Overview", "credit": "PERSONAL RESEARCH",
+        "art": "stocks",
+    },
+    "prediction-markets-q3-2026": {
+        "number": "02", "category": "QUARTERLY REPORT", "lines": ("Prediction", "Markets"),
+        "subtitle": "State of the Market · Q3 2026", "credit": "PERSONAL RESEARCH",
+        "art": "prediction",
+    },
+    "pendle-one-venue-all-of-fixed-income": {
+        "number": "03", "category": "INVESTMENT THESIS", "lines": ("Pendle",),
+        "subtitle": "One Venue, All of Fixed Income", "credit": "WORK FOR ALEA RESEARCH",
+        "art": "pendle",
+    },
+    "derive": {
+        "number": "04", "category": "INVESTMENT THESIS", "lines": ("Derive",),
+        "subtitle": "Onchain Options", "credit": "WORK FOR ALEA RESEARCH",
+        "art": "derive",
+    },
+}
 DISPLAY_TITLES = {"hyperliquid": "Hyperliquid: Exchange Thesis", "hyperliquid-2": "Hyperliquid: HIP-4", "etherfi-q1-2026": "Ether.fi: Q1 2026", "threshold-q1-26": "Threshold: Q1 2026", "stacks-q3-2026": "Stacks: Q3 2026"}
 REPORT_LOGOS = {
     "tokenized-stocks-ecosystem-2026": "dimi",
@@ -136,25 +157,83 @@ def load_items() -> list[dict]:
     return items
 
 
-def make_thumbnail(item: dict) -> None:
+def cover_art(kind: str) -> str:
+    """Topic-specific editorial motifs; these illustrate concepts, not market data."""
+    if kind == "stocks":
+        return '''<g transform="translate(772 114) rotate(-14 160 150)">
+          <rect x="0" y="24" width="314" height="370" rx="10" fill="#1a4248" stroke="#547d79" stroke-width="2"/>
+          <rect x="36" y="0" width="314" height="370" rx="10" fill="#204e52" stroke="#77a29a" stroke-width="2"/>
+          <rect x="72" y="-24" width="314" height="370" rx="10" fill="#123840" stroke="#d0a36a" stroke-width="2"/>
+          <path d="M72 93h314 M72 244h314 M182 -24v370 M287 -24v370" stroke="#6f9690" stroke-opacity=".55"/>
+          <circle cx="127" cy="40" r="19" fill="none" stroke="#d6b27f" stroke-width="3"/>
+          <path d="M116 40h22 M127 29v22" stroke="#d6b27f" stroke-width="2"/>
+          <path d="M228 42h61 M228 57h91 M98 141h69 M98 158h110 M203 141h57 M203 158h74 M310 141h47 M310 158h28" stroke="#aac6b9" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+          <path d="M98 294h53 M203 294h53 M310 294h45" stroke="#d4aa75" stroke-width="5" stroke-linecap="round"/>
+        </g>'''
+    if kind == "prediction":
+        return '''<g transform="translate(735 110)">
+          <path d="M0 57h405 M0 159h405 M0 261h405 M0 363h405 M36 0v405 M138 0v405 M240 0v405 M342 0v405" stroke="#4a7270" stroke-width="1" opacity=".5"/>
+          <path d="M0 300 C62 285 73 198 137 207 S228 300 289 173 S370 119 405 58" fill="none" stroke="#d6ad75" stroke-width="6" stroke-linecap="round"/>
+          <path d="M0 107 C73 103 81 170 142 161 S228 114 284 235 S356 294 405 340" fill="none" stroke="#a0c4b5" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="289" cy="173" r="12" fill="#d6ad75"/><circle cx="284" cy="235" r="9" fill="#a0c4b5"/>
+          <circle cx="289" cy="173" r="26" fill="none" stroke="#d6ad75" opacity=".45"/>
+        </g>'''
+    if kind == "pendle":
+        return '''<g transform="translate(747 137)">
+          <path d="M5 270h415" stroke="#668d86" stroke-width="2"/>
+          <path d="M5 270 C89 270 120 242 166 183 S262 79 420 48" fill="none" stroke="#d9b37c" stroke-width="6" stroke-linecap="round"/>
+          <path d="M5 270 C92 270 131 230 190 213 S301 193 420 192" fill="none" stroke="#9fc3b5" stroke-width="4" stroke-linecap="round"/>
+          <path d="M5 270 C88 270 135 274 198 292 S319 329 420 338" fill="none" stroke="#527c78" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="5" cy="270" r="16" fill="#d9b37c"/>
+          <circle cx="420" cy="48" r="9" fill="#d9b37c"/><circle cx="420" cy="192" r="9" fill="#9fc3b5"/><circle cx="420" cy="338" r="9" fill="#527c78"/>
+        </g>'''
+    if kind == "derive":
+        return '''<g transform="translate(738 106)">
+          <path d="M0 50h425 M0 155h425 M0 260h425 M0 365h425 M42 0v410 M148 0v410 M254 0v410 M360 0v410" stroke="#527974" stroke-width="1" opacity=".45"/>
+          <path d="M0 306h155l106-205 96 205h68" fill="none" stroke="#d9b37c" stroke-width="6" stroke-linejoin="round"/>
+          <path d="M0 306h112l94-107h82l94 107h43" fill="none" stroke="#9fc3b5" stroke-width="4" stroke-linejoin="round"/>
+          <circle cx="261" cy="101" r="13" fill="#d9b37c"/>
+          <circle cx="206" cy="199" r="9" fill="#9fc3b5"/>
+        </g>'''
+    raise ValueError(f"Unknown cover art: {kind}")
+
+
+def make_featured_cover(item: dict) -> None:
     if item["slug"] not in FEATURED:
         return
-    output = SITE / "thumbs" / f"{item['slug']}.jpg"
+    output = SITE / "thumbs" / f"{item['slug']}.svg"
     output.parent.mkdir(parents=True, exist_ok=True)
-    with fitz.open(SITE / item["pdf"]) as pdf:
-        page_number = THUMBNAIL_PAGES[item["slug"]]
-        pix = pdf[page_number].get_pixmap(matrix=fitz.Matrix(1.2, 1.2), alpha=False)
-        from PIL import Image
-
-        image = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
-        image.thumbnail((900, 900))
-        image.save(output, "JPEG", quality=86, optimize=True)
+    spec = FEATURED_COVERS[item["slug"]]
+    title = "".join(f'<text x="58" y="{289 + 83 * index}" class="title">{html.escape(line)}</text>' for index, line in enumerate(spec["lines"]))
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title description">
+      <title id="title">{html.escape(item['title'])}</title>
+      <desc id="description">Editorial portfolio cover with a conceptual illustration.</desc>
+      <defs><linearGradient id="background" x2="1" y2="1"><stop stop-color="#102d35"/><stop offset="1" stop-color="#173b42"/></linearGradient></defs>
+      <style>
+        .label{{font:700 15px 'Avenir Next',Avenir,Arial,sans-serif;letter-spacing:3px;fill:#d5ad75}}
+        .small{{font:600 16px 'Avenir Next',Avenir,Arial,sans-serif;letter-spacing:1.2px;fill:#b7cbc5}}
+        .title{{font:normal 77px 'Iowan Old Style',Baskerville,Georgia,serif;letter-spacing:-2px;fill:#f8f4e9}}
+        .subtitle{{font:normal 22px 'Avenir Next',Avenir,Arial,sans-serif;fill:#e5d4b9}}
+      </style>
+      <rect width="1200" height="600" fill="url(#background)"/>
+      <path d="M0 108h1200 M0 506h1200" stroke="#77918d" stroke-opacity=".45"/>
+      <rect x="58" y="38" width="43" height="43" fill="none" stroke="#cba168"/>
+      <text x="65" y="68" style="font:normal 24px Georgia,serif;fill:#d6ae77">DP</text>
+      <text x="124" y="66" class="label">SELECTED WORK / {spec['number']}</text>
+      <text x="58" y="184" class="label">{spec['category']}</text>
+      {title}
+      <text x="61" y="{397 if len(spec['lines']) == 1 else 447}" class="subtitle">{html.escape(spec['subtitle'])}</text>
+      <text x="58" y="552" class="small">DIMITRIS PECHLIVANIDIS</text>
+      <text x="1143" y="552" text-anchor="end" class="small">{spec['credit']}</text>
+      {cover_art(spec['art'])}
+    </svg>'''
+    output.write_text(svg)
 
 
 def card(item: dict, featured: bool = False) -> str:
     e = lambda value: html.escape(str(value), quote=True)
     slug = e(item["slug"])
-    image = f'<div class="feature-image"><img src="thumbs/{slug}.jpg" alt="Page from {e(item["title"])}" loading="lazy"></div>' if featured else ""
+    image = f'<div class="feature-image"><img src="thumbs/{slug}.svg" alt="Cover for {e(item["title"])}" loading="lazy" decoding="async" width="1200" height="600"></div>' if featured else ""
     class_name = "work-card featured-card" if featured else "work-card"
     if item["kind"] == "data_rooms":
         return f"""
@@ -188,7 +267,7 @@ def card(item: dict, featured: bool = False) -> str:
 def main() -> None:
     items = load_items()
     for item in items:
-        make_thumbnail(item)
+        make_featured_cover(item)
     featured = "\n".join(card(next(item for item in items if item["slug"] == slug), featured=True) for slug in FEATURED)
     library = "\n".join(card(item) for item in items)
     counts = {kind: sum(item["kind"] == kind for item in items) for kind in LABELS}

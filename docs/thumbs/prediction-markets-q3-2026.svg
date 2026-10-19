@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title description">
+      <title id="title">State of Prediction Markets: Q3 2026</title>
+      <desc id="description">Editorial portfolio cover with a conceptual illustration.</desc>
+      <defs><linearGradient id="background" x2="1" y2="1"><stop stop-color="#102d35"/><stop offset="1" stop-color="#173b42"/></linearGradient></defs>
+      <style>
+        .label{font:700 15px 'Avenir Next',Avenir,Arial,sans-serif;letter-spacing:3px;fill:#d5ad75}
+        .small{font:600 16px 'Avenir Next',Avenir,Arial,sans-serif;letter-spacing:1.2px;fill:#b7cbc5}
+        .title{font:normal 77px 'Iowan Old Style',Baskerville,Georgia,serif;letter-spacing:-2px;fill:#f8f4e9}
+        .subtitle{font:normal 22px 'Avenir Next',Avenir,Arial,sans-serif;fill:#e5d4b9}
+      </style>
+      <rect width="1200" height="600" fill="url(#background)"/>
+      <path d="M0 108h1200 M0 506h1200" stroke="#77918d" stroke-opacity=".45"/>
+      <rect x="58" y="38" width="43" height="43" fill="none" stroke="#cba168"/>
+      <text x="65" y="68" style="font:normal 24px Georgia,serif;fill:#d6ae77">DP</text>
+      <text x="124" y="66" class="label">SELECTED WORK / 02</text>
+      <text x="58" y="184" class="label">QUARTERLY REPORT</text>
+      <text x="58" y="289" class="title">Prediction</text><text x="58" y="372" class="title">Markets</text>
+      <text x="61" y="447" class="subtitle">State of the Market · Q3 2026</text>
+      <text x="58" y="552" class="small">DIMITRIS PECHLIVANIDIS</text>
+      <text x="1143" y="552" text-anchor="end" class="small">PERSONAL RESEARCH</text>
+      <g transform="translate(735 110)">
+          <path d="M0 57h405 M0 159h405 M0 261h405 M0 363h405 M36 0v405 M138 0v405 M240 0v405 M342 0v405" stroke="#4a7270" stroke-width="1" opacity=".5"/>
+          <path d="M0 300 C62 285 73 198 137 207 S228 300 289 173 S370 119 405 58" fill="none" stroke="#d6ad75" stroke-width="6" stroke-linecap="round"/>
+          <path d="M0 107 C73 103 81 170 142 161 S228 114 284 235 S356 294 405 340" fill="none" stroke="#a0c4b5" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="289" cy="173" r="12" fill="#d6ad75"/><circle cx="284" cy="235" r="9" fill="#a0c4b5"/>
+          <circle cx="289" cy="173" r="26" fill="none" stroke="#d6ad75" opacity=".45"/>
+        </g>
+    </svg>

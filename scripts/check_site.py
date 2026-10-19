@@ -194,9 +194,12 @@ def main() -> None:
                 if any(f"Chapter {number}" not in text for number in (2, 3, 8)):
                     raise RuntimeError("RedStone PDF is missing a credited chapter")
         total_bytes += path.stat().st_size
-    for thumbnail in SITE.glob("thumbs/*.jpg"):
-        if thumbnail.stat().st_size < 10_000:
-            raise RuntimeError(f"Thumbnail appears broken: {thumbnail}")
+    for slug in ("tokenized-stocks-ecosystem-2026", "prediction-markets-q3-2026", "pendle-one-venue-all-of-fixed-income", "derive"):
+        thumbnail = SITE / "thumbs" / f"{slug}.svg"
+        if not thumbnail.is_file() or thumbnail.stat().st_size < 1_000:
+            raise RuntimeError(f"Featured cover is missing or broken: {thumbnail}")
+        if soup.select_one(f"#selected #work-{slug} img[src='thumbs/{slug}.svg']") is None:
+            raise RuntimeError(f"Featured card does not use its cover: {slug}")
     if soup.select(".performance, .performance-method"):
         raise RuntimeError("Performance section was not fully removed")
     if pdf_count != 30:
