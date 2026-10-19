@@ -83,6 +83,10 @@ def main() -> None:
     jump_filters = [link.get("data-jump-filter") for link in soup.select(".hero-aside a")]
     if jump_filters[-3:-1] != ["financial_models", "data_rooms"]:
         raise RuntimeError("Hero index is missing Financial Models or Data Rooms")
+    hero_numbers = [link.find("span").get_text(strip=True) for link in soup.select(".hero-aside a")]
+    section_numbers = [label.get_text(strip=True).split(" / ", 1)[0] for label in soup.select(".section-no")]
+    if hero_numbers != [str(number) for number in range(1, 9)] or section_numbers != ["1", "2", "3", "4"]:
+        raise RuntimeError("Portfolio section numbers are not plain 1, 2, 3 format")
     rooms = [item for item in manifest if item["kind"] == "data_rooms"]
     if [item["title"] for item in rooms] != ["Tempo", "Aave", "Hyperliquid", "Morpho", "Polymarket", "Derive"]:
         raise RuntimeError("Data Rooms category is incomplete or out of order")
