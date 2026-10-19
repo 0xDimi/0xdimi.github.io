@@ -17,8 +17,11 @@ SITE = ROOT / "docs"
 
 def main() -> None:
     manifest = json.loads((SITE / "manifest.json").read_text())
-    if len(manifest) != 35:
-        raise RuntimeError(f"Expected 35 work samples, found {len(manifest)}")
+    if len(manifest) != 36:
+        raise RuntimeError(f"Expected 36 work samples, found {len(manifest)}")
+    aave = next((item for item in manifest if item["slug"] == "aave"), None)
+    if not aave or aave["kind"] != "memos" or aave["published"] != "February 26, 2026" or aave["source"] != "https://alearesearch.io/reports/memos/aave" or aave.get("provenance") != "alea":
+        raise RuntimeError("Aave memo metadata is missing or incorrect")
     models = [item for item in manifest if item["kind"] == "financial_models"]
     if len(models) != 1 or models[0]["slug"] != "circle-financial-model" or models[0]["published"] != "October 14, 2026" or models[0].get("provenance") != "personal":
         raise RuntimeError("Circle financial model metadata is missing or incorrect")
@@ -151,6 +154,12 @@ def main() -> None:
                     raise RuntimeError("Prediction markets PDF lacks author attribution")
                 if soup.select_one(f"#work-{item['slug']} a:not(.primary-link)"):
                     raise RuntimeError("Prediction markets card links to a private source")
+            if item["slug"] == "aave":
+                body = " ".join(page.get_text() for page in list(pdf)[1:])
+                if "Work for Alea Research" not in pdf[0].get_text() or "Cut below $85" not in body:
+                    raise RuntimeError("Aave PDF attribution or ending is missing")
+                if sum(len(page.get_links()) for page in pdf) < 26 or sum(len(page.get_images()) for page in pdf) < 11:
+                    raise RuntimeError("Aave PDF lost citations or figures")
             if item["slug"] == "circle-financial-model":
                 if hashlib.sha256(path.read_bytes()).hexdigest() != "b224e59d858aa36c73ff12c279feb97229d424cca885b95107dc2ab92d7ed052":
                     raise RuntimeError("Circle PDF does not match the reviewed original")
@@ -173,8 +182,8 @@ def main() -> None:
             raise RuntimeError(f"Thumbnail appears broken: {thumbnail}")
     if soup.select(".performance, .performance-method"):
         raise RuntimeError("Performance section was not fully removed")
-    if pdf_count != 29:
-        raise RuntimeError(f"Expected 29 linked PDFs, found {pdf_count}")
+    if pdf_count != 30:
+        raise RuntimeError(f"Expected 30 linked PDFs, found {pdf_count}")
     print(f"PASS: {pdf_count} linked PDFs and {len(rooms)} data rooms; all PDF pages nonblank; {total_bytes / 1024 / 1024:.1f} MiB total")
 
 

@@ -23,6 +23,7 @@ when present.
 
 ```bash
 python3 scripts/build_articles.py
+python3 scripts/build_aave_memo.py
 python3 scripts/build_redstone.py
 python3 scripts/build_decks.py
 python3 scripts/build_personal.py
@@ -42,6 +43,12 @@ RedStone PDF includes chapters 2, 3, and 8, each credited to Dimitris on the
 source page. Deck PDFs capture every slide from the public Figma audience
 view; their slide pages are high-resolution images, so the original deck link
 remains available alongside the PDF.
+
+The Aave memo uses the author's complete local Markdown source at
+`source-pdfs/aave-memo.md`, excluded from Git. Its public Alea page currently
+shows only the opening section without a sign-in. `build_aave_memo.py` checks
+the source hash and retains the full text, eleven figures, citations, Alea
+credit, and link to the original publication.
 
 The personal Tokenized Stocks report is rebuilt from
 `source-pdfs/tokenized-stocks-original.pdf`, which stays local and is excluded

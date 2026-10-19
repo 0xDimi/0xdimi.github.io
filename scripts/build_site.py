@@ -38,6 +38,7 @@ SUMMARIES = {
     "vvv": "Private AI inference and the economics of the VVV token.",
     "near": "NEAR's pivots, current positioning, and token valuation.",
     "zro": "LayerZero's Zero network and the ZRO value-capture case.",
+    "aave": "Aave governance, tokenholder economics, buybacks, and the V4 transition.",
     "steakhouse-financial": "A public vault business performance review for Q2 2026.",
     "re-protocol": "An investor relations deck on Re Protocol.",
     "theo": "An investor relations deck on Theo.",
@@ -86,6 +87,7 @@ REPORT_LOGOS = {
     "vvv": "venice",
     "near": "near",
     "zro": "layerzero",
+    "aave": "aave",
     "steakhouse-financial": "steakhouse",
     "re-protocol": "re",
     "theo": "theo",
@@ -99,6 +101,7 @@ def load_items() -> list[dict]:
     decks = json.loads((SITE / "decks.json").read_text())
     personal = json.loads((SITE / "personal.json").read_text())
     author_exports = json.loads((SITE / "author_exports.json").read_text())
+    author_memos = json.loads((SITE / "author_memos.json").read_text())
     financial_models = json.loads((SITE / "financial_models.json").read_text())
     data_rooms = json.loads((SITE / "data_rooms.json").read_text())
     logos = json.loads((SITE / "logos" / "sources.json").read_text())
@@ -111,9 +114,9 @@ def load_items() -> list[dict]:
         "source": "https://www.redstone.finance/research/tokenized-stocks-2026",
         "pdf": "pdfs/tokenized-stocks-chapters-2-3-8.pdf",
     }
-    items = [collaboration, *articles, *decks, *personal, *author_exports, *financial_models, *data_rooms]
-    if len(items) != 35:
-        raise RuntimeError(f"Expected 35 portfolio samples, found {len(items)}")
+    items = [collaboration, *articles, *decks, *personal, *author_exports, *author_memos, *financial_models, *data_rooms]
+    if len(items) != 36:
+        raise RuntimeError(f"Expected 36 portfolio samples, found {len(items)}")
     for item in items:
         if item["kind"] != "data_rooms":
             path = SITE / item["pdf"]
