@@ -281,6 +281,7 @@ def main() -> None:
           <p>During my first role at Revelo Intel, I helped raise $1.3 million in syndicate capital across three early-stage investments.</p>
           <p>Client work matters just as much at the same time. At Alea, I've sourced and closed four client engagements, building relationships from the first conversation through to a signed deal. I've also helped teams raise money, shape GTM strategies and business models, plan incentive campaigns, and prepare investor materials.</p>
           <p>Before research, I spent twelve years in competitive football and five years in sales in Greece. Both taught me to care about the result. A match ends. A client buys or walks away. I bring that same drive and accountability to investing and every client relationship.</p>
+          <p class="about-thesis"><span>University thesis</span> · <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4708467" target="_blank" rel="noopener">The Case of Venture DAOs and the Future of Decentralized Venture Capital <span aria-hidden="true">↗</span></a></p>
           <a class="about-link" href="https://meditationsbyd.substack.com/" target="_blank" rel="noopener">Read more of my writing on Substack <span aria-hidden="true">↗</span></a>
         </div>
       </div>

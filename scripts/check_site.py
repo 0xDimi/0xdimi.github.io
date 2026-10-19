@@ -94,6 +94,9 @@ def main() -> None:
         raise RuntimeError("Derive data room does not use the requested URL")
     if not soup.select_one('a[href="https://meditationsbyd.substack.com/"]'):
         raise RuntimeError("Substack link is missing")
+    thesis_link = soup.select_one('.about-thesis a[href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4708467"]')
+    if not thesis_link or thesis_link.get_text(" ", strip=True).replace(" ↗", "") != "The Case of Venture DAOs and the Future of Decentralized Venture Capital":
+        raise RuntimeError("University thesis link or title is missing from About")
     tool_cards = {card.select_one("h3").get_text(strip=True): card for card in soup.select(".tool-card")}
     if set(tool_cards) != {"Atlas Chart Builder", "Alea Signal", "MANTIS"}:
         raise RuntimeError("Tool cards are missing")

@@ -99,6 +99,10 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 .about-copy{max-width:690px}
 .about-copy p{font-size:16px;line-height:1.75;color:#d3e0df;margin:0 0 20px}
 .about-copy .about-lead{font:normal clamp(29px,3.2vw,43px)/1.18 var(--font-serif);letter-spacing:-.032em;color:#f2d4ad;margin:0 0 31px;max-width:620px}
+.about-copy .about-thesis{font-size:13px;line-height:1.55;color:#aac3c2;margin:25px 0 0}
+.about-thesis>span{color:#e0bd87;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.about-thesis a{color:#f0d4ac;text-decoration:underline;text-decoration-color:#ad8350;text-underline-offset:3px}
+.about-thesis a:hover{color:#fff}
 .about-link{display:inline-flex;gap:24px;align-items:center;border-bottom:1px solid #ad8350;padding:7px 0;margin-top:13px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#f0d4ac}
 .about-link:hover{color:#fff}
 .site-footer{background:var(--pine);color:#f3eee4;padding:36px 0}
