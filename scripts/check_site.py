@@ -70,8 +70,18 @@ def main() -> None:
     if len(cards) != len(manifest):
         raise RuntimeError("Index and manifest publication counts differ")
     featured_slugs = [card["id"].removeprefix("work-") for card in soup.select("#selected .featured-card")]
-    if featured_slugs != ["tokenized-stocks-ecosystem-2026", "prediction-markets-q3-2026", "pendle-one-venue-all-of-fixed-income", "derive"]:
-        raise RuntimeError("Selected work does not match the requested four reports in order")
+    if featured_slugs != ["stocklens", "tokenized-stocks-ecosystem-2026", "prediction-markets-q3-2026", "pendle-one-venue-all-of-fixed-income", "derive"]:
+        raise RuntimeError("Selected work does not feature Stocklens before the four reports")
+    stocklens_app = "https://stocklens-osft.onrender.com/?stock=US67066G1040&amount=1000&chain=all&view=products"
+    stocklens_code = "https://github.com/0xDimi/stocklens/tree/main"
+    for selector in ("#selected #work-stocklens", "#tools .tool-feature"):
+        element = soup.select_one(selector)
+        if element is None or {link.get("href") for link in element.select("a")} != {stocklens_app, stocklens_code}:
+            raise RuntimeError(f"Stocklens app or code link is missing: {selector}")
+    if not (SITE / "images" / "stocklens-interface.webp").is_file() or not (SITE / "logos" / "stocklens.svg").is_file():
+        raise RuntimeError("Stocklens preview or logo is missing")
+    if soup.select_one("#tools .tool-feature + .tool-grid") is None:
+        raise RuntimeError("Stocklens is not above the three tool cards")
     if soup.select("a[download]") or "Download model" in soup.get_text():
         raise RuntimeError("Portfolio still offers a download link")
     if soup.select_one('[data-filter="perspectives"]') or not soup.select_one('[data-filter="strategies"]'):
@@ -194,7 +204,7 @@ def main() -> None:
                 if any(f"Chapter {number}" not in text for number in (2, 3, 8)):
                     raise RuntimeError("RedStone PDF is missing a credited chapter")
         total_bytes += path.stat().st_size
-    for slug in ("tokenized-stocks-ecosystem-2026", "prediction-markets-q3-2026", "pendle-one-venue-all-of-fixed-income", "derive"):
+    for slug in ("stocklens", "tokenized-stocks-ecosystem-2026", "prediction-markets-q3-2026", "pendle-one-venue-all-of-fixed-income", "derive"):
         thumbnail = SITE / "thumbs" / f"{slug}.svg"
         if not thumbnail.is_file() or thumbnail.stat().st_size < 1_000:
             raise RuntimeError(f"Featured cover is missing or broken: {thumbnail}")

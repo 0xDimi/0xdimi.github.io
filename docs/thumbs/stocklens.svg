@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title description">
+      <title id="title">Stocklens</title>
+      <desc id="description">Editorial portfolio cover with a conceptual illustration.</desc>
+      <defs><linearGradient id="background" x2="1" y2="1"><stop stop-color="#102d35"/><stop offset="1" stop-color="#173b42"/></linearGradient></defs>
+      <style>
+        .label{font:700 15px 'Avenir Next',Avenir,Arial,sans-serif;letter-spacing:3px;fill:#d5ad75}
+        .small{font:600 16px 'Avenir Next',Avenir,Arial,sans-serif;letter-spacing:1.2px;fill:#b7cbc5}
+        .title{font:normal 77px 'Iowan Old Style',Baskerville,Georgia,serif;letter-spacing:-2px;fill:#f8f4e9}
+        .subtitle{font:normal 22px 'Avenir Next',Avenir,Arial,sans-serif;fill:#e5d4b9}
+      </style>
+      <rect width="1200" height="600" fill="url(#background)"/>
+      <path d="M0 108h1200 M0 506h1200" stroke="#77918d" stroke-opacity=".45"/>
+      <rect x="58" y="38" width="43" height="43" fill="none" stroke="#cba168"/>
+      <text x="65" y="68" style="font:normal 24px Georgia,serif;fill:#d6ae77">DP</text>
+      <text x="124" y="66" class="label">SELECTED WORK / 1</text>
+      <text x="58" y="184" class="label">LIVE PRODUCT</text>
+      <text x="58" y="289" class="title">Stocklens</text>
+      <text x="61" y="397" class="subtitle">One stock. Compare its tokens.</text>
+      <text x="58" y="552" class="small">DIMITRIS PECHLIVANIDIS</text>
+      <text x="1143" y="552" text-anchor="end" class="small">PERSONAL PROJECT</text>
+      <g transform="translate(760 122)">
+          <circle cx="202" cy="192" r="158" fill="none" stroke="#527d72" stroke-width="2"/>
+          <circle cx="202" cy="192" r="124" fill="none" stroke="#78a58f" stroke-opacity=".65" stroke-width="2"/>
+          <path d="M313 304l86 86" stroke="#d9b37c" stroke-width="19" stroke-linecap="round"/>
+          <rect x="45" y="93" width="246" height="87" rx="6" fill="#1b4950" stroke="#7ca495" stroke-width="2"/>
+          <rect x="80" y="194" width="246" height="87" rx="6" fill="#1b4950" stroke="#d9b37c" stroke-width="2"/>
+          <circle cx="80" cy="136" r="18" fill="#a6c8ae"/><circle cx="115" cy="237" r="18" fill="#d9b37c"/>
+          <path d="M119 129h113 M119 145h80 M154 230h113 M154 246h80" stroke="#d2e0d1" stroke-width="5" stroke-linecap="round"/>
+          <path d="M45 321h221" stroke="#81a89a" stroke-width="2" stroke-dasharray="7 10"/>
+        </g>
+    </svg>

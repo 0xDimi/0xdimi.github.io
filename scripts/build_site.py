@@ -61,24 +61,35 @@ CATEGORY_DESCRIPTIONS = {
     "data_rooms": "Data Rooms pair protocol research with the data behind it.",
 }
 FEATURED = ["tokenized-stocks-ecosystem-2026", "prediction-markets-q3-2026", "pendle-one-venue-all-of-fixed-income", "derive"]
+STOCKLENS = {
+    "slug": "stocklens",
+    "title": "Stocklens",
+    "app": "https://stocklens-osft.onrender.com/?stock=US67066G1040&amount=1000&chain=all&view=products",
+    "code": "https://github.com/0xDimi/stocklens/tree/main",
+}
 FEATURED_COVERS = {
+    "stocklens": {
+        "number": "1", "category": "LIVE PRODUCT", "lines": ("Stocklens",),
+        "subtitle": "One stock. Compare its tokens.", "credit": "PERSONAL PROJECT",
+        "art": "stocklens",
+    },
     "tokenized-stocks-ecosystem-2026": {
-        "number": "01", "category": "SECTOR WIDE REPORT", "lines": ("Tokenized", "Stocks"),
+        "number": "2", "category": "SECTOR WIDE REPORT", "lines": ("Tokenized", "Stocks"),
         "subtitle": "An Ecosystem & Platform Overview", "credit": "PERSONAL RESEARCH",
         "art": "stocks",
     },
     "prediction-markets-q3-2026": {
-        "number": "02", "category": "QUARTERLY REPORT", "lines": ("Prediction", "Markets"),
+        "number": "3", "category": "QUARTERLY REPORT", "lines": ("Prediction", "Markets"),
         "subtitle": "State of the Market · Q3 2026", "credit": "PERSONAL RESEARCH",
         "art": "prediction",
     },
     "pendle-one-venue-all-of-fixed-income": {
-        "number": "03", "category": "INVESTMENT THESIS", "lines": ("Pendle",),
+        "number": "4", "category": "INVESTMENT THESIS", "lines": ("Pendle",),
         "subtitle": "One Venue, All of Fixed Income", "credit": "WORK FOR ALEA RESEARCH",
         "art": "pendle",
     },
     "derive": {
-        "number": "04", "category": "INVESTMENT THESIS", "lines": ("Derive",),
+        "number": "5", "category": "INVESTMENT THESIS", "lines": ("Derive",),
         "subtitle": "Onchain Options", "credit": "WORK FOR ALEA RESEARCH",
         "art": "derive",
     },
@@ -159,6 +170,17 @@ def load_items() -> list[dict]:
 
 def cover_art(kind: str) -> str:
     """Topic-specific editorial motifs; these illustrate concepts, not market data."""
+    if kind == "stocklens":
+        return '''<g transform="translate(760 122)">
+          <circle cx="202" cy="192" r="158" fill="none" stroke="#527d72" stroke-width="2"/>
+          <circle cx="202" cy="192" r="124" fill="none" stroke="#78a58f" stroke-opacity=".65" stroke-width="2"/>
+          <path d="M313 304l86 86" stroke="#d9b37c" stroke-width="19" stroke-linecap="round"/>
+          <rect x="45" y="93" width="246" height="87" rx="6" fill="#1b4950" stroke="#7ca495" stroke-width="2"/>
+          <rect x="80" y="194" width="246" height="87" rx="6" fill="#1b4950" stroke="#d9b37c" stroke-width="2"/>
+          <circle cx="80" cy="136" r="18" fill="#a6c8ae"/><circle cx="115" cy="237" r="18" fill="#d9b37c"/>
+          <path d="M119 129h113 M119 145h80 M154 230h113 M154 246h80" stroke="#d2e0d1" stroke-width="5" stroke-linecap="round"/>
+          <path d="M45 321h221" stroke="#81a89a" stroke-width="2" stroke-dasharray="7 10"/>
+        </g>'''
     if kind == "stocks":
         return '''<g transform="translate(772 114) rotate(-14 160 150)">
           <rect x="0" y="24" width="314" height="370" rx="10" fill="#1a4248" stroke="#547d79" stroke-width="2"/>
@@ -199,7 +221,7 @@ def cover_art(kind: str) -> str:
 
 
 def make_featured_cover(item: dict) -> None:
-    if item["slug"] not in FEATURED:
+    if item["slug"] not in FEATURED_COVERS:
         return
     output = SITE / "thumbs" / f"{item['slug']}.svg"
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -264,11 +286,30 @@ def card(item: dict, featured: bool = False) -> str:
       </article>"""
 
 
+def stocklens_card() -> str:
+    app = html.escape(STOCKLENS["app"], quote=True)
+    code = html.escape(STOCKLENS["code"], quote=True)
+    return f"""
+      <article class="work-card featured-card featured-product" id="work-stocklens">
+        <div class="feature-image"><img src="thumbs/stocklens.svg" alt="Stocklens cover: tokenized stock versions under a lens" loading="lazy" decoding="async" width="1200" height="600"></div>
+        <div class="card-content">
+          <div class="card-meta"><span>Live product</span><span>Personal project</span></div>
+          <div class="card-title-row"><span class="protocol-logo" aria-hidden="true"><img src="logos/stocklens.svg" alt="" width="58" height="58" loading="lazy" decoding="async"></span><h3>Stocklens</h3></div>
+          <p>Compare tokenized versions of the same stock by issuer, network, price, liquidity, and product terms.</p>
+          <div class="card-bottom"><span>Live app</span><div class="card-links">
+            <a class="primary-link" href="{app}" target="_blank" rel="noopener">Open app <span aria-hidden="true">↗</span></a>
+            <a href="{code}" target="_blank" rel="noopener">View code <span aria-hidden="true">↗</span></a>
+          </div></div>
+        </div>
+      </article>"""
+
+
 def main() -> None:
     items = load_items()
     for item in items:
         make_featured_cover(item)
-    featured = "\n".join(card(next(item for item in items if item["slug"] == slug), featured=True) for slug in FEATURED)
+    make_featured_cover(STOCKLENS)
+    featured = stocklens_card() + "\n" + "\n".join(card(next(item for item in items if item["slug"] == slug), featured=True) for slug in FEATURED)
     library = "\n".join(card(item) for item in items)
     counts = {kind: sum(item["kind"] == kind for item in items) for kind in LABELS}
     doc = f"""<!doctype html>
@@ -344,11 +385,21 @@ def main() -> None:
 
     <section class="section tools-section" id="tools" aria-labelledby="tools-title">
       <div class="container">
-        <div class="section-heading"><div><p class="section-no">3 / BUILT WORK</p><h2 id="tools-title">Data & product tools</h2></div><p>Tools to screen markets, build charts, and test product ideas.</p></div>
+        <div class="section-heading"><div><p class="section-no">3 / BUILT WORK</p><h2 id="tools-title">Data & product tools</h2></div><p>Tools to compare markets, build charts, and test product ideas.</p></div>
+        <article class="tool-feature" aria-labelledby="stocklens-tool-title">
+          <div class="tool-feature-copy">
+            <span class="tool-index">A / TOKENIZED EQUITIES</span>
+            <h3 id="stocklens-tool-title">Stocklens</h3>
+            <p class="tool-feature-lead">One stock. Compare its tokens.</p>
+            <p>Find tokenized versions across issuers and networks, inspect their prices, liquidity, and terms, then open a venue to check its current quote.</p>
+            <div class="tool-links"><a href="{html.escape(STOCKLENS['app'], quote=True)}" target="_blank" rel="noopener">Open live app ↗</a><a href="{html.escape(STOCKLENS['code'], quote=True)}" target="_blank" rel="noopener">View code ↗</a></div>
+          </div>
+          <figure class="tool-feature-image"><img src="images/stocklens-interface.webp" alt="Stocklens app comparing tokenized versions of NVIDIA across issuers and networks" loading="lazy" decoding="async" width="1200" height="768"><figcaption>Interface captured October 19, 2026 · Open the app for current data.</figcaption></figure>
+        </article>
         <div class="tool-grid">
-          <article class="tool-card"><span class="tool-index">A / DATA VISUALIZATION</span><h3>Atlas Chart Builder</h3><p>A CSV chart builder for research data, with chart export and configurable data sources.</p><div class="tool-links"><a href="https://github.com/0xDimi/atlas-chart-builder" target="_blank" rel="noopener">View code ↗</a></div></article>
-          <article class="tool-card"><span class="tool-index">B / MARKET SCREENING</span><h3>Alea Signal</h3><p>A Polymarket researchability screener for crypto, finance, and economy markets.</p><p class="tool-status">Currently inactive</p><div class="tool-links"><a href="https://alea-signal.vercel.app/" target="_blank" rel="noopener">Open preview ↗</a><a href="https://github.com/0xDimi/alea-signal" target="_blank" rel="noopener">View code ↗</a></div></article>
-          <article class="tool-card"><span class="tool-index">C / PRODUCT PROTOTYPE</span><h3>MANTIS</h3><p>A Greek-first prediction-market product prototype. Demo only; no real-money trading.</p><p class="tool-status">Currently inactive</p><div class="tool-links"><a href="https://mantis-demo.xyz/" target="_blank" rel="noopener">Open demo ↗</a><a href="https://github.com/0xDimi/MANTIS" target="_blank" rel="noopener">View code ↗</a></div></article>
+          <article class="tool-card"><span class="tool-index">B / DATA VISUALIZATION</span><h3>Atlas Chart Builder</h3><p>A CSV chart builder for research data, with chart export and configurable data sources.</p><div class="tool-links"><a href="https://github.com/0xDimi/atlas-chart-builder" target="_blank" rel="noopener">View code ↗</a></div></article>
+          <article class="tool-card"><span class="tool-index">C / MARKET SCREENING</span><h3>Alea Signal</h3><p>A Polymarket researchability screener for crypto, finance, and economy markets.</p><p class="tool-status">Currently inactive</p><div class="tool-links"><a href="https://alea-signal.vercel.app/" target="_blank" rel="noopener">Open preview ↗</a><a href="https://github.com/0xDimi/alea-signal" target="_blank" rel="noopener">View code ↗</a></div></article>
+          <article class="tool-card"><span class="tool-index">D / PRODUCT PROTOTYPE</span><h3>MANTIS</h3><p>A Greek-first prediction-market product prototype. Demo only; no real-money trading.</p><p class="tool-status">Currently inactive</p><div class="tool-links"><a href="https://mantis-demo.xyz/" target="_blank" rel="noopener">Open demo ↗</a><a href="https://github.com/0xDimi/MANTIS" target="_blank" rel="noopener">View code ↗</a></div></article>
         </div>
       </div>
     </section>

@@ -88,6 +88,12 @@ Financial Models. Its six cards link to the live Tempo, Aave, Hyperliquid, Morph
 Polymarket, and Derive rooms. Tempo through Polymarket currently require a
 sign-in; Derive opens directly. Room cards are web links, not PDF exports.
 
+Stocklens is a separate personal project featured in Selected work and above
+the smaller tool cards. Its source is `0xDimi/stocklens`; both placements link to
+the live app and repository. `docs/images/stocklens-interface.webp` is an app
+screenshot captured October 19, 2026, and is labeled as such because its market
+prices can change. `scripts/build_site.py` regenerates the matching SVG cover.
+
 ## Publishing
 
 The intended GitHub Pages repository is `0xDimi/0xDimi.github.io`, with `docs/`
