@@ -17,8 +17,8 @@ SITE = ROOT / "docs"
 
 def main() -> None:
     manifest = json.loads((SITE / "manifest.json").read_text())
-    if len(manifest) != 36:
-        raise RuntimeError(f"Expected 36 work samples, found {len(manifest)}")
+    if len(manifest) != 37:
+        raise RuntimeError(f"Expected 37 work samples, found {len(manifest)}")
     aave = next((item for item in manifest if item["slug"] == "aave"), None)
     if not aave or aave["kind"] != "memos" or aave["published"] != "February 26, 2026" or aave["source"] != "https://alearesearch.io/reports/memos/aave" or aave.get("provenance") != "alea":
         raise RuntimeError("Aave memo metadata is missing or incorrect")
@@ -32,6 +32,7 @@ def main() -> None:
         "crypto-etfs-q3-2026": None,
         "robinhood-chain-q3-2026": None,
         "prediction-markets-q3-2026": None,
+        "derive-q3-2026": "https://alearesearch.io/reports/benchmark/derive-q3-2026",
     }
     quarterly_items = {item["slug"]: item for item in manifest if item["kind"] == "quarterly_reports"}
     if set(quarterly_items) != set(quarterly_sources):
@@ -48,6 +49,9 @@ def main() -> None:
     prediction_markets = quarterly_items["prediction-markets-q3-2026"]
     if prediction_markets.get("provenance") != "personal" or prediction_markets["published"] is not None or prediction_markets.get("date_label") != "Q3 2026" or prediction_markets["title"] != "State of Prediction Markets: Q3 2026":
         raise RuntimeError("Prediction markets report attribution, title, or reporting period is incorrect")
+    derive_quarterly = quarterly_items["derive-q3-2026"]
+    if derive_quarterly.get("published") != "October 28, 2026" or derive_quarterly.get("provenance") != "alea" or derive_quarterly.get("pdf") or derive_quarterly.get("access") != "Alea sign-in required":
+        raise RuntimeError("Derive Q3 source access or publication metadata is incorrect")
     sector_sources = {
         "tokenized-stocks-ecosystem-2026": None,
         "rwa-perpetuals": "https://alearesearch.io/reports/perspectives/rwa-perpetuals",
@@ -137,6 +141,13 @@ def main() -> None:
                 raise RuntimeError(f"Data room card is not a live-site link: {item['slug']}")
             if item["access"] not in soup.select_one(f"#work-{item['slug']}").get_text():
                 raise RuntimeError(f"Data room access label is missing: {item['slug']}")
+            continue
+        if not item.get("pdf"):
+            link = soup.select_one(f"#work-grid #work-{item['slug']} a.primary-link")
+            if not link or link.get("href") != item.get("source") or "Open report" not in link.get_text(" ", strip=True):
+                raise RuntimeError(f"Source-only report has no working library link: {item['slug']}")
+            if item.get("access") not in soup.select_one(f"#work-grid #work-{item['slug']}").get_text():
+                raise RuntimeError(f"Source-only report access label is missing: {item['slug']}")
             continue
         pdf_count += 1
         path = SITE / item["pdf"]

@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "docs"
 
 SUMMARIES = {
+    "derive-q3-2026": "Q3 review of options volume, the V3 migration, fee economics, and DRV buybacks.",
     "tokenized-stocks-ecosystem-2026": "Personal sector research on market size, product rights, platform activity, DeFi use, and execution costs.",
     "stacks-q3-2026": "Q3 review of Bitcoin Staking, sBTC, DeFi balances, fees, and STX valuation. Commissioned Alea Research work.",
     "crypto-etfs-q3-2026": "Q3 review of U.S. crypto ETF assets, fund flows, issuer economics, and product structure.",
@@ -96,6 +97,7 @@ FEATURED_COVERS = {
 }
 DISPLAY_TITLES = {"hyperliquid": "Hyperliquid: Exchange Thesis", "hyperliquid-2": "Hyperliquid: HIP-4", "etherfi-q1-2026": "Ether.fi: Q1 2026", "threshold-q1-26": "Threshold: Q1 2026", "stacks-q3-2026": "Stacks: Q3 2026"}
 REPORT_LOGOS = {
+    "derive-q3-2026": "derive",
     "tokenized-stocks-ecosystem-2026": "dimi",
     "stacks-q3-2026": "stacks",
     "crypto-etfs-q3-2026": "dimi",
@@ -136,6 +138,7 @@ def load_items() -> list[dict]:
     author_exports = json.loads((SITE / "author_exports.json").read_text())
     author_memos = json.loads((SITE / "author_memos.json").read_text())
     financial_models = json.loads((SITE / "financial_models.json").read_text())
+    linked_reports = json.loads((SITE / "linked_reports.json").read_text())
     data_rooms = json.loads((SITE / "data_rooms.json").read_text())
     logos = json.loads((SITE / "logos" / "sources.json").read_text())
     collaboration = {
@@ -147,16 +150,17 @@ def load_items() -> list[dict]:
         "source": "https://www.redstone.finance/research/tokenized-stocks-2026",
         "pdf": "pdfs/tokenized-stocks-chapters-2-3-8.pdf",
     }
-    items = [collaboration, *articles, *decks, *personal, *author_exports, *author_memos, *financial_models, *data_rooms]
-    if len(items) != 36:
-        raise RuntimeError(f"Expected 36 portfolio samples, found {len(items)}")
+    items = [collaboration, *articles, *linked_reports, *decks, *personal, *author_exports, *author_memos, *financial_models, *data_rooms]
+    if len(items) != 37:
+        raise RuntimeError(f"Expected 37 portfolio samples, found {len(items)}")
     for item in items:
-        if item["kind"] != "data_rooms":
+        if item.get("pdf"):
             path = SITE / item["pdf"]
             if not path.is_file():
                 raise FileNotFoundError(path)
             with fitz.open(path) as pdf:
                 item["pages"] = len(pdf)
+        if item["kind"] != "data_rooms":
             item["summary"] = SUMMARIES[item["slug"]]
         logo_key = item["logo_key"] if item["kind"] == "data_rooms" else REPORT_LOGOS[item["slug"]]
         item["logo"] = f"logos/{logos[logo_key]['file']}"
@@ -266,6 +270,18 @@ def card(item: dict, featured: bool = False) -> str:
           <p>{e(item['summary'])}</p>
           <div class="card-bottom"><span>{e(item['access'])}</span><div class="card-links">
             <a class="primary-link" href="{e(item['url'])}" target="_blank" rel="noopener">Open data room <span aria-hidden="true">↗</span></a>
+          </div></div>
+        </div>
+      </article>"""
+    if not item.get("pdf"):
+        return f"""
+      <article class="{class_name}" data-kind="{e(item['kind'])}" id="work-{slug}">
+        <div class="card-content">
+          <div class="card-meta"><span>{e(LABELS[item['kind']])}</span><span>{e(item['published'])}</span></div>
+          <div class="card-title-row"><span class="protocol-logo" aria-hidden="true"><img src="{e(item['logo'])}" alt="" width="58" height="58" loading="lazy" decoding="async"></span><h3>{e(item['title'])}</h3></div>
+          <p>{e(item['summary'])}</p>
+          <div class="card-bottom"><span>{e(item['access'])}</span><div class="card-links">
+            <a class="primary-link" href="{e(item['source'])}" target="_blank" rel="noopener">Open report <span aria-hidden="true">↗</span></a>
           </div></div>
         </div>
       </article>"""

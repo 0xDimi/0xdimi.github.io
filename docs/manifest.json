@@ -72,6 +72,18 @@
   },
   {
     "kind": "quarterly_reports",
+    "slug": "derive-q3-2026",
+    "title": "Derive: Q3 2026",
+    "subtitle": "Quarterly benchmark",
+    "published": "October 28, 2026",
+    "source": "https://alearesearch.io/reports/benchmark/derive-q3-2026",
+    "access": "Alea sign-in required",
+    "provenance": "alea",
+    "summary": "Q3 review of options volume, the V3 migration, fee economics, and DRV buybacks.",
+    "logo": "logos/derive.webp"
+  },
+  {
+    "kind": "quarterly_reports",
     "slug": "prediction-markets-q3-2026",
     "title": "State of Prediction Markets: Q3 2026",
     "subtitle": "Kalshi, Polymarket, fee retention, and broker distribution",
