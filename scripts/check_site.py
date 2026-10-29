@@ -50,7 +50,7 @@ def main() -> None:
     if prediction_markets.get("provenance") != "personal" or prediction_markets["published"] is not None or prediction_markets.get("date_label") != "Q3 2026" or prediction_markets["title"] != "State of Prediction Markets: Q3 2026":
         raise RuntimeError("Prediction markets report attribution, title, or reporting period is incorrect")
     derive_quarterly = quarterly_items["derive-q3-2026"]
-    if derive_quarterly.get("published") != "October 28, 2026" or derive_quarterly.get("provenance") != "alea" or derive_quarterly.get("pdf") or derive_quarterly.get("access") != "Alea sign-in required":
+    if derive_quarterly.get("published") != "October 28, 2026" or derive_quarterly.get("provenance") != "alea" or derive_quarterly.get("pdf") != "pdfs/derive-q3-2026.pdf":
         raise RuntimeError("Derive Q3 source access or publication metadata is incorrect")
     sector_sources = {
         "tokenized-stocks-ecosystem-2026": None,
@@ -223,8 +223,8 @@ def main() -> None:
             raise RuntimeError(f"Featured card does not use its cover: {slug}")
     if soup.select(".performance, .performance-method"):
         raise RuntimeError("Performance section was not fully removed")
-    if pdf_count != 30:
-        raise RuntimeError(f"Expected 30 linked PDFs, found {pdf_count}")
+    if pdf_count != 31:
+        raise RuntimeError(f"Expected 31 linked PDFs, found {pdf_count}")
     print(f"PASS: {pdf_count} linked PDFs and {len(rooms)} data rooms; all PDF pages nonblank; {total_bytes / 1024 / 1024:.1f} MiB total")
 
 

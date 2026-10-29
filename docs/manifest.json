@@ -77,8 +77,9 @@
     "subtitle": "Quarterly benchmark",
     "published": "October 28, 2026",
     "source": "https://alearesearch.io/reports/benchmark/derive-q3-2026",
-    "access": "Alea sign-in required",
+    "pdf": "pdfs/derive-q3-2026.pdf",
     "provenance": "alea",
+    "pages": 23,
     "summary": "Q3 review of options volume, the V3 migration, fee economics, and DRV buybacks.",
     "logo": "logos/derive.webp"
   },

@@ -83,10 +83,7 @@ That local source is excluded from Git. The public PDF retains its embedded
 workbook; there is no separate `.xlsx` download on the site.
 The script checks the reviewed source hash, page count, date, and attribution.
 
-`docs/linked_reports.json` holds published reports whose public page exposes
-only a preview. Derive: Q3 2026 is listed in Quarterly Reports with its Alea
-publication date and a direct link. Its card says that Alea sign-in is required;
-the portfolio does not present the preview as a complete PDF.
+The Derive Q3 benchmark uses a signed-in Alea PDF export, with a portfolio cover and the report's disclosures and links preserved. Rebuild it with `scripts/build_derive_quarterly.py` from the local source export.
 
 `docs/data_rooms.json` supplies the Data Rooms category, which appears after
 Financial Models. Its six cards link to the live Tempo, Aave, Hyperliquid, Morpho,
