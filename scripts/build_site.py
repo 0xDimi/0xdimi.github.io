@@ -47,7 +47,7 @@ SUMMARIES = {
     "circle-financial-model": "A scenario model connecting USDC circulation, reserve yield, retained income, and cash flow to Circle equity value.",
 }
 
-LABELS = {"collaboration": "Collaboration", "sector_reports": "Sector Wide Report", "quarterly_reports": "Quarterly Report", "strategies": "Strategy", "theses": "Investment thesis", "memos": "Investment memo", "blueprints": "IR deck", "financial_models": "Financial model", "data_rooms": "Data room"}
+LABELS = {"collaboration": "Collaboration", "sector_reports": "Sector-wide report", "quarterly_reports": "Quarterly Report", "strategies": "Strategy", "theses": "Investment thesis", "memos": "Investment memo", "blueprints": "IR deck", "financial_models": "Financial model", "data_rooms": "Data room"}
 ORDER = {"collaboration": 0, "sector_reports": 1, "quarterly_reports": 2, "strategies": 3, "theses": 4, "memos": 5, "blueprints": 6, "financial_models": 7, "data_rooms": 8}
 CATEGORY_DESCRIPTIONS = {
     "all": "Selected research, investor materials, and live data products.",
@@ -59,8 +59,11 @@ CATEGORY_DESCRIPTIONS = {
     "memos": "Investment memos give a short view on an asset and its key assumptions.",
     "blueprints": "IR decks present a business case and its operating record to investors.",
     "financial_models": "Financial models connect operating assumptions to forecasts and valuation.",
-    "data_rooms": "Data Rooms pair protocol research with the data behind it.",
+    "data_rooms": "Data rooms pair protocol research with the data behind it.",
 }
+EMAIL = "dimpechli@gmail.com"
+LINKEDIN = "https://www.linkedin.com/in/dimitris-pechlivanidis-a6ab38195/"
+SITE_URL = "https://0xdimi.github.io/"
 FEATURED = ["tokenized-stocks-ecosystem-2026", "prediction-markets-q3-2026", "pendle-one-venue-all-of-fixed-income", "derive"]
 STOCKLENS = {
     "slug": "stocklens",
@@ -75,7 +78,7 @@ FEATURED_COVERS = {
         "art": "stocklens",
     },
     "tokenized-stocks-ecosystem-2026": {
-        "number": "2", "category": "SECTOR WIDE REPORT", "lines": ("Tokenized", "Stocks"),
+        "number": "2", "category": "SECTOR-WIDE REPORT", "lines": ("Tokenized", "Stocks"),
         "subtitle": "An Ecosystem & Platform Overview", "credit": "PERSONAL RESEARCH",
         "art": "stocks",
     },
@@ -295,7 +298,7 @@ def card(item: dict, featured: bool = False) -> str:
           <div class="card-title-row"><span class="protocol-logo" aria-hidden="true"><img src="{e(item['logo'])}" alt="" width="58" height="58" loading="lazy" decoding="async"></span><h3>{e(DISPLAY_TITLES.get(item['slug'], item['title']))}</h3></div>
           <p>{e(item['summary'])}</p>
           <div class="card-bottom"><span>{item['pages']} pages · PDF</span><div class="card-links">
-            <a class="primary-link" href="{e(item['pdf'])}" target="_blank" rel="noopener">Read PDF <span aria-hidden="true">↗</span></a>
+            <a class="primary-link" href="{e(item['pdf'])}" target="_blank" rel="noopener">Read report <span aria-hidden="true">↗</span></a>
             {source_link}
           </div></div>
         </div>
@@ -334,12 +337,18 @@ def main() -> None:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#102c34">
-  <meta name="description" content="Selected sector and quarterly reports, strategies, investment theses, memos, IR decks, financial models, data rooms, and tools by Dimitris Pechlivanidis.">
-  <meta property="og:title" content="Dimitris Pechlivanidis — Research & Data">
-  <meta property="og:description" content="Sector and quarterly reports, strategies, investment theses, memos, financial models, data rooms, and analytical tools.">
+  <meta name="description" content="Dimitris Pechlivanidis, Investment Research Analyst. Sector and quarterly reports, investment theses, memos, IR decks, financial models, data rooms, and tools.">
+  <meta property="og:title" content="Dimitris Pechlivanidis · Investment Research Analyst">
+  <meta property="og:description" content="Liquid token investing, business analysis, early-stage diligence, and investor relations. 50+ research reports and investor materials.">
   <meta property="og:type" content="website">
-  <title>Dimitris Pechlivanidis · Research & Data</title>
+  <meta property="og:url" content="{SITE_URL}">
+  <meta property="og:image" content="{SITE_URL}og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Dimitris Pechlivanidis · Investment Research Analyst</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -347,25 +356,28 @@ def main() -> None:
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="Dimitris Pechlivanidis, back to top"><span class="brand-mark">DP</span><span>Dimitris Pechlivanidis</span></a>
-      <nav aria-label="Main navigation"><a href="#selected">Selected work</a><a href="#library">Library</a><a href="#tools">Tools</a><a href="#about">About</a><a class="nav-contact" href="https://www.linkedin.com/in/dimitris-pechlivanidis-a6ab38195/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></nav>
+      <nav aria-label="Main navigation"><a href="#selected">Selected work</a><a href="#library">Library</a><a href="#tools">Tools</a><a href="#about">About</a><a class="nav-contact" href="mailto:{EMAIL}">Email <span aria-hidden="true">→</span></a></nav>
     </div>
   </header>
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="hero-copy">
+          <p class="hero-eyebrow">Investment Research Analyst</p>
           <h1 id="hero-title">Dimitris<br><em>Pechlivanidis.</em></h1>
-          <div class="hero-actions"><a class="button button-light" href="#selected">Explore the work <span aria-hidden="true">↓</span></a><a class="text-link" href="https://github.com/0xDimi" target="_blank" rel="noopener">GitHub profile <span aria-hidden="true">↗</span></a></div>
+          <p class="hero-lead">Liquid token investing, business analysis and early-stage diligence. Investor relations, business development and investor support across crypto and alternative markets.</p>
+          <ul class="hero-proof" aria-label="Track record"><li>50+ reports</li><li>60+ businesses evaluated</li><li>$1.3M syndicate capital raised</li></ul>
+          <div class="hero-actions"><a class="button button-light" href="mailto:{EMAIL}">Email me <span aria-hidden="true">→</span></a><a class="text-link" href="{LINKEDIN}" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></div>
         </div>
         <div class="hero-aside" aria-label="Portfolio sections">
           <div class="aside-label">INDEX / 2025—2026</div>
-          <a href="#library" data-jump-filter="sector_reports"><span>1</span><strong>Sector Wide Reports</strong><span aria-hidden="true">↗</span></a>
-          <a href="#library" data-jump-filter="quarterly_reports"><span>2</span><strong>Quarterly Reports</strong><span aria-hidden="true">↗</span></a>
+          <a href="#library" data-jump-filter="sector_reports"><span>1</span><strong>Sector-wide reports</strong><span aria-hidden="true">↗</span></a>
+          <a href="#library" data-jump-filter="quarterly_reports"><span>2</span><strong>Quarterly reports</strong><span aria-hidden="true">↗</span></a>
           <a href="#library" data-jump-filter="theses"><span>3</span><strong>Investment theses</strong><span aria-hidden="true">↗</span></a>
           <a href="#library" data-jump-filter="memos"><span>4</span><strong>Investment memos</strong><span aria-hidden="true">↗</span></a>
           <a href="#library" data-jump-filter="blueprints"><span>5</span><strong>IR decks</strong><span aria-hidden="true">↗</span></a>
-          <a href="#library" data-jump-filter="financial_models"><span>6</span><strong>Financial Models</strong><span aria-hidden="true">↗</span></a>
-          <a href="#library" data-jump-filter="data_rooms"><span>7</span><strong>Data Rooms</strong><span aria-hidden="true">↗</span></a>
+          <a href="#library" data-jump-filter="financial_models"><span>6</span><strong>Financial models</strong><span aria-hidden="true">↗</span></a>
+          <a href="#library" data-jump-filter="data_rooms"><span>7</span><strong>Data rooms</strong><span aria-hidden="true">↗</span></a>
           <a href="#tools"><span>8</span><strong>Data tools</strong><span aria-hidden="true">↗</span></a>
         </div>
       </div>
@@ -380,18 +392,18 @@ def main() -> None:
 
     <section class="section library-section" id="library" aria-labelledby="library-title">
       <div class="container">
-        <div class="section-heading"><div><p class="section-no">2 / FULL LIBRARY</p><h2 id="library-title">Work Samples</h2></div><p class="sample-note">A small selection from more than 50 reports I've produced across Alea Research and Revelo.</p></div>
+        <div class="section-heading"><div><p class="section-no">2 / FULL LIBRARY</p><h2 id="library-title">Work samples</h2></div><p class="sample-note">37 samples from more than 50 reports I've produced across Alea Research and Revelo Intel.</p></div>
         <div class="filter-bar" role="group" aria-label="Filter research by type">
           <button class="filter active" type="button" data-filter="all" data-description="{html.escape(CATEGORY_DESCRIPTIONS['all'], quote=True)}" aria-pressed="true">All <span>{len(items)}</span></button>
           <button class="filter" type="button" data-filter="collaboration" data-description="{html.escape(CATEGORY_DESCRIPTIONS['collaboration'], quote=True)}" aria-pressed="false">Collaboration <span>{counts['collaboration']}</span></button>
-          <button class="filter" type="button" data-filter="sector_reports" data-description="{html.escape(CATEGORY_DESCRIPTIONS['sector_reports'], quote=True)}" aria-pressed="false">Sector Wide Reports <span>{counts['sector_reports']}</span></button>
-          <button class="filter" type="button" data-filter="quarterly_reports" data-description="{html.escape(CATEGORY_DESCRIPTIONS['quarterly_reports'], quote=True)}" aria-pressed="false">Quarterly Reports <span>{counts['quarterly_reports']}</span></button>
+          <button class="filter" type="button" data-filter="sector_reports" data-description="{html.escape(CATEGORY_DESCRIPTIONS['sector_reports'], quote=True)}" aria-pressed="false">Sector-wide reports <span>{counts['sector_reports']}</span></button>
+          <button class="filter" type="button" data-filter="quarterly_reports" data-description="{html.escape(CATEGORY_DESCRIPTIONS['quarterly_reports'], quote=True)}" aria-pressed="false">Quarterly reports <span>{counts['quarterly_reports']}</span></button>
           <button class="filter" type="button" data-filter="strategies" data-description="{html.escape(CATEGORY_DESCRIPTIONS['strategies'], quote=True)}" aria-pressed="false">Strategies <span>{counts['strategies']}</span></button>
           <button class="filter" type="button" data-filter="theses" data-description="{html.escape(CATEGORY_DESCRIPTIONS['theses'], quote=True)}" aria-pressed="false">Theses <span>{counts['theses']}</span></button>
           <button class="filter" type="button" data-filter="memos" data-description="{html.escape(CATEGORY_DESCRIPTIONS['memos'], quote=True)}" aria-pressed="false">Memos <span>{counts['memos']}</span></button>
           <button class="filter" type="button" data-filter="blueprints" data-description="{html.escape(CATEGORY_DESCRIPTIONS['blueprints'], quote=True)}" aria-pressed="false">IR decks <span>{counts['blueprints']}</span></button>
-          <button class="filter" type="button" data-filter="financial_models" data-description="{html.escape(CATEGORY_DESCRIPTIONS['financial_models'], quote=True)}" aria-pressed="false">Financial Models <span>{counts['financial_models']}</span></button>
-          <button class="filter" type="button" data-filter="data_rooms" data-description="{html.escape(CATEGORY_DESCRIPTIONS['data_rooms'], quote=True)}" aria-pressed="false">Data Rooms <span>{counts['data_rooms']}</span></button>
+          <button class="filter" type="button" data-filter="financial_models" data-description="{html.escape(CATEGORY_DESCRIPTIONS['financial_models'], quote=True)}" aria-pressed="false">Financial models <span>{counts['financial_models']}</span></button>
+          <button class="filter" type="button" data-filter="data_rooms" data-description="{html.escape(CATEGORY_DESCRIPTIONS['data_rooms'], quote=True)}" aria-pressed="false">Data rooms <span>{counts['data_rooms']}</span></button>
         </div>
         <p class="category-description" id="category-description" aria-live="polite">{html.escape(CATEGORY_DESCRIPTIONS['all'])}</p>
         <div class="library-grid" id="work-grid">{library}</div>
@@ -401,7 +413,7 @@ def main() -> None:
 
     <section class="section tools-section" id="tools" aria-labelledby="tools-title">
       <div class="container">
-        <div class="section-heading"><div><p class="section-no">3 / BUILT WORK</p><h2 id="tools-title">Data & product tools</h2></div><p>Tools to compare markets, build charts, and test product ideas.</p></div>
+        <div class="section-heading"><div><p class="section-no">3 / BUILT WORK</p><h2 id="tools-title">Data & product tools</h2></div><p>Tools to compare markets, build charts, and test product ideas. <a class="inline-link" href="https://github.com/0xDimi" target="_blank" rel="noopener">All code on GitHub ↗</a></p></div>
         <article class="tool-feature" aria-labelledby="stocklens-tool-title">
           <div class="tool-feature-copy">
             <span class="tool-index">A / TOKENIZED EQUITIES</span>
@@ -424,9 +436,9 @@ def main() -> None:
         <div class="about-heading"><p class="section-no">4 / THE PERSON BEHIND THE WORK</p><h2 id="about-title">About</h2><div class="about-rule" aria-hidden="true"></div></div>
         <div class="about-copy">
           <p class="about-lead">Give a damn and you'll be great.</p>
-          <p>I've evaluated more than 60 businesses and protocols, sourced at least 20 blockchain startups, and invested to some of them. I've also invested in robotics and AI companies. Skin in the game matters to me. I put my conviction up for judgment, test the assumptions behind it, and change my thesis when the evidence calls for it.</p>
+          <p>I've evaluated more than 60 businesses and protocols, sourced 20+ blockchain startups, and invested in some of them. I've also invested in robotics and AI companies. Skin in the game matters to me. I put my conviction up for judgment, test the assumptions behind it, and change my thesis when the evidence calls for it.</p>
           <p>During my first role at Revelo Intel, I helped raise $1.3 million in syndicate capital across three early-stage investments.</p>
-          <p>Client work matters just as much at the same time. At Alea, I've sourced and closed four client engagements, building relationships from the first conversation through to a signed deal. I've also helped teams raise money, shape GTM strategies and business models, plan incentive campaigns, and prepare investor materials.</p>
+          <p>Client work matters just as much. At Alea, I've sourced and closed four client engagements, building relationships from the first conversation through to a signed deal. I've also helped teams raise money, shape GTM strategies and business models, plan incentive campaigns, and prepare investor materials.</p>
           <p>Before research, I spent twelve years in competitive football and five years in sales in Greece. Both taught me to care about the result. A match ends. A client buys or walks away. I bring that same drive and accountability to investing and every client relationship.</p>
           <p class="about-thesis"><span>University thesis</span> · <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4708467" target="_blank" rel="noopener">The Case of Venture DAOs and the Future of Decentralized Venture Capital <span aria-hidden="true">↗</span></a></p>
           <a class="about-link" href="https://meditationsbyd.substack.com/" target="_blank" rel="noopener">Read more of my writing on Substack <span aria-hidden="true">↗</span></a>
@@ -434,7 +446,7 @@ def main() -> None:
       </div>
     </section>
   </main>
-  <footer class="site-footer"><div class="container footer-inner"><div><span class="footer-mark">DP</span><p>Dimitris Pechlivanidis<br><span>Research & data</span></p></div><div class="footer-links"><a href="https://meditationsbyd.substack.com/" target="_blank" rel="noopener">Substack ↗</a><a href="https://www.linkedin.com/in/dimitris-pechlivanidis-a6ab38195/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://github.com/0xDimi" target="_blank" rel="noopener">GitHub ↗</a><a href="#top">Back to top ↑</a></div></div></footer>
+  <footer class="site-footer"><div class="container footer-inner"><div><span class="footer-mark">DP</span><p>Dimitris Pechlivanidis<br><span>Investment Research Analyst</span></p></div><div class="footer-links"><a href="mailto:{EMAIL}">Email →</a><a href="https://meditationsbyd.substack.com/" target="_blank" rel="noopener">Substack ↗</a><a href="{LINKEDIN}" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://github.com/0xDimi" target="_blank" rel="noopener">GitHub ↗</a><a href="#top">Back to top ↑</a></div></div></footer>
   <script src="script.js" defer></script>
 </body>
 </html>"""
