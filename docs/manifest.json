@@ -72,6 +72,19 @@
   },
   {
     "kind": "quarterly_reports",
+    "slug": "hyperliquid-q3-2026",
+    "title": "Hyperliquid: Q3 2026",
+    "subtitle": "Quarterly benchmark",
+    "published": "November 4, 2026",
+    "source": "https://alearesearch.io/reports/benchmark/hyperliquid-q3-2026#financials",
+    "pdf": "pdfs/hyperliquid-q3-2026.pdf",
+    "provenance": "alea",
+    "pages": 47,
+    "summary": "Q3 review of trading activity, HIP-3 markets, USDC reserve income, and HYPE economics.",
+    "logo": "logos/hyperliquid.webp"
+  },
+  {
+    "kind": "quarterly_reports",
     "slug": "derive-q3-2026",
     "title": "Derive: Q3 2026",
     "subtitle": "Quarterly benchmark",

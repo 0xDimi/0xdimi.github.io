@@ -17,8 +17,8 @@ SITE = ROOT / "docs"
 
 def main() -> None:
     manifest = json.loads((SITE / "manifest.json").read_text())
-    if len(manifest) != 37:
-        raise RuntimeError(f"Expected 37 work samples, found {len(manifest)}")
+    if len(manifest) != 38:
+        raise RuntimeError(f"Expected 38 work samples, found {len(manifest)}")
     aave = next((item for item in manifest if item["slug"] == "aave"), None)
     if not aave or aave["kind"] != "memos" or aave["published"] != "February 26, 2026" or aave["source"] != "https://alearesearch.io/reports/memos/aave" or aave.get("provenance") != "alea":
         raise RuntimeError("Aave memo metadata is missing or incorrect")
@@ -26,6 +26,7 @@ def main() -> None:
     if len(models) != 1 or models[0]["slug"] != "circle-financial-model" or models[0]["published"] != "October 14, 2026" or models[0].get("provenance") != "personal":
         raise RuntimeError("Circle financial model metadata is missing or incorrect")
     quarterly_sources = {
+        "hyperliquid-q3-2026": "https://alearesearch.io/reports/benchmark/hyperliquid-q3-2026#financials",
         "etherfi-q1-2026": "https://alearesearch.io/reports/benchmark/etherfi-q1-2026",
         "threshold-q1-26": "https://alearesearch.io/reports/benchmark/threshold-q1-26",
         "stacks-q3-2026": None,
@@ -223,8 +224,8 @@ def main() -> None:
             raise RuntimeError(f"Featured card does not use its cover: {slug}")
     if soup.select(".performance, .performance-method"):
         raise RuntimeError("Performance section was not fully removed")
-    if pdf_count != 31:
-        raise RuntimeError(f"Expected 31 linked PDFs, found {pdf_count}")
+    if pdf_count != 32:
+        raise RuntimeError(f"Expected 32 linked PDFs, found {pdf_count}")
     print(f"PASS: {pdf_count} linked PDFs and {len(rooms)} data rooms; all PDF pages nonblank; {total_bytes / 1024 / 1024:.1f} MiB total")
 
 
