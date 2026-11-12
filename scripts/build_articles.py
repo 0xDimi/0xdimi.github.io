@@ -12,7 +12,7 @@ import html
 import json
 import os
 import re
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 from urllib.parse import parse_qs, urljoin, urlparse
 
@@ -26,9 +26,12 @@ ROOT = Path(__file__).resolve().parents[1]
 PDF_DIR = ROOT / "docs" / "pdfs"
 DEFAULT_CHROME = Path("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
 CHROME = os.environ.get("PORTFOLIO_CHROME") or (str(DEFAULT_CHROME) if DEFAULT_CHROME.exists() else None)
-AS_OF = "8 October 2026"
+AS_OF = "12 November 2026"
 
 ARTICLES = [
+    ("perspectives", "stacks", "stacks-thesis"),
+    ("perspectives", "threshold-network", "threshold-network-thesis"),
+    ("perspectives", "solv-protocol", "solv-protocol-thesis"),
     ("perspectives", "axil-prime-credit-3m", "axil-prime-credit-3m"),
     ("perspectives", "rwa-perpetuals", "rwa-perpetuals"),
     ("perspectives", "when-agents-pay", "when-agents-pay"),
@@ -49,6 +52,9 @@ ARTICLES = [
 ]
 
 SUBTITLES = {
+    "threshold-network": "Bitcoin collateral and the tBTC bridge",
+    "solv-protocol": "Bitcoin liquidity and yield strategies",
+    "stacks": "Bitcoin staking and the STX economy",
     "axil-prime-credit-3m": "Tokenized consumer credit: structure, protections, and risks",
     "rwa-perpetuals": "Where around-the-clock equity and commodity trading finds demand",
     "when-agents-pay": "Authorization, settlement, and value capture in agentic payments",
@@ -187,9 +193,12 @@ def build_one(browser, kind: str, slug: str, filename: str) -> dict:
         subtitle = re.split(r"(?<=[.!?])\s+", opening, maxsplit=1)[0][:160] or "Investment research"
     date_match = re.search(r"\b(?:January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, 20\d{2}\b", main.get_text(" ", strip=True))
     published = date_match.group(0) if date_match else "Publication date not shown"
+    published_meta = soup.select_one('meta[property="article:published_time"]')
+    if published_meta and published_meta.get("content"):
+        published = datetime.fromisoformat(published_meta["content"].replace("Z", "+00:00")).strftime("%B %-d, %Y")
     figure_count = len(article.select("figure"))
     clean = clean_article(article, source)
-    portfolio_kind = "sector_reports" if slug in SECTOR_REPORTS else {"perspectives": "strategies", "benchmark": "quarterly_reports"}.get(kind, kind)
+    portfolio_kind = "theses" if slug in {"threshold-network", "solv-protocol", "stacks"} else "sector_reports" if slug in SECTOR_REPORTS else {"perspectives": "strategies", "benchmark": "quarterly_reports"}.get(kind, kind)
     cover_kind = {"sector_reports": "Sector Report", "strategies": "Strategy", "quarterly_reports": "Quarterly Report", "theses": "Thesis", "memos": "Memo"}[portfolio_kind]
     doc = f"""<!doctype html><html><head><meta charset="utf-8"><title>{html.escape(title)}</title><style>{CSS}</style></head><body>
       {cover_html(title, subtitle, cover_kind, published, source)}
@@ -215,7 +224,7 @@ def build_one(browser, kind: str, slug: str, filename: str) -> dict:
     body_text = " ".join(p.get_text() for p in list(reader)[1:])
     if len(body_text) < 0.85 * len(article.get_text(" ", strip=True)):
         raise RuntimeError(f"Text dropped during PDF render: {output}")
-    return {"kind": portfolio_kind, "slug": slug, "title": title, "subtitle": subtitle, "published": published, "source": source, "pdf": f"pdfs/{filename}.pdf", "pages": len(reader), "figures": figure_count, "bytes": output.stat().st_size}
+    return {"kind": portfolio_kind, "slug": filename if slug in {"threshold-network", "solv-protocol", "stacks"} else slug, "title": title, "subtitle": subtitle, "published": published, "source": source, "pdf": f"pdfs/{filename}.pdf", "pages": len(reader), "figures": figure_count, "bytes": output.stat().st_size}
 
 
 def main() -> None:
@@ -240,7 +249,7 @@ def main() -> None:
     if args.only and metadata.exists():
         known = {item["slug"]: item for item in json.loads(metadata.read_text())}
         known.update({item["slug"]: item for item in results})
-        results = [known[slug] for _, slug, _ in ARTICLES if slug in known]
+        results = [known.get(filename, known.get(slug)) for _, slug, filename in ARTICLES if filename in known or slug in known]
     metadata.write_text(json.dumps(results, indent=2) + "\n")
 
 

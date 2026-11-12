@@ -14,6 +14,10 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "docs"
 
 SUMMARIES = {
+    "threshold-network-thesis": "An investment thesis on Threshold Network and tBTC.",
+    "solv-protocol-thesis": "An investment thesis on Solv Protocol and Bitcoin liquidity.",
+    "stacks-thesis": "An investment thesis on Stacks and its Bitcoin ecosystem.",
+    "threshold-network": "An investor relations deck on Threshold Network.",
     "hyperliquid-q3-2026": "Q3 review of trading activity, HIP-3 markets, USDC reserve income, and HYPE economics.",
     "derive-q3-2026": "Q3 review of options volume, the V3 migration, fee economics, and DRV buybacks.",
     "tokenized-stocks-ecosystem-2026": "Personal sector research on market size, product rights, platform activity, DeFi use, and execution costs.",
@@ -101,6 +105,10 @@ FEATURED_COVERS = {
 }
 DISPLAY_TITLES = {"hyperliquid": "Hyperliquid: Exchange Thesis", "hyperliquid-2": "Hyperliquid: HIP-4", "etherfi-q1-2026": "Ether.fi: Q1 2026", "threshold-q1-26": "Threshold: Q1 2026", "stacks-q3-2026": "Stacks: Q3 2026"}
 REPORT_LOGOS = {
+    "threshold-network-thesis": "threshold",
+    "solv-protocol-thesis": "alea",
+    "stacks-thesis": "stacks",
+    "threshold-network": "threshold",
     "hyperliquid-q3-2026": "hyperliquid",
     "derive-q3-2026": "derive",
     "tokenized-stocks-ecosystem-2026": "dimi",
@@ -156,8 +164,8 @@ def load_items() -> list[dict]:
         "pdf": "pdfs/tokenized-stocks-chapters-2-3-8.pdf",
     }
     items = [collaboration, *articles, *linked_reports, *decks, *personal, *author_exports, *author_memos, *financial_models, *data_rooms]
-    if len(items) != 38:
-        raise RuntimeError(f"Expected 38 portfolio samples, found {len(items)}")
+    if len(items) != 42:
+        raise RuntimeError(f"Expected 42 portfolio samples, found {len(items)}")
     for item in items:
         if item.get("pdf"):
             path = SITE / item["pdf"]
@@ -394,7 +402,7 @@ def main() -> None:
 
     <section class="section library-section" id="library" aria-labelledby="library-title">
       <div class="container">
-        <div class="section-heading"><div><p class="section-no">2 / FULL LIBRARY</p><h2 id="library-title">Work samples</h2></div><p class="sample-note">38 samples from more than 50 reports I've produced across Alea Research and Revelo Intel.</p></div>
+        <div class="section-heading"><div><p class="section-no">2 / FULL LIBRARY</p><h2 id="library-title">Work samples</h2></div><p class="sample-note">42 samples from more than 50 reports I've produced across Alea Research and Revelo Intel.</p></div>
         <div class="filter-bar" role="group" aria-label="Filter research by type">
           <button class="filter active" type="button" data-filter="all" data-description="{html.escape(CATEGORY_DESCRIPTIONS['all'], quote=True)}" aria-pressed="true">All <span>{len(items)}</span></button>
           <button class="filter" type="button" data-filter="collaboration" data-description="{html.escape(CATEGORY_DESCRIPTIONS['collaboration'], quote=True)}" aria-pressed="false">Collaboration <span>{counts['collaboration']}</span></button>

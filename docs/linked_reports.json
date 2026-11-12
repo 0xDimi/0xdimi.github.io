@@ -18,5 +18,15 @@
     "source": "https://alearesearch.io/reports/benchmark/hyperliquid-q3-2026#financials",
     "pdf": "pdfs/hyperliquid-q3-2026.pdf",
     "provenance": "alea"
+  },
+  {
+    "kind": "blueprints",
+    "slug": "threshold-network",
+    "title": "Threshold Network",
+    "subtitle": "Investor relations deck",
+    "published": "January 27, 2026",
+    "source": "https://alearesearch.io/reports/blueprints/threshold-network",
+    "access": "Canva deck",
+    "provenance": "alea"
   }
 ]

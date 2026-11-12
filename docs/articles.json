@@ -1,5 +1,41 @@
 [
   {
+    "kind": "theses",
+    "slug": "stacks-thesis",
+    "title": "Stacks",
+    "subtitle": "Bitcoin staking and the STX economy",
+    "published": "October 6, 2026",
+    "source": "https://alearesearch.io/reports/perspectives/stacks",
+    "pdf": "pdfs/stacks-thesis.pdf",
+    "pages": 20,
+    "figures": 21,
+    "bytes": 2588637
+  },
+  {
+    "kind": "theses",
+    "slug": "threshold-network-thesis",
+    "title": "Threshold Network",
+    "subtitle": "Bitcoin collateral and the tBTC bridge",
+    "published": "November 18, 2025",
+    "source": "https://alearesearch.io/reports/perspectives/threshold-network",
+    "pdf": "pdfs/threshold-network-thesis.pdf",
+    "pages": 21,
+    "figures": 24,
+    "bytes": 11334949
+  },
+  {
+    "kind": "theses",
+    "slug": "solv-protocol-thesis",
+    "title": "Solv Protocol",
+    "subtitle": "Bitcoin liquidity and yield strategies",
+    "published": "January 16, 2026",
+    "source": "https://alearesearch.io/reports/perspectives/solv-protocol",
+    "pdf": "pdfs/solv-protocol-thesis.pdf",
+    "pages": 18,
+    "figures": 20,
+    "bytes": 6909459
+  },
+  {
     "kind": "strategies",
     "slug": "axil-prime-credit-3m",
     "title": "Axil Prime Credit 3M",

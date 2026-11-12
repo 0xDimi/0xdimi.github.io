@@ -205,6 +205,20 @@
   },
   {
     "kind": "theses",
+    "slug": "stacks-thesis",
+    "title": "Stacks",
+    "subtitle": "Bitcoin staking and the STX economy",
+    "published": "October 6, 2026",
+    "source": "https://alearesearch.io/reports/perspectives/stacks",
+    "pdf": "pdfs/stacks-thesis.pdf",
+    "pages": 20,
+    "figures": 21,
+    "bytes": 2588637,
+    "summary": "An investment thesis on Stacks and its Bitcoin ecosystem.",
+    "logo": "logos/stacks.webp"
+  },
+  {
+    "kind": "theses",
     "slug": "hyperliquid-2",
     "title": "Hyperliquid",
     "subtitle": "HIP-4: Outcome Markets",
@@ -233,6 +247,20 @@
   },
   {
     "kind": "theses",
+    "slug": "solv-protocol-thesis",
+    "title": "Solv Protocol",
+    "subtitle": "Bitcoin liquidity and yield strategies",
+    "published": "January 16, 2026",
+    "source": "https://alearesearch.io/reports/perspectives/solv-protocol",
+    "pdf": "pdfs/solv-protocol-thesis.pdf",
+    "pages": 18,
+    "figures": 20,
+    "bytes": 6909459,
+    "summary": "An investment thesis on Solv Protocol and Bitcoin liquidity.",
+    "logo": "logos/alea.svg"
+  },
+  {
+    "kind": "theses",
     "slug": "pendle-one-venue-all-of-fixed-income",
     "title": "Pendle",
     "subtitle": "One Venue, All of Fixed Income",
@@ -244,6 +272,20 @@
     "bytes": 3960123,
     "summary": "Pendle's yield-trading position, Boros, and the case for a broader fixed-income venue.",
     "logo": "logos/pendle.webp"
+  },
+  {
+    "kind": "theses",
+    "slug": "threshold-network-thesis",
+    "title": "Threshold Network",
+    "subtitle": "Bitcoin collateral and the tBTC bridge",
+    "published": "November 18, 2025",
+    "source": "https://alearesearch.io/reports/perspectives/threshold-network",
+    "pdf": "pdfs/threshold-network-thesis.pdf",
+    "pages": 21,
+    "figures": 24,
+    "bytes": 11334949,
+    "summary": "An investment thesis on Threshold Network and tBTC.",
+    "logo": "logos/threshold.svg"
   },
   {
     "kind": "theses",
@@ -441,6 +483,18 @@
     "bytes": 28375593,
     "summary": "An investor relations deck on USD.AI.",
     "logo": "logos/usdai.svg"
+  },
+  {
+    "kind": "blueprints",
+    "slug": "threshold-network",
+    "title": "Threshold Network",
+    "subtitle": "Investor relations deck",
+    "published": "January 27, 2026",
+    "source": "https://alearesearch.io/reports/blueprints/threshold-network",
+    "access": "Canva deck",
+    "provenance": "alea",
+    "summary": "An investor relations deck on Threshold Network.",
+    "logo": "logos/threshold.svg"
   },
   {
     "kind": "financial_models",
