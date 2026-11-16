@@ -17,8 +17,8 @@ SITE = ROOT / "docs"
 
 def main() -> None:
     manifest = json.loads((SITE / "manifest.json").read_text())
-    if len(manifest) != 42:
-        raise RuntimeError(f"Expected 42 work samples, found {len(manifest)}")
+    if len(manifest) != 43:
+        raise RuntimeError(f"Expected 43 work samples, found {len(manifest)}")
     aave = next((item for item in manifest if item["slug"] == "aave"), None)
     if not aave or aave["kind"] != "memos" or aave["published"] != "February 26, 2026" or aave["source"] != "https://alearesearch.io/reports/memos/aave" or aave.get("provenance") != "alea":
         raise RuntimeError("Aave memo metadata is missing or incorrect")
@@ -54,6 +54,7 @@ def main() -> None:
     if derive_quarterly.get("published") != "October 28, 2026" or derive_quarterly.get("provenance") != "alea" or derive_quarterly.get("pdf") != "pdfs/derive-q3-2026.pdf":
         raise RuntimeError("Derive Q3 source access or publication metadata is incorrect")
     sector_sources = {
+        "vaneck": "https://alearesearch.io/reports/deep-dives/vaneck",
         "tokenized-stocks-ecosystem-2026": None,
         "rwa-perpetuals": "https://alearesearch.io/reports/perspectives/rwa-perpetuals",
         "when-agents-pay": "https://alearesearch.io/reports/perspectives/when-agents-pay",

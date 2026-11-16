@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "docs"
 
 SUMMARIES = {
+    "vaneck": "A deep dive into VanEck’s digital asset products and investment approach.",
     "threshold-network-thesis": "An investment thesis on Threshold Network and tBTC.",
     "solv-protocol-thesis": "An investment thesis on Solv Protocol and Bitcoin liquidity.",
     "stacks-thesis": "An investment thesis on Stacks and its Bitcoin ecosystem.",
@@ -57,7 +58,7 @@ ORDER = {"collaboration": 0, "sector_reports": 1, "quarterly_reports": 2, "strat
 CATEGORY_DESCRIPTIONS = {
     "all": "Selected research, investor materials, and live data products.",
     "collaboration": "Research written with partners, with my contributions clearly credited.",
-    "sector_reports": "Sector-wide reports cover emerging narratives and shifts in market structure.",
+    "sector_reports": "Reports explore companies, emerging narratives, and shifts in market structure.",
     "quarterly_reports": "Quarterly reports track markets and protocols through operating data.",
     "strategies": "Strategies explain how an investment product works and where its risks sit.",
     "theses": "Investment theses weigh a protocol's upside against its risks and valuation.",
@@ -105,6 +106,7 @@ FEATURED_COVERS = {
 }
 DISPLAY_TITLES = {"hyperliquid": "Hyperliquid: Exchange Thesis", "hyperliquid-2": "Hyperliquid: HIP-4", "etherfi-q1-2026": "Ether.fi: Q1 2026", "threshold-q1-26": "Threshold: Q1 2026", "stacks-q3-2026": "Stacks: Q3 2026"}
 REPORT_LOGOS = {
+    "vaneck": "alea",
     "threshold-network-thesis": "threshold",
     "solv-protocol-thesis": "alea",
     "stacks-thesis": "stacks",
@@ -164,8 +166,8 @@ def load_items() -> list[dict]:
         "pdf": "pdfs/tokenized-stocks-chapters-2-3-8.pdf",
     }
     items = [collaboration, *articles, *linked_reports, *decks, *personal, *author_exports, *author_memos, *financial_models, *data_rooms]
-    if len(items) != 42:
-        raise RuntimeError(f"Expected 42 portfolio samples, found {len(items)}")
+    if len(items) != 43:
+        raise RuntimeError(f"Expected 43 portfolio samples, found {len(items)}")
     for item in items:
         if item.get("pdf"):
             path = SITE / item["pdf"]
@@ -381,7 +383,7 @@ def main() -> None:
         </div>
         <div class="hero-aside" aria-label="Portfolio sections">
           <div class="aside-label">INDEX / 2025—2026</div>
-          <a href="#library" data-jump-filter="sector_reports"><span>1</span><strong>Sector-wide reports</strong><span aria-hidden="true">↗</span></a>
+          <a href="#library" data-jump-filter="sector_reports"><span>1</span><strong>Sector &amp; company reports</strong><span aria-hidden="true">↗</span></a>
           <a href="#library" data-jump-filter="quarterly_reports"><span>2</span><strong>Quarterly reports</strong><span aria-hidden="true">↗</span></a>
           <a href="#library" data-jump-filter="theses"><span>3</span><strong>Investment theses</strong><span aria-hidden="true">↗</span></a>
           <a href="#library" data-jump-filter="memos"><span>4</span><strong>Investment memos</strong><span aria-hidden="true">↗</span></a>
@@ -402,11 +404,11 @@ def main() -> None:
 
     <section class="section library-section" id="library" aria-labelledby="library-title">
       <div class="container">
-        <div class="section-heading"><div><p class="section-no">2 / FULL LIBRARY</p><h2 id="library-title">Work samples</h2></div><p class="sample-note">42 samples from more than 50 reports I've produced across Alea Research and Revelo Intel.</p></div>
+        <div class="section-heading"><div><p class="section-no">2 / FULL LIBRARY</p><h2 id="library-title">Work samples</h2></div><p class="sample-note">43 samples from more than 50 reports I've produced across Alea Research and Revelo Intel.</p></div>
         <div class="filter-bar" role="group" aria-label="Filter research by type">
           <button class="filter active" type="button" data-filter="all" data-description="{html.escape(CATEGORY_DESCRIPTIONS['all'], quote=True)}" aria-pressed="true">All <span>{len(items)}</span></button>
           <button class="filter" type="button" data-filter="collaboration" data-description="{html.escape(CATEGORY_DESCRIPTIONS['collaboration'], quote=True)}" aria-pressed="false">Collaboration <span>{counts['collaboration']}</span></button>
-          <button class="filter" type="button" data-filter="sector_reports" data-description="{html.escape(CATEGORY_DESCRIPTIONS['sector_reports'], quote=True)}" aria-pressed="false">Sector-wide reports <span>{counts['sector_reports']}</span></button>
+          <button class="filter" type="button" data-filter="sector_reports" data-description="{html.escape(CATEGORY_DESCRIPTIONS['sector_reports'], quote=True)}" aria-pressed="false">Sector &amp; company reports <span>{counts['sector_reports']}</span></button>
           <button class="filter" type="button" data-filter="quarterly_reports" data-description="{html.escape(CATEGORY_DESCRIPTIONS['quarterly_reports'], quote=True)}" aria-pressed="false">Quarterly reports <span>{counts['quarterly_reports']}</span></button>
           <button class="filter" type="button" data-filter="strategies" data-description="{html.escape(CATEGORY_DESCRIPTIONS['strategies'], quote=True)}" aria-pressed="false">Strategies <span>{counts['strategies']}</span></button>
           <button class="filter" type="button" data-filter="theses" data-description="{html.escape(CATEGORY_DESCRIPTIONS['theses'], quote=True)}" aria-pressed="false">Theses <span>{counts['theses']}</span></button>

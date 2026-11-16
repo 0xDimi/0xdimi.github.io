@@ -28,5 +28,15 @@
     "source": "https://alearesearch.io/reports/blueprints/threshold-network",
     "access": "Canva deck",
     "provenance": "alea"
+  },
+  {
+    "kind": "sector_reports",
+    "slug": "vaneck",
+    "title": "VanEck",
+    "subtitle": "Company deep dive",
+    "published": "November 12, 2026",
+    "source": "https://alearesearch.io/reports/deep-dives/vaneck",
+    "access": "Alea sign-in required for full report",
+    "provenance": "alea"
   }
 ]
