@@ -36,7 +36,17 @@
     "subtitle": "Company deep dive",
     "published": "November 12, 2026",
     "source": "https://alearesearch.io/reports/deep-dives/vaneck",
-    "access": "Alea sign-in required for full report",
-    "provenance": "alea"
+    "provenance": "alea",
+    "pdf": "pdfs/vaneck-deep-dive.pdf"
+  },
+  {
+    "kind": "strategies",
+    "slug": "como-1907",
+    "title": "The Como 1907 business playbook",
+    "subtitle": "Football club business strategy",
+    "published": "November 17, 2026",
+    "source": "https://meditationsbyd.substack.com/p/the-como-1907-business-playbook",
+    "access": "Substack",
+    "provenance": "personal"
   }
 ]

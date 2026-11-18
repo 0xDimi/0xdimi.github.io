@@ -17,8 +17,8 @@ SITE = ROOT / "docs"
 
 def main() -> None:
     manifest = json.loads((SITE / "manifest.json").read_text())
-    if len(manifest) != 43:
-        raise RuntimeError(f"Expected 43 work samples, found {len(manifest)}")
+    if len(manifest) != 44:
+        raise RuntimeError(f"Expected 44 work samples, found {len(manifest)}")
     aave = next((item for item in manifest if item["slug"] == "aave"), None)
     if not aave or aave["kind"] != "memos" or aave["published"] != "February 26, 2026" or aave["source"] != "https://alearesearch.io/reports/memos/aave" or aave.get("provenance") != "alea":
         raise RuntimeError("Aave memo metadata is missing or incorrect")
@@ -225,8 +225,8 @@ def main() -> None:
             raise RuntimeError(f"Featured card does not use its cover: {slug}")
     if soup.select(".performance, .performance-method"):
         raise RuntimeError("Performance section was not fully removed")
-    if pdf_count != 35:
-        raise RuntimeError(f"Expected 35 linked PDFs, found {pdf_count}")
+    if pdf_count != 36:
+        raise RuntimeError(f"Expected 36 linked PDFs, found {pdf_count}")
     print(f"PASS: {pdf_count} linked PDFs and {len(rooms)} data rooms; all PDF pages nonblank; {total_bytes / 1024 / 1024:.1f} MiB total")
 
 
