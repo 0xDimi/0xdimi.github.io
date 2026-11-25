@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "docs"
 
 SUMMARIES = {
+    "securitize": "A company deep dive into Securitize’s onchain securities register and business model.",
     "como-1907": "How Como 1907 built a business around its football club and Lake Como.",
     "vaneck": "A deep dive into VanEck’s digital asset products and investment approach.",
     "threshold-network-thesis": "An investment thesis on Threshold Network and tBTC.",
@@ -107,6 +108,7 @@ FEATURED_COVERS = {
 }
 DISPLAY_TITLES = {"hyperliquid": "Hyperliquid: Exchange Thesis", "hyperliquid-2": "Hyperliquid: HIP-4", "etherfi-q1-2026": "Ether.fi: Q1 2026", "threshold-q1-26": "Threshold: Q1 2026", "stacks-q3-2026": "Stacks: Q3 2026"}
 REPORT_LOGOS = {
+    "securitize": "alea",
     "como-1907": "dimi",
     "vaneck": "alea",
     "threshold-network-thesis": "threshold",
@@ -168,8 +170,8 @@ def load_items() -> list[dict]:
         "pdf": "pdfs/tokenized-stocks-chapters-2-3-8.pdf",
     }
     items = [collaboration, *articles, *linked_reports, *decks, *personal, *author_exports, *author_memos, *financial_models, *data_rooms]
-    if len(items) != 44:
-        raise RuntimeError(f"Expected 44 portfolio samples, found {len(items)}")
+    if len(items) != 45:
+        raise RuntimeError(f"Expected 45 portfolio samples, found {len(items)}")
     for item in items:
         if item.get("pdf"):
             path = SITE / item["pdf"]

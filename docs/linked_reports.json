@@ -48,5 +48,15 @@
     "source": "https://meditationsbyd.substack.com/p/the-como-1907-business-playbook",
     "access": "Substack",
     "provenance": "personal"
+  },
+  {
+    "kind": "sector_reports",
+    "slug": "securitize",
+    "title": "Securitize",
+    "subtitle": "The Onchain Register",
+    "published": "November 11, 2026",
+    "source": "https://alearesearch.io/reports/deep-dives/securitize",
+    "pdf": "pdfs/securitize-deep-dive.pdf",
+    "provenance": "alea"
   }
 ]
